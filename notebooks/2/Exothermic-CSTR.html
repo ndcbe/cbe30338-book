@@ -1,0 +1,1427 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.8. Exothermic Continuous Stirred Tank Reactor &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2/Exothermic-CSTR';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.9. Hare and Lynx Population Dynamics" href="Hare-and-Lynx.html" />
+    <link rel="prev" title="2.7. Characteristics of Second Order Systems" href="Spring-Mass-Damper.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Process-Modeling.html">2. Process Modeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4/Process-Analytics.html">4. Process Analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4/Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/notebooks/2/Exothermic-CSTR.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2/Exothermic-CSTR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/2/Exothermic-CSTR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exothermic Continuous Stirred Tank Reactor</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">2.8.1. Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-kinetics">2.8.2. Reaction Kinetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-equations-and-parameter-values">2.8.3. Model Equations and Parameter Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-cooling-temperature">2.8.4. Effect of Cooling Temperature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-simulation">2.8.5. Interactive Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nullclines">2.8.6. Nullclines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-plane-analysis">2.8.7. Phase Plane Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">2.8.8. Activities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-states">2.8.9. Steady-States</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stability-analysis">2.8.10. Stability analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away-messages">2.8.11. Take Away Messages</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exothermic-continuous-stirred-tank-reactor">
+<h1><span class="section-number">2.8. </span>Exothermic Continuous Stirred Tank Reactor<a class="headerlink" href="#exothermic-continuous-stirred-tank-reactor" title="Link to this heading">#</a></h1>
+<section id="description">
+<h2><span class="section-number">2.8.1. </span>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h2>
+<p>This example is intended as an introduction to the nonlinear dynamics of an exothermic continuous stirred-tank reactor. The example has been studied by countless researchers and students since the pioneering work of Amundson and Aris in the 1950’s. The particular formulation and parameter values described below are taken from example 2.5 from Seborg, Edgar, Mellichamp and Doyle (SEMD).</p>
+<p><img alt="Exothermic Reactor" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Agitated_vessel.svg/500px-Agitated_vessel.svg.png" /></p>
+<p>(Diagram By <a class="reference external" href="https://commons.wikimedia.org/wiki/User:Daniele_Pugliesi">Daniele Pugliesi</a> - Own work, <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, <a class="reference external" href="https://commons.wikimedia.org/w/index.php?curid=6915706">Link</a>)</p>
+</section>
+<section id="reaction-kinetics">
+<h2><span class="section-number">2.8.2. </span>Reaction Kinetics<a class="headerlink" href="#reaction-kinetics" title="Link to this heading">#</a></h2>
+<p>We assume the kinetics are dominated by a single first order reaction</p>
+<div class="math notranslate nohighlight">
+\[A \xrightarrow{kc_A}{} \text{Products}\]</div>
+<p>The reaction rate per unit volume is modeled as the product <span class="math notranslate nohighlight">\(kc_A\)</span> where <span class="math notranslate nohighlight">\(c_A\)</span> is the concentration of <span class="math notranslate nohighlight">\(A\)</span>. The rate constant <span class="math notranslate nohighlight">\(k(T)\)</span> is a increases with temperature following the Arrehenius law</p>
+<div class="math notranslate nohighlight">
+\[k(T) = k_0 e^{-\frac{E_a}{RT}}\]</div>
+<p><span class="math notranslate nohighlight">\(E_a\)</span> is the activation energy, <span class="math notranslate nohighlight">\(R\)</span> is the gas constant, <span class="math notranslate nohighlight">\(T\)</span> is absolute temperature, and <span class="math notranslate nohighlight">\(k_0\)</span> is the pre-exponential factor.</p>
+<p>We can see the strong temperature dependence by plotting <span class="math notranslate nohighlight">\(k(T)\)</span> versus temperature over typical operating conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="c1">#import seaborn as sns</span>
+
+<span class="c1"># Arrehnius parameters</span>
+<span class="n">Ea</span> <span class="o">=</span> <span class="mi">72750</span>     <span class="c1"># activation energy J/gmol</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span>      <span class="c1"># gas constant J/gmol/K</span>
+<span class="n">k0</span> <span class="o">=</span> <span class="mf">7.2e10</span>    <span class="c1"># Arrhenius rate constant 1/min</span>
+
+<span class="c1"># Arrhenius rate expression</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">k</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">k0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">290</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Absolute Temperature [K]&quot;</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="s2">&quot;k(T) [1/min]&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Absolute Temperature [K]&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/e2ef5c947251f2b21e928ece105560cc6b2f6e61b769eda15be9ed2c6faa5041.png" src="../../_images/e2ef5c947251f2b21e928ece105560cc6b2f6e61b769eda15be9ed2c6faa5041.png" />
+</div>
+</div>
+<p>This graph shows the reaction rate changes by six orders of magnitude over the range of possible operating temperatures. Because an exothermic reaction releases heat faster at higher temperatures, there is a positive feedback that can potentially result in unstable process behavior.</p>
+</section>
+<section id="model-equations-and-parameter-values">
+<h2><span class="section-number">2.8.3. </span>Model Equations and Parameter Values<a class="headerlink" href="#model-equations-and-parameter-values" title="Link to this heading">#</a></h2>
+<p>The model consists of mole and energy balances on the contents of the well-mixed reactor.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+V\frac{dc_A}{dt} &amp; = q(c_{A,f} - c_A) - Vk(T)c_A \\
+\rho C_p V\frac{dT}{dt} &amp; = \rho  C_p q(T_f - T) + (-\Delta H_R)Vk(T)c_A + UA(T_c - T)
+\end{align*}\]</div>
+<p>Normalizing the equations to isolate the time rates of change of <span class="math notranslate nohighlight">\(c_A\)</span> and <span class="math notranslate nohighlight">\(T\)</span> give</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{dc_A}{dt} &amp; = \frac{q}{V}(c_{A,f} - c_A)- k(T)c_A \\
+\frac{dT}{dt} &amp; = \frac{q}{V}(T_f - T) + \frac{-\Delta H_R}{\rho C_p}k(T)c_A + \frac{UA}{V\rho C_p}(T_c - T)
+\end{align*}\]</div>
+<p>which are the equations that will be integrated below.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Quantity</p></th>
+<th class="head text-center"><p>Symbol</p></th>
+<th class="head text-center"><p>Value</p></th>
+<th class="head text-left"><p>Units</p></th>
+<th class="head text-left"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Activation Energy</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(E_a\)</span></p></td>
+<td class="text-center"><p>72,750</p></td>
+<td class="text-left"><p>J/gmol</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Arrehnius pre-exponential</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(k_0\)</span></p></td>
+<td class="text-center"><p>7.2 x 10<sup>10</sup></p></td>
+<td class="text-left"><p>1/min</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Gas Constant</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(R\)</span></p></td>
+<td class="text-center"><p>8.314</p></td>
+<td class="text-left"><p>J/gmol/K</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Reactor Volume</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(V\)</span></p></td>
+<td class="text-center"><p>100</p></td>
+<td class="text-left"><p>liters</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Density</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\rho\)</span></p></td>
+<td class="text-center"><p>1000</p></td>
+<td class="text-left"><p>g/liter</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Heat Capacity</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(C_p\)</span></p></td>
+<td class="text-center"><p>0.239</p></td>
+<td class="text-left"><p>J/g/K</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Enthalpy of Reaction</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\Delta H_r\)</span></p></td>
+<td class="text-center"><p>-50,000</p></td>
+<td class="text-left"><p>J/gmol</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Heat Transfer Coefficient</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(UA\)</span></p></td>
+<td class="text-center"><p>50,000</p></td>
+<td class="text-left"><p>J/min/K</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Feed flowrate</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(q\)</span></p></td>
+<td class="text-center"><p>100</p></td>
+<td class="text-left"><p>liters/min</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Feed concentration</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(c_{A,f}\)</span></p></td>
+<td class="text-center"><p>1.0</p></td>
+<td class="text-left"><p>gmol/liter</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Feed temperature</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(T_f\)</span></p></td>
+<td class="text-center"><p>350</p></td>
+<td class="text-left"><p>K</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Coolant temperature</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(T_c\)</span></p></td>
+<td class="text-center"><p>300</p></td>
+<td class="text-left"><p>K</p></td>
+<td class="text-left"><p>Manipulated Variable</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Initial concentration</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(c_{A,0}\)</span></p></td>
+<td class="text-center"><p>0.5</p></td>
+<td class="text-left"><p>gmol/liter</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Initial temperature</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(T_0\)</span></p></td>
+<td class="text-center"><p>350</p></td>
+<td class="text-left"><p>K</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This mathematical formulation is implemented as a function <code class="docutils literal notranslate"><span class="pre">simulate_cstr</span></code> that returns a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrame object. The inputs to the function is a grid of points in time for the which a solution is required, initial conditions, and values for selected operating parameters. The remaining parameters are fixed in the body of the function. With this design, all calculations within the function require no access to parameters or function defined outside of <code class="docutils literal notranslate"><span class="pre">simulate_cstr</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># study parameters</span>
+<span class="n">Tc</span>  <span class="o">=</span> <span class="mf">300.0</span>     <span class="c1"># Coolant temperature [K]</span>
+<span class="n">cA0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>      <span class="c1"># Initial concentration [mol/L]</span>
+<span class="n">T0</span>  <span class="o">=</span> <span class="mf">350.0</span><span class="p">;</span>    <span class="c1"># Initial temperature [K]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">,</span> <span class="n">cA0</span><span class="o">=</span><span class="n">cA0</span><span class="p">,</span> <span class="n">T0</span><span class="o">=</span><span class="n">T0</span><span class="p">):</span>
+    
+    <span class="c1"># fixed model parameters</span>
+    <span class="n">Ea</span>  <span class="o">=</span> <span class="mi">72750</span>     <span class="c1"># activation energy J/gmol</span>
+    <span class="n">R</span>   <span class="o">=</span> <span class="mf">8.314</span>     <span class="c1"># gas constant J/gmol/K</span>
+    <span class="n">k0</span>  <span class="o">=</span> <span class="mf">7.2e10</span>    <span class="c1"># Arrhenius rate constant 1/min</span>
+    <span class="n">V</span>   <span class="o">=</span> <span class="mf">100.0</span>     <span class="c1"># Volume [L]</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="mf">1000.0</span>    <span class="c1"># Density [g/L]</span>
+    <span class="n">Cp</span>  <span class="o">=</span> <span class="mf">0.239</span>     <span class="c1"># Heat capacity [J/g/K]</span>
+    <span class="n">dHr</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0e4</span>    <span class="c1"># Enthalpy of reaction [J/mol]</span>
+    <span class="n">UA</span>  <span class="o">=</span> <span class="mf">5.0e4</span>     <span class="c1"># Heat transfer [J/min/K]</span>
+    <span class="n">q</span>   <span class="o">=</span> <span class="mf">100.0</span>     <span class="c1"># Flowrate [L/min]</span>
+    <span class="n">cAf</span> <span class="o">=</span> <span class="mf">1.0</span>       <span class="c1"># Inlet feed concentration [mol/L]</span>
+    <span class="n">Tf</span>  <span class="o">=</span> <span class="mf">350.0</span>     <span class="c1"># Inlet feed temperature [K]</span>
+    
+    <span class="c1"># Arrhenius rate expression</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">k</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">k0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+
+    <span class="c1"># function to evaluate differential equations</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">cA</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="n">dcAdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cAf</span> <span class="o">-</span> <span class="n">cA</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">cA</span>
+        <span class="n">dTdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Tf</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">dHr</span><span class="o">/</span><span class="n">rho</span><span class="o">/</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">cA</span> <span class="o">+</span> <span class="p">(</span><span class="n">UA</span><span class="o">/</span><span class="n">V</span><span class="o">/</span><span class="n">rho</span><span class="o">/</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Tc</span><span class="o">-</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">dcAdt</span><span class="p">,</span> <span class="n">dTdt</span><span class="p">]</span>
+    
+    <span class="c1"># solve ivp</span>
+    <span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">t_eval</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t_eval</span><span class="p">)],</span> <span class="p">[</span><span class="n">cA0</span><span class="p">,</span> <span class="n">T0</span><span class="p">],</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    
+    <span class="c1"># return solution as a pandas dataframe</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Time&quot;</span><span class="p">:</span> <span class="n">t_eval</span><span class="p">})</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first define a visualization function that will be reused in later simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time grid</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+
+<span class="c1"># simulate for default cooling temperature and initial conditions</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time (min)&quot;</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Concentration (gmol/L)&quot;</span><span class="p">,</span> <span class="s2">&quot;Reactor Temperature (K)&quot;</span><span class="p">],</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># this plotting interface does not support unique ylabels</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&lt;Axes: title={&#39;center&#39;: &#39;Concentration (gmol/L)&#39;}, xlabel=&#39;Time (min)&#39;&gt;,
+       &lt;Axes: title={&#39;center&#39;: &#39;Reactor Temperature (K)&#39;}, xlabel=&#39;Time (min)&#39;&gt;],
+      dtype=object)
+</pre></div>
+</div>
+<img alt="../../_images/e87b7e96c030e11269125fcc0261a9fd98538d88110b631c74ff7425baccf15d.png" src="../../_images/e87b7e96c030e11269125fcc0261a9fd98538d88110b631c74ff7425baccf15d.png" />
+</div>
+</div>
+</section>
+<section id="effect-of-cooling-temperature">
+<h2><span class="section-number">2.8.4. </span>Effect of Cooling Temperature<a class="headerlink" href="#effect-of-cooling-temperature" title="Link to this heading">#</a></h2>
+<p>The primary means of controlling the reactoris through temperature of the cooling water jacket. The next calculations explore the effect of plus or minus change of 5 K in cooling water temperature on reactor behavior. These simulations reproduce the behavior shown in Example 2.5 SEMD.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create plot grid</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># simulate for a range of cooling temperatures</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">Tc</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">295</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">305</span><span class="p">]:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">Tc</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time (min)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;cA&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$c_A$ (gmol/L)&quot;</span><span class="p">,</span> 
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$T_c$ = </span><span class="si">{</span><span class="n">Tc</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time (min)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$T$ (K)&quot;</span><span class="p">,</span> 
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$T_c$ = </span><span class="si">{</span><span class="n">Tc</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2bc71e8dd24b49a763268025e3aca191851fef56f6c00f3fb19e92766d6a0699.png" src="../../_images/2bc71e8dd24b49a763268025e3aca191851fef56f6c00f3fb19e92766d6a0699.png" />
+</div>
+</div>
+</section>
+<section id="interactive-simulation">
+<h2><span class="section-number">2.8.5. </span>Interactive Simulation<a class="headerlink" href="#interactive-simulation" title="Link to this heading">#</a></h2>
+<p>Executing the following cell provides an interactive tool for exploring the relationship of cooling temperature with reactor behavior.  Use it to observe a thermal runaway, sustained osciallations, and low and high conversion steady states.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Install and uncomment these two packages to run the interactive widget</span>
+<span class="c1"># from ipywidgets import interact</span>
+<span class="c1"># from IPython.display import display</span>
+
+<span class="c1"># initial simulation</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">)</span>
+
+<span class="c1"># plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;cA&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time (min)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$c_A$ (gmol/L)&quot;</span><span class="p">,</span> 
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time (min)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$T$ (K)&quot;</span><span class="p">,</span> 
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">460</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># this close is needed to avoid duplicate plotter output</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<span class="c1"># function to update and display the plot object</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sim</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cA&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span><span class="o">.</span><span class="n">get_texts</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;$T_c$ = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; K&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span><span class="o">.</span><span class="n">get_texts</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;$T_c$ = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; K&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<span class="c1"># uncomment the line below to run the interactive widget</span>
+<span class="c1"># interact(sim, T_cooling = (290.0, 310.0), c_initial = (0.0, 1.0, 0.01), T_initial = (300, 400));</span>
+
+<span class="n">sim</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/48992bd880322ed5822ad73ae907392ee392188e0b7e6f03dd8c7d48e8e3f1aa.png" src="../../_images/48992bd880322ed5822ad73ae907392ee392188e0b7e6f03dd8c7d48e8e3f1aa.png" />
+</div>
+</div>
+</section>
+<section id="nullclines">
+<h2><span class="section-number">2.8.6. </span>Nullclines<a class="headerlink" href="#nullclines" title="Link to this heading">#</a></h2>
+<p>The nullclines of two first-order differential equations are points in the phase plane for which one or the other of the two derivatives are zero.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+V\frac{dc_A}{dt} &amp; = 0 = q(c_{A,f} - c_A) - Vk(T)c_A \\
+\rho C_pV\frac{dT}{dt} &amp; = 0 = \rho C_p q(T_f - T) + (-\Delta H_R)Vk(T)c_A + UA(T_c-T)
+\end{align*}\]</div>
+<p>Solving each of equations for steady-state values <span class="math notranslate nohighlight">\(\bar{c}_A\)</span>, <span class="math notranslate nohighlight">\(\bar{T}\)</span> gives two relations</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d\bar{c}_A}{dt} = 0 \implies \bar{c}_A &amp; = \frac{q c_{A,f}}{q + V k(\bar{T})} \\
+\frac{d\bar{T}}{dt} = 0 \implies \bar{c}_A &amp; = -\frac{\rho q C_p(T_f - \bar{T}) + UA(T_c - \bar{T})}{(-\Delta H_R)Vk(\bar{T})} 
+\end{align*}\]</div>
+<p>The intersection of the nullclines correspond to steady states. The relative positions of the nullclines provide valuable insight into the dynamics of a nonlinear system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot nullclines</span>
+<span class="n">Ea</span>  <span class="o">=</span> <span class="mi">72750</span>     <span class="c1"># activation energy J/gmol</span>
+<span class="n">R</span>   <span class="o">=</span> <span class="mf">8.314</span>     <span class="c1"># gas constant J/gmol/K</span>
+<span class="n">k0</span>  <span class="o">=</span> <span class="mf">7.2e10</span>    <span class="c1"># Arrhenius rate constant 1/min</span>
+<span class="n">V</span>   <span class="o">=</span> <span class="mf">100.0</span>     <span class="c1"># Volume [L]</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">1000.0</span>    <span class="c1"># Density [g/L]</span>
+<span class="n">Cp</span>  <span class="o">=</span> <span class="mf">0.239</span>     <span class="c1"># Heat capacity [J/g/K]</span>
+<span class="n">dHr</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0e4</span>    <span class="c1"># Enthalpy of reaction [J/mol]</span>
+<span class="n">UA</span>  <span class="o">=</span> <span class="mf">5.0e4</span>     <span class="c1"># Heat transfer [J/min/K]</span>
+<span class="n">q</span>   <span class="o">=</span> <span class="mf">100.0</span>     <span class="c1"># Flowrate [L/min]</span>
+<span class="n">cAf</span> <span class="o">=</span> <span class="mf">1.0</span>       <span class="c1"># Inlet feed concentration [mol/L]</span>
+<span class="n">Tf</span>  <span class="o">=</span> <span class="mf">350.0</span>     <span class="c1"># Inlet feed temperature [K]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_nullclines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>  
+                       <span class="s2">&quot;dC/dt = 0&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="n">cAf</span><span class="o">/</span><span class="p">((</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span>
+                       <span class="s2">&quot;dT/dt = 0&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">rho</span><span class="o">*</span><span class="n">q</span><span class="o">*</span><span class="n">Cp</span><span class="o">*</span><span class="p">(</span><span class="n">Tf</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">UA</span><span class="o">*</span><span class="p">(</span><span class="n">Tc</span> <span class="o">-</span> <span class="n">T</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">*</span><span class="n">dHr</span><span class="o">*</span><span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">))})</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;T&quot;</span><span class="p">:</span><span class="s2">&quot;g-.&quot;</span><span class="p">})</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">ylim</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;T&quot;</span><span class="p">:</span><span class="s2">&quot;r--&quot;</span><span class="p">})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;dC/dt = 0&#39;</span><span class="p">,</span><span class="s1">&#39;dT/dt = 0&#39;</span><span class="p">])</span>
+    
+<span class="n">fix</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plot_nullclines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Tc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/18a33c2ac3e3603ee1a7e7bc4d49ebf6f93bd5bae257900e7dd0aeccd234b517.png" src="../../_images/18a33c2ac3e3603ee1a7e7bc4d49ebf6f93bd5bae257900e7dd0aeccd234b517.png" />
+</div>
+</div>
+</section>
+<section id="phase-plane-analysis">
+<h2><span class="section-number">2.8.7. </span>Phase Plane Analysis<a class="headerlink" href="#phase-plane-analysis" title="Link to this heading">#</a></h2>
+<p>The final analysis is display the simulation in both time and phase plane coordinates. The red circle is the initial point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up figure window and axes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># simulate</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">)</span>
+
+<span class="c1"># add plots</span>
+<span class="n">plot_nullclines</span><span class="p">(</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cA&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cA&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">],</span> <span class="s1">&#39;r.&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;cA&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">460</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xdata</span><span class="p">((</span><span class="n">rho</span><span class="o">*</span><span class="n">q</span><span class="o">*</span><span class="n">Cp</span><span class="o">*</span><span class="p">(</span><span class="n">Tf</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">UA</span><span class="o">*</span><span class="p">(</span><span class="n">T_cooling</span> <span class="o">-</span> <span class="n">T</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">*</span><span class="n">dHr</span><span class="o">*</span><span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xdata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cA&quot;</span><span class="p">])</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">])</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_xdata</span><span class="p">([</span><span class="n">c_initial</span><span class="p">])</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">([</span><span class="n">T_initial</span><span class="p">])</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cA&quot;</span><span class="p">])</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">])</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+
+<span class="c1"># Uncomment the line below to run the interactive widget</span>
+<span class="c1"># interact(plot_phase, T_cooling = (290.0, 310.0), c_initial = (0.0, 1.0, 0.01), T_initial = (300, 400));</span>
+    
+<span class="n">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mf">290.</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mf">350.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/75db345e00496261bf0682d87945e6e5c0bca56b4f3296c87e1b5ea2232c4ccf.png" src="../../_images/75db345e00496261bf0682d87945e6e5c0bca56b4f3296c87e1b5ea2232c4ccf.png" />
+</div>
+</div>
+</section>
+<section id="activities">
+<h2><span class="section-number">2.8.8. </span>Activities<a class="headerlink" href="#activities" title="Link to this heading">#</a></h2>
+<p><strong>1.</strong> Adjust the cooling temperature over the range of values from 290K to 310K, identify the cooling water temperatures at which you observe a qualitative difference in system behavior. Try to identify the following behaviors:</p>
+<ul class="simple">
+<li><p>Stable steady state</p></li>
+<li><p>Oscillatory steady state</p></li>
+<li><p>The onset of a thermal runaway condition</p></li>
+</ul>
+<p>Describe the behavior using the nullclines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># stable steady state operation</span>
+<span class="n">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mf">290.</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mf">350.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/75db345e00496261bf0682d87945e6e5c0bca56b4f3296c87e1b5ea2232c4ccf.png" src="../../_images/75db345e00496261bf0682d87945e6e5c0bca56b4f3296c87e1b5ea2232c4ccf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># oscillatory steady state operation</span>
+<span class="n">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mf">305.</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mf">350.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9f2a2f8ec4d4dd9c9e152dbd0d3bc4fd99855cda377ddf8ab84c1d89bf86d81b.png" src="../../_images/9f2a2f8ec4d4dd9c9e152dbd0d3bc4fd99855cda377ddf8ab84c1d89bf86d81b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># onset of thermal runaway</span>
+<span class="n">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mf">304.</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mf">300.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bd0768157116d2d8073d44147a090870128fd01451229ffe7f45d30f96b1e6c1.png" src="../../_images/bd0768157116d2d8073d44147a090870128fd01451229ffe7f45d30f96b1e6c1.png" />
+</div>
+</div>
+<p><strong>2.</strong> Assume the reactor is start up with a tank of reactant feed with a concentration <span class="math notranslate nohighlight">\(c_A = 1\)</span>. What is the maximum initial temperature that would avoid thermal runaway during reactor startup?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># no thermal runaway</span>
+<span class="n">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mf">290.</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mf">341.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/932b309e0fa13c93f4037eeaf2f18d7c5a4b0fd52cad726d826f94b935010fe4.png" src="../../_images/932b309e0fa13c93f4037eeaf2f18d7c5a4b0fd52cad726d826f94b935010fe4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># with thermal runaway</span>
+<span class="n">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="o">=</span><span class="mf">290.</span><span class="p">,</span> <span class="n">c_initial</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">T_initial</span><span class="o">=</span><span class="mf">342.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2c456cfa903215269fed2654d436eeb384289874ca97ac771f5a7ffc721be929.png" src="../../_images/2c456cfa903215269fed2654d436eeb384289874ca97ac771f5a7ffc721be929.png" />
+</div>
+</div>
+</section>
+<section id="steady-states">
+<h2><span class="section-number">2.8.9. </span>Steady-States<a class="headerlink" href="#steady-states" title="Link to this heading">#</a></h2>
+<p>Let’s now numerically compute the steady-state reactor concentration <span class="math notranslate nohighlight">\(\bar{c}_A\)</span> and temperature <span class="math notranslate nohighlight">\(\bar{T}\)</span> as a function of the coolant temperature.</p>
+<p>First, we will (define again) a function to evaluate the RHS of the ODEs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># function to evaluate RHS of ODEs</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mf">310.</span><span class="p">):</span>
+    <span class="n">cA</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># Arrhenius rate expression</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">k0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+
+    <span class="c1"># Concentration derivative</span>
+    <span class="n">dcAdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cAf</span> <span class="o">-</span> <span class="n">cA</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span><span class="o">*</span><span class="n">cA</span>
+
+    <span class="c1"># Temperature derivative</span>
+    <span class="n">dTdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Tf</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">dHr</span><span class="o">/</span><span class="n">rho</span><span class="o">/</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">cA</span> <span class="o">+</span> <span class="p">(</span><span class="n">UA</span><span class="o">/</span><span class="n">V</span><span class="o">/</span><span class="n">rho</span><span class="o">/</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Tc</span><span class="o">-</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dcAdt</span><span class="p">,</span> <span class="n">dTdt</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we will use Newton’s method, available in <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root</span></code>, to numerically compute values of <span class="math notranslate nohighlight">\(\bar{c}_A\)</span> and <span class="math notranslate nohighlight">\(\bar{T}\)</span> at one coolant temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">root</span>
+<span class="c1"># Test calculation for steady-state at one coolant temperature</span>
+<span class="n">ode_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y_</span> <span class="p">:</span> <span class="n">deriv</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mf">300.</span><span class="p">)</span>
+<span class="n">sln</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">ode_func</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">350.</span><span class="p">])</span>
+<span class="n">y_bar</span> <span class="o">=</span> <span class="n">sln</span><span class="o">.</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cA = &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">y_bar</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;mol/L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;T = &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">y_bar</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;K&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cA =  0.5 mol/L
+T =  350.08 K
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we will put our Newton’s method code in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. This will allow us to calculate the steady-state for many values of <span class="math notranslate nohighlight">\(T_c\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Allocation arrays to store results</span>
+<span class="n">Tc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">290</span><span class="p">,</span> <span class="mi">310</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Tc</span><span class="p">)</span>
+<span class="n">ca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Tc</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">Ti</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Tc</span><span class="p">):</span>
+    <span class="c1"># Define new lambda function using the current value of Tc</span>
+    <span class="n">ode_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y_</span> <span class="p">:</span> <span class="n">deriv</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Ti</span><span class="p">)</span>
+
+    <span class="n">y_default</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">310.</span><span class="p">]</span>
+    <span class="n">y_fail</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">370.</span><span class="p">]</span>
+
+    <span class="c1"># Set initial guess for fsolve</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Use previous solution as initial guess</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Default initial guess for first Tc value</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="n">y_default</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sln</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">ode_func</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sln</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to converge at Tc = &quot;</span><span class="p">,</span> <span class="n">Ti</span><span class="p">,</span><span class="s2">&quot;, trying with failsafe initial guess&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Try again with default initial guess</span>
+        <span class="n">sln</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">ode_func</span><span class="p">,</span> <span class="n">y_fail</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sln</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to converge at Tc = &quot;</span><span class="p">,</span> <span class="n">Ti</span><span class="p">,</span><span class="s2">&quot; with failsafe initial guess&quot;</span><span class="p">)</span>
+        
+    <span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sln</span><span class="o">.</span><span class="n">x</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tc</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Coolant temperature (K)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Reactor temperature (K)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tc</span><span class="p">,</span> <span class="n">ca</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Coolant temperature (K)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Reactor concentration (gmol/L)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed to converge at Tc =  303.5 , trying with failsafe initial guess
+</pre></div>
+</div>
+<img alt="../../_images/6fbbdb33c170f3606ec0eaf560fd91d7e1c4bdd30dd8ba9042a9d296e70b1a79.png" src="../../_images/6fbbdb33c170f3606ec0eaf560fd91d7e1c4bdd30dd8ba9042a9d296e70b1a79.png" />
+<img alt="../../_images/2fa8086a14beede6830c3a277c5a2d10d75d5c30c66c312d4ec1fbd38036744c.png" src="../../_images/2fa8086a14beede6830c3a277c5a2d10d75d5c30c66c312d4ec1fbd38036744c.png" />
+</div>
+</div>
+<p>These plots show the calculated steady-states as a function of the coolant temperature <span class="math notranslate nohighlight">\(T_c\)</span> assuming the other parameters are fixed to the values diven above in the table.</p>
+<p>At coolant temperatures below 303.5 K, the steady-state is in the “low conversion region”. Recall, <span class="math notranslate nohighlight">\(c_{A,f} = 1.0\)</span> gmol/L, so the effluent concentration of <span class="math notranslate nohighlight">\(c_A \geq 0.8\)</span> gmol/L means only a model amount of <span class="math notranslate nohighlight">\(A\)</span> is converted into the desired products.</p>
+<p>For coolant temperatures above 303.5 K, the steady-state shifts to the “high conversion region” with <span class="math notranslate nohighlight">\(c_{A} \leq 0.2\)</span> gmol/L. In this region, a majority of species A fed into the reactor is converted into valuable products.</p>
+<p>Notice the reactor temperature is much higher: <span class="math notranslate nohighlight">\(\geq 375\)</span> K in the “high conversion region” compared to <span class="math notranslate nohighlight">\(\leq 335\)</span> K in the “low conversion region”. This is because the reaction is exothermic; in the “high conversion region”, more reactant is consumed and thus more heat is released, which raises the reactor temperature. Recall, the reaction is also faster at higher temperatures. These two phenomena work together to produce the sudden shift between the “low conversion” and “high conversion” regions.</p>
+</section>
+<section id="stability-analysis">
+<h2><span class="section-number">2.8.10. </span>Stability analysis<a class="headerlink" href="#stability-analysis" title="Link to this heading">#</a></h2>
+<p>Next, we want to analyze the stability of the open-loop (i.e., no feedback control) system.</p>
+<p>Recall, we previously learned how the eigenvalues of linear system tell us about the dynamic response. Recall the canonical state-space linear system:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{\mathbf{x}} = \mathbf{A} \mathbf{x} + \mathbf{B} \mathbf{u}, \qquad \mathbf{y} = \mathbf{C} \mathbf{x} + \mathbf{D} \mathbf{u}
+\]</div>
+<p>But we have a nonlinear system:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{\mathbf{x}} = \mathbf{f}(t, \mathbf{x}, \mathbf{u}), \qquad \mathbf{y} = \mathbf{h}(t, \mathbf{x}, \mathbf{u})
+\]</div>
+<p>To analyze stability, we are going to construct a linear approximation:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{\mathbf{x}} \approx \mathbf{A} \mathbf{x}
+\]</div>
+<p>For this example, we are going to consider <span class="math notranslate nohighlight">\(\mathbf{u} = 0\)</span> and examine the eigenvalues if <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<p>How to construct this linear approximation?</p>
+<p>We will compute the Jacobian of the RHS of the ODEs:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{A} = \nabla_\mathbf{x} \mathbf{f}(t, \mathbf{x}, \mathbf{u})
+\]</div>
+<p>This Jacobian will be evaluated/computed at the steady-state we wish to analyze.</p>
+<p>First, we will assemble a linear approximation to our ODE system using <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/Newton-Raphson-Methods-for-Systems-of-Equations.html?#finite-difference-to-approximate-the-jacobian-matrix">finite difference code from CBE 20258</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Approximate Jacobian using forward finite difference</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        f: vector-valued function</span>
+<span class="sd">        x: point to build approximation J(x) around</span>
+<span class="sd">        delta: finite difference step size</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        J: square Jacobian matrix (approximation)</span>
+
+<span class="sd">    Reference: CBE 20258, Notre Dame</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Determine size</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>
+    
+    <span class="c1">#Evaluate function f at x</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1">#only need to evaluate this once</span>
+    
+    <span class="c1"># Make sure f is square (no. inputs = no. outputs)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">N</span> <span class="o">==</span> <span class="n">fx</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="s2">&quot;Your problem is not square!&quot;</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fx = &quot;</span><span class="p">,</span><span class="n">fx</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Allocate empty matrix</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+
+    <span class="n">idelta</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">delta</span> <span class="c1">#division is slower than multiplication</span>
+    <span class="n">x_perturbed</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#copy x to add delta</span>
+    
+    <span class="c1"># Loop over elements of x and columns of J</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="c1"># Perturb (apply step) to element i of x</span>
+        <span class="n">x_perturbed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span>
+        
+        <span class="c1"># Approximate column in Jacobian</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_perturbed</span><span class="p">)</span> <span class="o">-</span> <span class="n">fx</span><span class="p">)</span> <span class="o">*</span> <span class="n">idelta</span>
+        
+        <span class="c1"># Reset element of x</span>
+        <span class="n">x_perturbed</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="c1"># Save results</span>
+        <span class="n">J</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">col</span>
+    <span class="c1"># end for loop</span>
+    <span class="k">return</span> <span class="n">J</span>
+
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">ca</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">ode_jac</span> <span class="o">=</span> <span class="n">Jacobian</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span> <span class="p">:</span> <span class="n">deriv</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A approximation = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">ode_jac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A approximation = 
+ [[-1.05041791e+00 -4.29658087e-03]
+ [ 1.05476802e+01 -2.19318466e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we will loop over the above calculated steady-states. At each steady-state, will will assemble the linearization and then compute the eigenvalues.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform sensitivity analysis of eigenvalues to Tc</span>
+
+<span class="n">evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">Tc</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span><span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Tc</span><span class="p">)):</span>
+
+    <span class="c1"># Construct Jacobian</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="n">ode_jac</span> <span class="o">=</span> <span class="n">Jacobian</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span> <span class="p">:</span> <span class="n">deriv</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">))</span>
+
+    <span class="c1"># Compute eigenvalues</span>
+    <span class="n">evals</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">ode_jac</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tc</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;real($\lambda_1$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tc</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;real($\lambda_2$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Real&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Coolant Temperature (K)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Linearized Stability Analysis&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tc</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;imag($\lambda_1$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tc</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;imag($\lambda_2$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Imaginary&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aa8927fd326f253e404a9f52877f962615059d5f52bf638d09c9e1588282d332.png" src="../../_images/aa8927fd326f253e404a9f52877f962615059d5f52bf638d09c9e1588282d332.png" />
+</div>
+</div>
+<p>In this plot, we see four distinct regions from left to right:</p>
+<ul class="simple">
+<li><p><strong>Stable</strong> because real(<span class="math notranslate nohighlight">\(\lambda\)</span>) <span class="math notranslate nohighlight">\(\leq 0\)</span> and <strong>non-oscillatory</strong> because imag(<span class="math notranslate nohighlight">\(\lambda\)</span>) = 0</p></li>
+<li><p><strong>Stable</strong> and <strong>oscillatory</strong> because imag(<span class="math notranslate nohighlight">\(\lambda\)</span>) <span class="math notranslate nohighlight">\(\neq\)</span> 0</p></li>
+<li><p><strong>Unstable</strong> because real(<span class="math notranslate nohighlight">\(\lambda\)</span>) <span class="math notranslate nohighlight">\(\geq 0\)</span> and <strong>oscillatory</strong></p></li>
+<li><p><strong>Stable</strong> with fast <strong>oscillations</strong> because abs(imag(<span class="math notranslate nohighlight">\(\lambda\)</span>)) are large</p></li>
+</ul>
+<p>From an economic perspective, we want to operate at a steady-state in the “high conversion region”, which means an elevated reactor temperature. However, from a safety perspective, this is challenging because the system concentration and temperatures oscillate in this region. Moreover, there is an intermediate region between low and high coolant temperatures in which the reactor is subject to thermal run away! During the next few weeks, we will discuss how to design feedback control systems that enable operating in the economically preferred “high conversion region” while mitigating these safety issues.</p>
+<p>Compare this plot to the analysis of our second order system (mass-spring-damper example). Nonlinear systems such as this simple exothermic reactor a much more complicated! This is why controls and dynamical systems are so interesting in chemical and biomolecular engineering.</p>
+</section>
+<section id="take-away-messages">
+<h2><span class="section-number">2.8.11. </span>Take Away Messages<a class="headerlink" href="#take-away-messages" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Many chemical and biomolecular engineering dynamical systems are nonlinear.</p></li>
+<li><p>We derived the simple continous stirred tank reactor (CSTR) model from a dynamic mass and energy balance.</p></li>
+<li><p>The simple exothermic CSTR model is nonlinear with respect to temperature and subject to thermal run away to high conversions.</p></li>
+<li><p>We used nullclines and Newton’s method to compute steady-states as a function of the manipulated variable (coolant temperature).</p></li>
+<li><p>We examined the eigendecomposition of linearize system to understand the system response, e.g., stable versus unstable, oscillatory versus non-oscillatory, around the steady-states.</p></li>
+<li><p>During the next few weeks, we will design feedback control systems that allow us to safely operate at desired steady-state operating points (e.g., high conversion) while mitigating undersiable aspects of their open-loop steady-state response (e.g., unstable, oscillatory).</p></li>
+<li><p>This example illustrates why control of chemical and biomolecular systems, which are often nonlinear, is much more interesting (in the intrustors’ opinions) than many mechanical or electrical systems, which are often linear.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Spring-Mass-Damper.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.7. </span>Characteristics of Second Order Systems</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Hare-and-Lynx.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.9. </span>Hare and Lynx Population Dynamics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description">2.8.1. Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reaction-kinetics">2.8.2. Reaction Kinetics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-equations-and-parameter-values">2.8.3. Model Equations and Parameter Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effect-of-cooling-temperature">2.8.4. Effect of Cooling Temperature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-simulation">2.8.5. Interactive Simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nullclines">2.8.6. Nullclines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-plane-analysis">2.8.7. Phase Plane Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">2.8.8. Activities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-states">2.8.9. Steady-States</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stability-analysis">2.8.10. Stability analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away-messages">2.8.11. Take Away Messages</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

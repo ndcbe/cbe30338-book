@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Syllabus &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Syllabus';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Schedule (2025)" href="Schedule.html" />
+    <link rel="prev" title="CBE 30338 Data Analytics, Optimization, and Control" href="Readme.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/2/Process-Modeling.html">2. Process Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/2/Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/4/Process-Analytics.html">4. Process Analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/4/Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="notebooks/08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2FSyllabus.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Syllabus.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Syllabus</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cbe-30338-description">CBE 30338 Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-information">Course Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructors-and-teaching-assistants">Instructors and Teaching Assistants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aces-tutors-and-study-room">ACES Tutors and Study Room</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-board-canvas-and-email-correspondance">Discussion Board (Canvas) and Email Correspondance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-materials">Required Materials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment-and-grades">Assessment and Grades</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-participation-and-participation">Class Participation and Participation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excused-absenses">Excused Absenses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignments">Assignments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exam">Exam</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final Project</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-requirements-and-scope">Project Requirements and Scope</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-proposal">Project Proposal</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-check-ins">Project Check-ins</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#group-presentation">Group Presentation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fianl-report-and-code">Fianl Report and Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-ideas">Project Ideas</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-standards">Grading Standards</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regrade-requests">Regrade Requests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#late-policy">Late Policy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#honor-code">Honor Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collaboration-policy">Collaboration Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artificial-intelligence-policy">Artificial Intelligence Policy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inclusiveness-mental-health-and-disabilities">Inclusiveness, Mental Health, and Disabilities</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="syllabus">
+<h1>Syllabus<a class="headerlink" href="#syllabus" title="Link to this heading">#</a></h1>
+<section id="cbe-30338-description">
+<h2>CBE 30338 Description<a class="headerlink" href="#cbe-30338-description" title="Link to this heading">#</a></h2>
+<p><strong>CBE 30338 Data Analytics, Optimization, and Control</strong> introduces students to the analysis and design of control systems for chemical and biochemical processes. Applications include chemical and biological reactors, separation processes, autonomous biomedical devices, and examples from other engineering disciplines.</p>
+<p>The major topics of the course are:</p>
+<ul class="simple">
+<li><p>Modeling and Parameter Estimation</p></li>
+<li><p>Feedback Control</p></li>
+<li><p>Process Data Analytics</p></li>
+<li><p>Optimization</p></li>
+<li><p>Predictive Control</p></li>
+</ul>
+<p>Python and hands-on control experiments are integrated into the course.</p>
+<p>The lab sessions (CBE 32338) provide opportunities for hands-on coding and experimentation using the <a class="reference internal" href="tclab/00.00-tclab.html"><span class="std std-doc">Temperature Control Laboratory</span></a>. In leu of a textbook, students should purchase their own device from <a class="reference external" href="https://www.amazon.com/TCLab-Temperature-Control-Lab/dp/B07GMFWMRY">Amazon</a> or <a class="reference external" href="https://apmonitor.com/pdc/index.php/Main/PurchaseLabKit">apmonitor.com</a>.</p>
+</section>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>Students completing this course will be able to:</p>
+<ul class="simple">
+<li><p>Identify process models and fit the models to data</p></li>
+<li><p>Design and implement feedback (e.g., advanced PID) control</p></li>
+<li><p>Manipulate time series data and extract process information</p></li>
+<li><p>Create and solve steady-state optimization models</p></li>
+<li><p>Apply the principles of modeling and control to novel applications</p></li>
+</ul>
+</section>
+<section id="course-information">
+<h2>Course Information<a class="headerlink" href="#course-information" title="Link to this heading">#</a></h2>
+<p><strong>Canvas link:</strong> <a class="reference external" href="https://canvas.nd.edu/courses/105816">SP25-CBE-30338-01 Data Analytics, Optimization, and Control</a></p>
+<p><strong>Dates:</strong> January 14 - April 30, 2025</p>
+<p><strong>Class:</strong> CBE 30338 Tuesday and  Thursdays, 9:15 - 10:45 am, DeBartolo 131</p>
+<p><strong>Lab/Tutorial:</strong>  Please try to attend the tutorial for which you are registered:</p>
+<ul class="simple">
+<li><p>CBE 32338-01 Friday, 10:30 am - 11:20 pm, DeBartolo 133</p></li>
+<li><p>CBE 32338-02 Friday, 11:30 am - 12:20 pm, DeBartolo 133</p></li>
+</ul>
+<p>Seating in DeBartolo 133 (computer classroom) is limited to 45 students*. Pleae attend the lab session for which you are registered.</p>
+<p><strong>Prerequisites:</strong> This course assumes knowledge of modeling and analysis with differential equations, procedural programming in Python, mass and energy balances. Students taking this course will normally have completed</p>
+<ul class="simple">
+<li><p>CBE 20258 Numerical and Statistical Analysis</p></li>
+<li><p>MATH 20580 Linear Algebra and Differential Equations (or ACMS equivalent)</p></li>
+<li><p>MATH 30650 Differential Equations (or ACMS equivalent)</p></li>
+</ul>
+<p>Students without this background should contact the instructor before registering for the course.</p>
+<p><strong>Required Materials:</strong> The following materials should be acquired at the start of the course.</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="http://apmonitor.com/pdc/index.php/Main/ArduinoTemperatureControl">Temperature Control Lab kit</a> is an Arduino based device used in this course as a “hands-on” laboratory for learning the principles and implementation of process control. It is available by on-line order from <a class="reference external" href="https://www.amazon.com/TCLab-Temperature-Control-Lab/dp/B07GMFWMRY">Amazon</a> or <a class="reference external" href="https://apmonitor.com/pdc/index.php/Main/PurchaseLabKit">Apmonitor.com</a> for about $40  USD.</p></li>
+<li><p>A laptop/desktop computer with USB-A port, or a USB-C port and a USB-C to USB-A converter.</p></li>
+<li><p>An up-to-date installation of the <a class="reference external" href="https://www.anaconda.com/products/individual">Anaconda Individual Edition</a>  for Python programming. <strong>Follow the instructions <a class="reference external" href="https://appdividend.com/2020/05/12/how-to-update-anaconda-upgrade-anaconda-navigator/">here</a> to update an older installation.</strong></p></li>
+</ol>
+</section>
+<section id="instructors-and-teaching-assistants">
+<h2>Instructors and Teaching Assistants<a class="headerlink" href="#instructors-and-teaching-assistants" title="Link to this heading">#</a></h2>
+<p>This semester will be team-taught. Prof. Dowling will deliver most of the lectures and Prof. Zartman will be responsible for most of the labs/tutorial sessions.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><a class="reference external" href="https://dowlinglab.nd.edu/people/professor-alexander-w-dowling/">Prof. Alex Dowling</a></p></th>
+<th class="head"><p><a class="reference external" href="https://engineering.nd.edu/faculty/jeremiah-zartman/">Prof. Jeremy Zartman</a></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><img alt="" src="https://dowlinglab.nd.edu/assets/320333/300x300/dowling_alex_sq.jpg" /></p></td>
+<td><p><img alt="" src="https://engineering.nd.edu/wp-content/uploads/2020/06/Zartman-Jermiah-HS-300x300.jpg" /></p></td>
+</tr>
+<tr class="row-odd"><td><p>Co-Instructor</p></td>
+<td><p>Co-Instructor</p></td>
+</tr>
+<tr class="row-even"><td><p>TBA</p></td>
+<td><p>TBA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Five teaching assistants (TAs) will help run the tutorial sessions, answer student questions on Canvas, hold office hours, and grade a majority of the assignments.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><a class="reference external" href="https://dowlinglab.nd.edu/people/zhicheng-lu/">Zhicheng Lu</a></p></th>
+<th class="head"><p><a class="reference external" href="https://dowlinglab.nd.edu/people/shammah-lilonfe/">Shammah Lilonfe</a></p></th>
+<th class="head"><p><a class="reference external" href="https://dowlinglab.nd.edu/people/hailey-lynch/">Kay Lu</a></p></th>
+<th class="head"><p>Caitlin Frank</p></th>
+<th class="head"><p>Yikang Gong</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><img alt="" src="https://dowlinglab.nd.edu/assets/552006/200x200/zhicheng.jpg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/556829/200x200/lilonfe_photograph_min.jpg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/599315/200x200/kay_164.jpeg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/600219/200x200/caitlin2025_headshot.jpg" /></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Senior TA</p></td>
+<td><p>Senior TA</p></td>
+<td><p>TA</p></td>
+<td><p>TA</p></td>
+<td><p>TA</p></td>
+</tr>
+<tr class="row-even"><td><p>TBA</p></td>
+<td><p>TBA</p></td>
+<td><p>TBA</p></td>
+<td><p>TBA</p></td>
+<td><p>TBA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="aces-tutors-and-study-room">
+<h2>ACES Tutors and Study Room<a class="headerlink" href="#aces-tutors-and-study-room" title="Link to this heading">#</a></h2>
+<p>Five tutors are available in the ACES study room for this course at the following times:</p>
+<ul class="simple">
+<li><p>Sundays, 4 - 6pm, Stinson-Remick Hall 108</p></li>
+<li><p>Thursdays, 6 - 9pm, Stinson-Remick Hall 108</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Lucy Chmura</p></th>
+<th class="head"><p>Nikki McNamara</p></th>
+<th class="head"><p>Erik Rozanski</p></th>
+<th class="head"><p>Evan Wood</p></th>
+<th class="head"><p>Samantha Yu</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><img alt="" src="https://dowlinglab.nd.edu/assets/600160/200x200/lucy2025_headshot.jpeg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/600158/200x200/nikki2025_headshot.jpeg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/600159/200x200/erik2025_headshot.jpg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/600161/200x200/evan2025_headshot.jpg" /></p></td>
+<td><p><img alt="" src="https://dowlinglab.nd.edu/assets/600223/200x200/samantha2025_headshot.jpeg" /></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The ACES tutors are an additional resource to help you master the content in this course. The ACES tutors DO NOT have access to the solutions for the assignments. The ACES tutors do have access to Canvas, including all announcements and the discussion boards. You SHOULD NOT ask the ACES tutorials to see their homework or lab solutions from last year as help.</p>
+</section>
+<section id="discussion-board-canvas-and-email-correspondance">
+<h2>Discussion Board (Canvas) and Email Correspondance<a class="headerlink" href="#discussion-board-canvas-and-email-correspondance" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Post your questions to the <strong>discussion board in Canvas</strong></p></li>
+<li><p>Instructor only: <a class="reference external" href="mailto:adowling&#37;&#52;&#48;nd&#46;edu">adowling<span>&#64;</span>nd<span>&#46;</span>edu</a> and <a class="reference external" href="mailto:jzartman&#37;&#52;&#48;nd&#46;edu">jzartman<span>&#64;</span>nd<span>&#46;</span>edu</a>, ‘’CBE 30338’’ in the subject, private official matters (e.g., excused absence, testing accommodations)</p></li>
+</ul>
+<p>We encourage you to post all your questions, including your mathematical models, pseudocode, and code screenshots, to the public <strong>discussion board in Canvas</strong>. We are doing this for a few reasons:</p>
+<ol class="arabic simple">
+<li><p>As professionals, you’ll need to be comfortable asking questions in front of a team. We want to cultivate a positive and friendly learning environment where everyone can practice this skill during the semester.</p></li>
+<li><p>By answering questions in the public discussion board, everyone in the class can access the same information.</p></li>
+<li><p>We would like to cultivate a learning community with peer instruction; as professionals, you must answer your peers’ questions.</p></li>
+<li><p>Many scientific software have online discussion boards to ask technical questions and report bugs. Using the <strong>discussion board in Canvas</strong> will help you develop comfort in asking questions this way.</p></li>
+</ol>
+</section>
+<section id="required-materials">
+<h2>Required Materials<a class="headerlink" href="#required-materials" title="Link to this heading">#</a></h2>
+<p>Required notes and materials for the course are available at the Github/web repositories</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ndcbe.github.io/controls/Readme.html">ndcbe/controls</a></p></li>
+<li><p><a class="reference external" href="https://github.com/jckantor/TCLab">jckantor/TCLab</a></p></li>
+</ul>
+<p>Additional material will be taken from:</p>
+<ul class="simple">
+<li><p>Åström, Karl Johan, and Richard M. Murray. Feedback systems: an introduction for scientists and engineers.  Second Edition (Version v3.1.5 dated 2020-07-24). Princeton University Press.</p></li>
+<li><p>Douglas, Brian. [The Fundamentals of Control Theory]([<a class="reference external" href="https://drive.google.com/file/d/1LAjaDDViFG4H7dQ6PQVHo8XSQHS59GJf/view">https://drive.google.com/file/d/1LAjaDDViFG4H7dQ6PQVHo8XSQHS59GJf/view</a>]. See <a class="reference external" href="https://engineeringmedia.com/">https://engineeringmedia.com/</a> for links to video.</p></li>
+</ul>
+<p>This textbook is available for download from the website (preferred, latest edition with corrections) and Hesburgh Library at <a class="reference external" href="https://ebookcentral.proquest.com/lib/ndlib-ebooks/detail.action?docID=475844">https://ebookcentral.proquest.com/lib/ndlib-ebooks/detail.action?docID=475844</a>.</p>
+<p>Additional supplementary materials related to process control will be distributed from time-to-time during the course.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://physics.nyu.edu/pine/pymanual/html/pymanMaster.html">Introduction to Python for Science</a></p></li>
+<li><p><a class="reference external" href="http://apmonitor.com/pdc/index.php/Main/HomePage">BYU Process Dynamics and Control course website</a></p></li>
+<li><p><a class="reference external" href="https://resourcium.org/">Resourcium</a></p></li>
+</ul>
+</section>
+<section id="assessment-and-grades">
+<h2>Assessment and Grades<a class="headerlink" href="#assessment-and-grades" title="Link to this heading">#</a></h2>
+<p>Grades for CBE 30338 and CBE 32338 are consolidated into a single grade assigned to CBE 30338. There is no separate grade or credit assigned for CBE 32338.</p>
+<p>Grades are based on a weighted assessment of performance in the following categories:</p>
+<ul class="simple">
+<li><p>Class Participation and Professionalism: 5%</p></li>
+<li><p>Assignments: 45%</p></li>
+<li><p>Exam: 25%</p></li>
+<li><p>Group Project: 25%</p></li>
+</ul>
+<section id="class-participation-and-participation">
+<h3>Class Participation and Participation<a class="headerlink" href="#class-participation-and-participation" title="Link to this heading">#</a></h3>
+<p>Class sessions will include opportunities to respond to instructor questions and other active learning exercises. All interactions will be civil, respectful, and inclusive. If you have any concerns about classroom dynamics, please feel free to speak with the instructor.</p>
+<p>At the end of the semester, the instructor will assign grades for class participation and professionalism at their discretion. Students who are good class citizens, i.e., actively engage in class and lab activities, work well with peers, arrives prepared, and ask and answer questions on the Canvas discussion board, will receive (near) full marks. In contrast, the following may result in a reduced grade:</p>
+<ul class="simple">
+<li><p>Unprofessional behavior toward peers, instructors, teaching assistants, or others in the campus community. (This may also result in other disciplinary action per university policies.)</p></li>
+<li><p>Repeatedly sending emails to the instructor or TAs on topics that should be addressed in the Canvas Discussion board (e.g., assignment help, class policy questions).</p></li>
+<li><p>Repeatdely sending emails without “CBE 30338” in the subject.</p></li>
+<li><p>Not actively participating in class or lab activities.</p></li>
+<li><p>Missing significant numbers of class sessions without an excuse recognized by the university.</p></li>
+<li><p>Arriving late to class as this causes a distrubtion.</p></li>
+</ul>
+<p>The class participation grade may include online quizzes, pre-lab activities, in-class Poll Everywhere questions, and prepartion for in-class project consultations.</p>
+</section>
+<section id="excused-absenses">
+<h3>Excused Absenses<a class="headerlink" href="#excused-absenses" title="Link to this heading">#</a></h3>
+<p>You are expected to attend and actively participate in all class sessions.  If you miss class for an official University excused function, please find notes for that lecture, do the reading, and avail yourself of office hours to catch up on the missed material. You do not need to email the instructor(s) to ask about missed materials. Please check Canvas, the class schedule, and with your classmates first. (You are welcome to post on the Canvas discussion if you miss class.)</p>
+<p>We plan on asking two or more Poll Everyone questions each lecture. If you have an excused absense, please submit the supporting documentation <a class="reference external" href="https://canvas.nd.edu/courses/105816/assignments/342768">via Canvas</a>. Please do NOT sent excused absense documenation via email. Canvas provides a more organized way to document excused absenses and factor this into the class participation grades. The exception are excused absenses from Athletics, which are sent via email directly to the instructors.</p>
+</section>
+<section id="assignments">
+<h3>Assignments<a class="headerlink" href="#assignments" title="Link to this heading">#</a></h3>
+<p>Homework and labratory assignments are critical to developing the skills needed to succeed in the course and in the major. Accordingly, assignments are a required element of the course. Missing assignments will be scored as zero. Group study is encouraged, but the submitted work must be your own. Students must be able to explain all of their submitted work.</p>
+<p>Please see our <a class="reference internal" href="Schedule.html"><span class="std std-doc">semester schedule</span></a> for a listing of assignments and deadlines.</p>
+</section>
+<section id="exam">
+<h3>Exam<a class="headerlink" href="#exam" title="Link to this heading">#</a></h3>
+<p>There will be one in-class exam. The exam will be open book but without access to a computer or the internet. Students who take notes on a tablet should sit in the front rows during the exam and will be monitored by the teaching team. Tablets may only be used to access your notes, i.e., internet and other connectivity must be disabled.</p>
+</section>
+<section id="final-project">
+<h3>Final Project<a class="headerlink" href="#final-project" title="Link to this heading">#</a></h3>
+<p>The final project for CBE 30338 is in-depth exploration of a dynamic modeling, optimization, or control problem of your choice. You will work in groups (at least three, no more than four, no exceptions), select a problem of interest, and develop an analysis or control design using the skills you learned in this course.</p>
+<section id="project-requirements-and-scope">
+<h4>Project Requirements and Scope<a class="headerlink" href="#project-requirements-and-scope" title="Link to this heading">#</a></h4>
+<p>Every project must incorporate at least three of the following elements:</p>
+<ul class="simple">
+<li><p>Mathematical modeling including degree of freedom analysis (e.g., states, decisions/controls)</p></li>
+<li><p>Feedback control</p></li>
+<li><p>Stability/eigenvalue analysis</p></li>
+<li><p>State estimation</p></li>
+<li><p>Optimization</p></li>
+<li><p>Data analysis, e.g., regression, uncertainty quantification</p></li>
+<li><p>Explore a numerical method, statitical method, or algorithm not taught in CBE 20258</p></li>
+<li><p>Use the TCLab hardware</p></li>
+<li><p>Use data or a computer/mathematical model from another project, research, or class (with permission from the other instructor or research supervisor)</p></li>
+<li><p>Use methods/concepts from CBE 30338 not listed above</p></li>
+</ul>
+<p>The three project deliverables are described below and deadlines are given in the <a class="reference internal" href="Schedule.html"><span class="std std-doc">Schedule (2025)</span></a>.</p>
+</section>
+<section id="project-proposal">
+<h4>Project Proposal<a class="headerlink" href="#project-proposal" title="Link to this heading">#</a></h4>
+<p>The first step is to assemble a team of three people (four if needed due to class numbers) with similar topic interests.</p>
+<p>As a team, you will write a <strong>two-page project proposal</strong> with up to <strong>one additional page of references</strong> that:</p>
+<ol class="arabic simple">
+<li><p>Explains the project motivation and goals. Also briefly explain your personal motivations for choosing this project.</p></li>
+<li><p>Explains the technical approach for the project, especially how the required elements (see list above) will be incorporated</p></li>
+<li><p>Identifies the starting point for the project. Where will the model or data come from? Will the project leverage prior experience or knowledge of your team? Please explain if the project will extend prior work from an extracircular/club activity, another class, research, or an internship. Do you have permission from your prior collaborators/supervisors/instructors? If a student is working on a similar topic for two concurrent classes, both instructors need to be aware of the potential overlap and provide written consent (email is fine) per university policies. Likewise, if you are leveraging data or a model from an internship or research, you need to confirm there are no confidentiality issues.</p></li>
+<li><p>Presents a timeline for the project. Identify the weekly goals for the project and person(s) primarily responsible for each goal.</p></li>
+<li><p>Lists references in a style of your choice (e.g., APA, MLA, ACS). You must identify at least <strong>five useful references</strong> for the project, two of which should be beyond the CBE 20258 or 30338 class notes/websites.</p></li>
+</ol>
+</section>
+<section id="project-check-ins">
+<h4>Project Check-ins<a class="headerlink" href="#project-check-ins" title="Link to this heading">#</a></h4>
+<p>At least twice during class time (see <a class="reference internal" href="Schedule.html"><span class="std std-doc">Schedule (2025)</span></a>), your team will meet with the instructor(s) for a 6-minute status update and check-in. It is essential your team carefully prepares for this meeting. For example, consider preparing a 3-slide update:</p>
+<ol class="arabic simple">
+<li><p>What is the motivation and goal of the project?</p></li>
+<li><p>Is the project on schedule? What is the updated timeline?</p></li>
+<li><p>What do you need feedback or advice on? Are you stuck?</p></li>
+</ol>
+</section>
+<section id="group-presentation">
+<h4>Group Presentation<a class="headerlink" href="#group-presentation" title="Link to this heading">#</a></h4>
+<p>Each team will give a 6-minute final presentation to the class on their project. Here is a suggested presentation outline:</p>
+<ol class="arabic simple">
+<li><p><strong>Motivation</strong>. Describe why your problem is interesting and excited. Why did you choose it as a final project?</p></li>
+<li><p><strong>Mathematical Model</strong>. Briefly explain the mathematical model for the system you studied. If your project focused on a numerical or statistical method, you may skip this slide and instead use two slides to describe the method in detail.</p></li>
+<li><p><strong>Methods</strong>. Describe the analysis procedure or methods you used in the project. Many groups will find it most effective to make a flowchart that shows their steps, e.g., construct model, regress model, tune controller, verify performance via simuluation.</p></li>
+<li><p><strong>Cool Result 1</strong>. Highlight one result you find very exciting and can explain qucikly.</p></li>
+<li><p><strong>Cool Result 2</strong>. Highlight another result you find exciting.</p></li>
+<li><p><strong>Take Away Message or Lessons Learned</strong>. What are the few essential things your audience should remember about the project? If you were telling a story about this project in a job interview, what would the punch line/conclusion of your story be?</p></li>
+</ol>
+<p>Teams are welcome to customize the above suggested presentation outline; however, each presentation must include all of the elements described above.</p>
+<p>Teams will submit their slides by 7am the morning of their assigned presentation time. Prof. Dowling will then compile these into one PowerPoint presentation.</p>
+</section>
+<section id="fianl-report-and-code">
+<h4>Fianl Report and Code<a class="headerlink" href="#fianl-report-and-code" title="Link to this heading">#</a></h4>
+<p>Each team will submit a final report that includes at least one executable that demonstrates your project. The executable element might consist of a Python/Jupyter notebook, a simulation prepared in an industry standard format, or video of experiment or hardware demonstration.</p>
+<p>The final report should be at least 4 pages long (not counting references) and include the following information:</p>
+<ul class="simple">
+<li><p>Motivation of the project (1/2 page)</p></li>
+<li><p>Description of the mathematical model and system of interest (1 or 2 pages). If you focused on a numerical or statistical method, include a brief description of the test cases you used to demonstrate the method (1/2 page).</p></li>
+<li><p>Description of the methods used. For projects that use methods from class to analyze a new system, this may be a short section that describes in a graphic (e.g., flowchart) how you combined methods from the class (1/2 page). For projects that focus on a numerical or statistical method, this section should be longer (e.g., 1 or 2 pages).</p></li>
+<li><p>Technical results (2 or more pages).</p></li>
+<li><p>Conclusions (1/2 page).</p></li>
+<li><p>At least 10 <strong>references</strong> in a style of your choice (e.g., APA, MLA, ACS)</p></li>
+</ul>
+<p>Important reminders:</p>
+<ul class="simple">
+<li><p>Review the formating guidelines in this syllabus.</p></li>
+<li><p>All code must be extensively commented.</p></li>
+<li><p>All plots should be professional formatted, i.e., publication quality.</p></li>
+<li><p>Many groups will choose to combine their report and Jupyter notebook into one file/submission. Please ensure the text written in the Jupyter notebook is about the length listed above is copied into a Word or LaTeX document.</p></li>
+<li><p>Upload your notebook to Gradescope early to check formatting. Gradescope is more strict about Markdown formatting standards that Colab or Jupyter Notebook. In other words, Colab and Jupyter Notebook will still render notebooks that have certain formatting errors but Gradescope will not.</p></li>
+</ul>
+</section>
+<section id="project-ideas">
+<h4>Project Ideas<a class="headerlink" href="#project-ideas" title="Link to this heading">#</a></h4>
+<p>Here are some project ideas, organized by topic. Please refine these ideas to fit your groups interest or use these ideas as a starting point to develop your own project.</p>
+<p><strong>TCLab</strong>. Significantly extend one of our TCLab activities, complete on the labs on the website we skipped this year, or make a new mini-lab that applying a method from control, optimization, or estimation to the TCLab hardware. For example:</p>
+<ul class="simple">
+<li><p>Fit a <a class="reference internal" href="tclab/03.06-Four-State-Model.html"><span class="std std-doc">four state model</span></a> that considers the interactions between the two heater/sensor assemblies.</p></li>
+<li><p>Try different types besides the simple step test to estimate parameters in the TCLab model. For example, what happens if the input is a sine wave with different amplitudes and frequencies. For a handful of experiments, estimate the model coefficients and quantify their uncertainty. Which tests are most informative, i.e., result in the smallest parameter uncertainty. Look up <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/16/Reaction-MBDoE.html">A-optimality and D-optimality</a> as ways of comparing information content.</p></li>
+<li><p>Use <a class="reference internal" href="notebooks/4/Lab-Assigment-State-Estimation.html"><span class="std std-doc">state estimation</span></a> for <a class="reference internal" href="notebooks/4/Lab-Assignment-Anomaly-Detection.html"><span class="std std-doc">anomaly detection</span></a>. Test your implementation by running the TCLab and then exposing it to a large external distubrance such as a fan or hair dryer. How long does it take your state estimator to detect the disturbance?</p></li>
+<li><p>Character the noise in the TCLab system. Are the residuals after parameter estimation i.i.d. Gaussian or is a different error model more appropriate? Explore fitting different time series models to the residuals. (This is a very open-ended project.)</p></li>
+<li><p>Develop a <a class="reference internal" href="tclab/04.10-Lab-Assignment-PID-Control.html"><span class="std std-doc">PID controller</span></a> for the TCLab. Extend our stability analysis of P and PI controllers from lecture to a PID controller.</p></li>
+<li><p>Develop two <a class="reference internal" href="tclab/04.11-Lab-Assignment-PI-Control.html"><span class="std std-doc">PI contollers</span></a> to simultanously control both heater assemblies. Test this on the <a class="reference internal" href="assignments/Lab-3-Relay-Control.html"><span class="std std-doc">original chocolate temperating experiment</span></a>.</p></li>
+<li><p>Perform <a class="reference internal" href="notebooks/3/Controller-Tuning.html"><span class="std std-doc">Ziegler-Nichols PID tuning</span></a></p></li>
+</ul>
+<p><strong>Modeling and Applications</strong>. Apply methods and concepts from class to explore a system of interest to your team.</p>
+<ul class="simple">
+<li><p>Develop a controler (e.g., PID, MPC) for tanks in series. This is a classic problem in chemical engineering control textbooks.</p></li>
+<li><p>Develop a controller (e.g., PID, MPC) for the <a class="reference internal" href="notebooks/2/Exothermic-CSTR.html"><span class="std std-doc">exothermic reactor</span></a>. The goal is to operate the reactor in the high conversion region with minimal oscillations and reject disturbances.</p></li>
+<li><p>Extend the portfolio optimization problem from <a class="reference internal" href="assignments/Homework-2.html"><span class="std std-doc">Homework 2</span></a> into a model predictive control scheme. Each day, compute the expected value and covariance of the return for the available mutal funds using data from the last 3 months (or another time period). Then resolve the portfolio optimization problem and buy/sell accordingly. Then increment the horizon one day and repeat. The key is that you cannot use the future data when making a decision, only past information. Add a small transaction fee and fine tune your buy/sell logic (perhaps borrow ideas from relay control with a deadband where you do nothing). How does your optimized portfolio compare to a simple investment strategy of 40% large cap index funds, 30% medium to small cap index funds, and 30% international index funds?</p></li>
+<li><p>How does a home water softener (ion exchange) or reverse osmosis water filter work? Research and develop a mathematical model. Use your model to predict how frequently you a typical homeowner/renter needs to do maintance, e.g., replacing the softer salt or the RO membrane, or the cost of operation. Do you predictions match your personal experience or manufacture recommendations?</p></li>
+<li><p>Are solar panels worth it in South Bend, IN (or another location)? Develop a simple mathematical model to predict the electrical power produced from a solar panel as a function of the solar intensity and position. You can find help <a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/index.html">Python packages</a> to calculate the position of the sun as a function of time and location. Next, find <a class="reference external" href="https://nsrdb.nrel.gov/">historical solar irradiance data</a> and calculate the energy production as a function of time. Then calculate the <a class="reference external" href="https://en.wikipedia.org/wiki/Levelized_cost_of_electricity">levelized cost of electricity</a> for a typical solar installation. You’ll need to look up typical home installation costs. How does the LCOE compare to <a class="reference external" href="https://www.nipsco.com/services/renewable-energy-programs/feed-in-tariff">feed-in tarriff rates</a> from a utility? This is like a mini-senior design project; you will learn all of the economic calculations and time-value of money. Modeling a PV solar panel is much more straight forward than your semester long process design.</p></li>
+<li><p>How does a heat pump work? Develop a simple mathematical model, similar to a mini-project in CBE 20258. Use your model to predict how the heat pump’s efficiency changes as a function of ambient temperature. How much does it cost to provide cooling or heating with the heat pump? How do your cost and efficiency calculations compare to consumer information you can find online?</p></li>
+<li><p>Does water harvesting make sense in the American West? Develop a simple mathematical model for <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S2542435121001781">adsorption-based atmospheric water harvesting</a>. Then find timeseries temperature and humidity data for a location of your choice. Simulate the water harvester for a year. How much water did you procedure? How much energy did regeneration take? What was the cost of producing the water?</p></li>
+<li><p>Simulate model predictive control for a <a class="reference external" href="https://www.pnas.org/doi/10.1073/pnas.1525162113">microfluidics device</a>.</p></li>
+<li><p>In the fall and spring, it is warm during the days and cool at night. From an energy perspective, does it make sense to open the windows in your house or appartment to cool off at night? The downside is that open windows will increase the humidity of your living space. When the air conditioner turns on in the day, it then takes more energy to dehumidify the room. Develop a simple mathematical model to perform the thermodynamic calculation. Then find historical temperature and humidity data for a location of your choice. Using your model and the data, analyze this strategy for one fall and one spring. How many nights was it clearly better to keep the windows open or closed? You will have to make a lot of assumptions for this project using your engineering judgement. The goal here is to get a reasonable answer you can defended, which is not neccessarily the most rigorous answer possible. This is a great project to hone engineering analysis skills before senior design.</p></li>
+<li><p>Analyze an industrial control system.</p></li>
+<li><p>Simulate the <a class="reference external" href="https://www.pnas.org/doi/epdf/10.1073/pnas.2313224120">growth and development of fruit flies</a>.</p></li>
+<li><p>Find time-series historical pricing and trade data for critical minerals used in batteries and other green technologies (e.g., copper, cobalt, lithium). For example, cobalt is a secondary product to mining of copper in the Democratic Republic of the Congo. Are these prices correlated? Can you identify geo-political events (e.g., conflicts, battery plant opennings) in the time-series? This project focuses on data collection and gathering related to critical mineral global supply chains.</p></li>
+</ul>
+<p><strong>Numerical and Statistical Methods</strong>. Develop a tutorial notebook for a topic not covered in CBE 20258.</p>
+<ul class="simple">
+<li><p>Principle componenent analysis</p></li>
+<li><p><a class="reference external" href="https://www.3blue1brown.com/lessons/fourier-transforms">Fourier analysis</a> of periodic signals</p></li>
+<li><p>Maximum likelihood estimation</p></li>
+<li><p>Create and demonstrate machine learning models to <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/acs.jchemed.3c01040">predict the boiling point and other thermophysical properties of compounds</a>.</p></li>
+</ul>
+<p><em>This list will be periodically updated with additional ideas.</em></p>
+</section>
+</section>
+<section id="grading-standards">
+<h3>Grading Standards<a class="headerlink" href="#grading-standards" title="Link to this heading">#</a></h3>
+<p>All computer code must be commented. No exceptions.</p>
+<p>All graphs must have labeled axes with UNITS. Likewise, all final answers need UNITS and should be rounded to the appropriate number of significant digits.</p>
+<p>Be sure to answer the questions asked in the assignment. When discussing results, only report the appropriate number of significant figures.</p>
+<p><strong>Formatting</strong>: Your submission should include neatly written code with extensive comments, well-labeled graphs, and answers to any discussion questions. Your project submissions should be professionally formatted, like a laboratory report. Your response to discussion questions and code comments MUST be written in your own words. Please see <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Pseudocode.html#python-and-commenting-guidelines">coding standards</a>.</p>
+<p><strong>Project:</strong> This will be graded in-depth (unlike the homework). Be sure to triple check the Python code and plotting formatting standards. We expect <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Publication-Quality-Figures.html">publication-quality plots</a> for this project.</p>
+<p><strong>Pseudocode:</strong> You should get in the habit of first writing pseudocode when starting assignments or projects. Some assignments may require you to turn in pseudocode. In this case, your pseudocode needs to reflect all your solution’s main steps and logic. You do not need to rewrite your pseudocode if your final solution has different main steps or logic. Instead, you should update your pseudocode with a few notes showing the change. Rewriting the pseudocode is helpful if you find a logical mistake but get stuck making modifications. Prof. Dowling has been programming in Python for 20 years. He writes pseudocode, and so do other professional software developers. Expect one of the first questions in office hours to be, “can we look at your pseudocode together?”.</p>
+</section>
+<section id="regrade-requests">
+<h3>Regrade Requests<a class="headerlink" href="#regrade-requests" title="Link to this heading">#</a></h3>
+<p>We will undoubtedly make some mistakes during grading. Regrades to correct these mistakes will be considered for <strong>up to ONE week after assignment grades are posted online</strong>.</p>
+<p>Submit your regrade requests in writing via Gradescope. Please include a 1-3 sentence explanation of the grading mistake. We will not consider adjustments to the grading point distribution.</p>
+<p>All regrade requests will result in a reevaluation of the entire assignment. For rubric selection mistakes in Gradescope, we will recheck all rubric selections. For more substantial regrade requests, the grader may reexamine the whole problem (including all subparts) and possibly the entire assignment.</p>
+</section>
+<section id="late-policy">
+<h3>Late Policy<a class="headerlink" href="#late-policy" title="Link to this heading">#</a></h3>
+<p>The following policy will apply to all assignments (homework, projects, etc.):</p>
+<ul class="simple">
+<li><p>Up to 1 hour late: grace period with no penalty</p></li>
+<li><p>1 hour to 24 hours late: 10% penalty of total available points</p></li>
+<li><p>24 to 48 hours late: 20% penalty of total available points</p></li>
+<li><p>48 to 72 hours: 30% penalty of total available points</p></li>
+<li><p>Beyond 72 hours: assignment not accepted</p></li>
+</ul>
+<p>If there is an extenuating circumstance, please email the instructor with ``CBE 30338’’ in the subject. Please send your requests for extensions at least 24 hours before the deadline (unless your specific circumstance prevents this). Please briefly explain the extenuating circumstance when requesting an extension and propose an alternate deadline.</p>
+</section>
+</section>
+<section id="honor-code">
+<h2>Honor Code<a class="headerlink" href="#honor-code" title="Link to this heading">#</a></h2>
+<p><em>As a guiding principle, if you are not comfortable explaining your solution strategy to an instructor or TA, you should not turn in the work as your own.</em></p>
+<section id="collaboration-policy">
+<h3>Collaboration Policy<a class="headerlink" href="#collaboration-policy" title="Link to this heading">#</a></h3>
+<p>You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates. However, there must be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are strongly encouraged to ask questions, including posting pseudocode or code screenshots, on the discussion board on Canvas. Likewise, you may use any material posted by the instructors or your classmates in the discussion board on Canvas that you understand. Copying code from classmates or the discussion board, you do not understand is prohibited. This policy facilitates collaboration while ensuring everyone in the class has the same access. Students <strong>MAY NOT use old files and solutions for the homework assignments or labs or quizes</strong>: you must do the problems for homework to be able to do them on the exams too.</p>
+<p>Your work may be electronically tested for plagiarized content. For example, Gradescope can detect highly similar code (i.e., plagiarism for computer code) while distinguishing from provided templates. Plagiarism is a serious offense and will have severe consequences per University, College, and Department procedures.</p>
+<p>To remove ambiguity, the following is a non-exhaustive list of collaborative scenarios that are <strong>PERMITTED</strong> under the above policies:</p>
+<ul class="simple">
+<li><p>You work with a group of classmates to write pseudocode together. Each group member participates at least once (e.g., asks a question). One person in the group takes a picture and emails it to everyone. Then each person rewrites the pseudocode on their own for the homework submission. You rewrite the comments in your own words (to be more evident). You also decide to replace a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop with a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. The collaboration policy permits this because the work is your own. You made a clear intellectual contribution.</p></li>
+<li><p>You are working on a homework assignment and get stuck on an error message. After consulting the class notes and Google for 5 minutes, you post a screenshot of your code and the error message to Canvas. A classmate posts some alternate code that fixes your error. You replied by thanking the student and asking for clarification on why the alternate code works and your approach was wrong. Your post leads to a good discussion, with the instructor explaining a concept and clearing up your confusion. The solution you turn in includes the changes suggested by your classmates. The collaboration policy permits this because you are comfortable explaining your solution strategy, including why the proposed modification was necessary to fix the error.</p></li>
+<li><p>You are working on the homework assignment closer to the deadline than you would like to admit. You get stuck on an error message but quickly find a discussion thread on Canvas. You read through the suggestions from your classmates and the instructor. The post answers your significant questions, and the proposed fix works! You adopt it into your code and add a comment acknowledging your classmates on Canvas for help. You still have a minor question about if there is an alternate way to solve the problem, so you post on Canvas and continue with the assignment. The collaboration policy permits this because you made a good faith effort to understand the proposed solution. Even though you have an outstanding minor doubt, you sought help from the TAs, instructor, and classmates. You also acknowledged the source (Canvas discussion) for the code you used and thus are not presenting it as your own.</p></li>
+</ul>
+<p>The following is a non-exhaustive list of collaborative scenarios that are <strong>PROHIBITED</strong> under the above policies:</p>
+<ul class="simple">
+<li><p>You are working on your homework alone in the library, but two tables away, there is a group of your classmates. They work through the pseudocode on a whiteboard and do not erase it after leaving. You take a picture “just in case”. You later get stuck and frustrated. You end up copying line by line most of their pseudocode and turn this in. You have some doubts about the approach but ran out of time. The collaboration policy prohibits this because the work is not your own. Moreover, you would be unable to explain your solution approach to the TA or instructor confidently.</p></li>
+<li><p>It is late at night, you are frustrated with syntax errors, and you cannot get one of the homework problems to work. You find a screenshot on Canvas of code from a classmate and an associated discussion. Desperate to finish the assignment, you adapt your code to follow the screenshot. To keep it simple, you copy line-by-line, do not change variable names, and copy some comments but skip others. You end up submitting code that looks almost identical to your classmate. You remember the instructor keeps emphasizing the comments should be in our own words to show that you understand the solution. You decide to go to bed and add those comments in the morning. You oversleep and submit the code without any comments or acknowledgments from your classmates. The collaboration policy prohibits this because you submitted work that is not your own. You should have acknowledged sources, and you can not confidently explain the solution procedure to the instructor or TA.</p></li>
+<li><p>You have no prior programming experience before college and feel like you are falling behind. You suspect the homework takes you three times as long as your classmates. You conclude the only way you can keep up is to do the homework with a partner. They do half the assignment, and you do the other half. You then exchange solutions. The person who completes each problem then explains the answer to the partner. Each person changes the comments, adds some extra white spaces, and changes a few variable names to ensure the solutions are not identical. The collaboration policy prohibits this because each person did not make an honest effort to solve every problem on their own. Although each person either explained or had the solutions presented to them, they likely need help to defend all of their solutions to the TA or instructor.</p></li>
+</ul>
+</section>
+<section id="artificial-intelligence-policy">
+<h3>Artificial Intelligence Policy<a class="headerlink" href="#artificial-intelligence-policy" title="Link to this heading">#</a></h3>
+<p>Please review the university-wide <a class="reference external" href="https://honorcode.nd.edu/generative-ai-policy-for-students-august-2023/">Generative AI Policy for Students</a> distributed via email in August 2023. We will adopt the following additional policies for CBE 30338:</p>
+<ul class="simple">
+<li><p>Anyone who uses Generative AI tools (e.g., Copilot, ChatCPT) must add a discloser statement at the end of their assignment submissions. In this disclosure statement, you must describe which Generative AI tool you used and how you used it. For example, many professional scientists and engineers find these technologies especially helpful for refining the quality of plots generated in Python.</p></li>
+<li><p>Many practicing scientists and engineers find <a class="reference external" href="https://copilot.microsoft.com/">Copilot</a>, which is available in [Visual Studio Code](<a class="reference external" href="https://visualstudio.microsoft.com/github-copilot/">https://visualstudio.microsoft.com/github-copilot/</a>, more helpful and reliable than <a class="reference external" href="https://chat.openai.com">ChatGPT</a>. However, ChatGPT and Copilot occasionally generate code with incorrect logic or calculations. You should critically examine any code from Generative AI tools, collaborators, and class examples.</p></li>
+<li><p>As described above, you must comment all code in your assignments. Furthermore, students must write comments in their own words. This ensures that anyone who uses Generative AI for help still practices interpreting the code. In other words, everyone who passes CBE 30338 should be able to perform calculations and explain the underlying logic in code.</p></li>
+<li><p>Students are expected to use descriptive variable names; sometimes, Generative AI tools suggest generic variable names.</p></li>
+<li><p>Students are responsible for understanding all code they submit, especially if they collaborate with another student or use Generative AI. The class exam will be individual and without access to Generative AI tools.</p></li>
+<li><p>Answers to discussion questions, which often critically interpret results or connect calculations with concepts from class, must be written in your own words. You should use tools like <a class="reference external" href="https://www.grammarly.com">Grammarly</a> to improve spelling, grammar, sentence structure, and conciseness. But you must perform the critical analysis on your own.</p></li>
+</ul>
+</section>
+</section>
+<section id="inclusiveness-mental-health-and-disabilities">
+<h2>Inclusiveness, Mental Health, and Disabilities<a class="headerlink" href="#inclusiveness-mental-health-and-disabilities" title="Link to this heading">#</a></h2>
+<p>The University of Notre Dame is committed to social justice. We share that commitment and strive to maintain a positive learning environment based on open communication, mutual respect, and non-discrimination. In this class, we will not discriminate on the basis of race, sex, age, economic class, disability, veteran status, religion, sexual orientation, color, or national origin. Any suggestions as to how to further such a positive and open environment will be appreciated and given serious consideration.</p>
+<p>Diminished mental health can interfere with optimal academic performance. The source of symptoms might be related to your coursework; if so, please speak with us. However, problems with other parts of your life can also decrease academic performance. The University Counseling Center (UCC) provides cost-free and confidential mental health services to help you manage personal challenges threatening your emotional or academic well-being. Remember, getting help is a smart and courageous thing to do — for yourself and for those who care about you. For more resources, please see <a class="reference external" href="http://ucc.nd.edu">ucc.nd.edu</a>. The UCC is located on the third floor of Saint Liam Hall Phone: 574-631-7336. Hours: Monday-Friday 8:30am – 5:00pm. Urgent Crisis Line 24/7.</p>
+<p>Any student who has a documented disability and is registered with Disability Services should speak with the professor as soon as possible regarding accommodations. Students who are not registered should contact the <a class="reference external" href="https://sarabeadisabilityservices.nd.edu/">Office of Disability Services</a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Readme.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">CBE 30338 Data Analytics, Optimization, and Control</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Schedule.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Schedule (2025)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cbe-30338-description">CBE 30338 Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-information">Course Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructors-and-teaching-assistants">Instructors and Teaching Assistants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aces-tutors-and-study-room">ACES Tutors and Study Room</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-board-canvas-and-email-correspondance">Discussion Board (Canvas) and Email Correspondance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-materials">Required Materials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment-and-grades">Assessment and Grades</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-participation-and-participation">Class Participation and Participation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#excused-absenses">Excused Absenses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignments">Assignments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exam">Exam</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-project">Final Project</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-requirements-and-scope">Project Requirements and Scope</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-proposal">Project Proposal</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-check-ins">Project Check-ins</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#group-presentation">Group Presentation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fianl-report-and-code">Fianl Report and Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#project-ideas">Project Ideas</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-standards">Grading Standards</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regrade-requests">Regrade Requests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#late-policy">Late Policy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#honor-code">Honor Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collaboration-policy">Collaboration Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#artificial-intelligence-policy">Artificial Intelligence Policy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inclusiveness-mental-health-and-disabilities">Inclusiveness, Mental Health, and Disabilities</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

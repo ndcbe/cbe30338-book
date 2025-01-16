@@ -1,0 +1,1849 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 5: Open Loop Optimization &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'assignments/Lab-5-Open-Loop-Optimization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lab 6: Model Predictive Control (MPC)" href="Lab-6-MPC.html" />
+    <link rel="prev" title="Homework 2: Optimization" href="Homework-2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="assignments.html">Assignments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/2/Process-Modeling.html">2. Process Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/4/Process-Analytics.html">4. Process Analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/assignments/Lab-5-Open-Loop-Optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fassignments/Lab-5-Open-Loop-Optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/assignments/Lab-5-Open-Loop-Optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 5: Open Loop Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-0-develop-the-mathematical-model-and-pyomo-simulation">Exercise 0: Develop the Mathematical Model and Pyomo Simulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyomo-model">Pyomo Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-inputs">Process Inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-control-with-knowledge-of-disturbances">Optimal Control with Knowledge of Disturbances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-observation">Estimation/Observation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-estimation">Parameter Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excerise-6-chocolate-tempering">Excerise 6. Chocolate Tempering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-loop-optimization">Open Loop Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-implementation">Hardware Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation">State Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Parameter Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarations">Declarations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-5-open-loop-optimization">
+<h1>Lab 5: Open Loop Optimization<a class="headerlink" href="#lab-5-open-loop-optimization" title="Link to this heading">#</a></h1>
+<p><em>Your Name:</em></p>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Compute optimal heater strategy using physics-based model</p></li>
+<li><p>Verify open loop performance with TC Lab hardware</p></li>
+<li><p>Estimate unmeasured states (heater temperature) using model</p></li>
+</ol>
+</section>
+<section id="installation-and-setup">
+<h2>Installation and Setup<a class="headerlink" href="#installation-and-setup" title="Link to this heading">#</a></h2>
+<p>This notebook is using Pyomo and Ipopt. Be sure to follow the installation instructions on the class website.</p>
+<p>Before beginning this lab, connect your TCLab device and run the following cell to estimate your ambient temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># experimental parameters</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># To complete the experiment, change this to True</span>
+<span class="c1"># After completing the experiment, be sure to change it back to False</span>
+<span class="c1"># This will prevent you from overwriting your data</span>
+<span class="n">run_tamb_tclab</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">if</span> <span class="n">run_tamb_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># initialize list to store temperature</span>
+    <span class="n">T_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># perform experiment</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
+        
+        <span class="c1"># save temperatures to access later</span>
+        <span class="n">T_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">)</span>
+        <span class="n">T_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">tfinal</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># estimate ambient temperature</span>
+    <span class="n">Tamb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">T_list</span><span class="p">)</span> <span class="c1"># deg C</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The ambient temperature is </span><span class="si">{</span><span class="n">Tamb</span><span class="si">}</span><span class="s2"> degrees C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-0-develop-the-mathematical-model-and-pyomo-simulation">
+<h2>Exercise 0: Develop the Mathematical Model and Pyomo Simulation<a class="headerlink" href="#exercise-0-develop-the-mathematical-model-and-pyomo-simulation" title="Link to this heading">#</a></h2>
+<p>Recall the two-state model for a single heater/sensor assembly:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+C_p^H \frac{dT_H}{dt} &amp; = U_a (T_{amb} - T_H) + U_b (T_S - T_H) + \alpha P u(t) + d(t)\\
+C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H) 
+\end{align*}\]</div>
+<section id="pyomo-model">
+<h3>Pyomo Model<a class="headerlink" href="#pyomo-model" title="Link to this heading">#</a></h3>
+<p>The code block below provides a library for performing several analysis tasks with our model. This is a <code class="docutils literal notranslate"><span class="pre">class</span></code>, which is a more sophisticated way to modularize our code. Briefly, classes store both data and methods to manipualte the data.</p>
+<p>Take a few minutes to study this code. Note the missing lines of code to fill in when you get to Exercise 1. A few features:</p>
+<ul class="simple">
+<li><p>It supports four modes:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">simulate</span></code>: solve the model with all of the inputs specified (zero degrees of freedom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimize</span></code>: determine the best <span class="math notranslate nohighlight">\(u(t)\)</span> to track the desired <span class="math notranslate nohighlight">\(T_{set}(t)\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">observe</span></code>: estimate the unmeasured state <span class="math notranslate nohighlight">\(T_{H}(t)\)</span> and disturbance <span class="math notranslate nohighlight">\(d(t)\)</span> from experimental data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">estimate</span></code>: estimate the model parameters <span class="math notranslate nohighlight">\(U_a\)</span>, <span class="math notranslate nohighlight">\(U_b\)</span>, <span class="math notranslate nohighlight">\(C_p^H\)</span>, <span class="math notranslate nohighlight">\(C_p^S\)</span> from experimental data</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method is called automatically when you create an instance of the object. The initial method is how you pass in data</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">solve</span></code> method call the numerical optimization algorithm</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">plot</span></code> method plots the Pyomo results</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">get_Ts</span></code>, <code class="docutils literal notranslate"><span class="pre">get_Th</span></code>, <code class="docutils literal notranslate"><span class="pre">get_U</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_D</span></code> methods return data stored in the Pyomo model after it is solved</p></li>
+</ul>
+<p>This notebook walks you through using the library. The take away message is that a class is a convient way to modularize our code and maximize reuse. The four supported modes are very similar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment and update value from code cell and run above if returning to notebook with reset kernel</span>
+<span class="c1"># Tamb = 20.75 # deg C</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">interpolate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ensure that IDAES is imported if there is an error calling Ipopt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">idaes</span>
+
+<span class="c1"># Protip: only import the functions you need for each library.</span>
+<span class="c1"># This tells other programs exactly where each function is defined.</span>
+<span class="c1"># Avoid using from pyomo.environ import * as this imports everything</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyomo.environ</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConcreteModel</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">Param</span><span class="p">,</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">TransformationFactory</span><span class="p">,</span> <span class="n">SolverFactory</span><span class="p">,</span> <span class="n">Objective</span><span class="p">,</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">Suffix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyomo.dae</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivativeVar</span><span class="p">,</span> <span class="n">ContinuousSet</span><span class="p">,</span> <span class="n">Simulator</span>
+
+<span class="c1">##### IMPORTANT #####</span>
+<span class="c1"># Update the default values for Ua, Ub, CpH, and CpS to match your previous labs</span>
+<span class="c1">#####################</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TCLabPyomo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This class contains the methods used for simulating the TCLab model, optimizing u(t) per a </span>
+<span class="sd">    given set point for T, observing a disturbance, and estimating model parameters in the TCLab.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">t_data</span><span class="p">,</span> <span class="n">u_data</span><span class="p">,</span> <span class="n">d_data</span><span class="p">,</span> <span class="n">Tset_data</span><span class="p">,</span> 
+                 <span class="n">TS_data</span><span class="p">,</span> <span class="n">Tamb</span> <span class="o">=</span> <span class="n">Tamb</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.00016</span><span class="p">,</span> <span class="n">P1</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+                 <span class="n">Ua</span> <span class="o">=</span> <span class="mf">0.0261</span><span class="p">,</span> <span class="n">Ub</span> <span class="o">=</span> <span class="mf">0.0222</span><span class="p">,</span> <span class="n">CpH</span> <span class="o">=</span> <span class="mf">1.335</span><span class="p">,</span> <span class="n">CpS</span> <span class="o">=</span> <span class="mf">1.328</span><span class="p">,</span>
+                 <span class="n">integrate_to_initialize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">obj_weight_observe</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                 <span class="n">obj_weight_optimize</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This method is automatically called automatically when instantiating class.</span>
+<span class="sd">        It stores input data in the class and creates the pyomo model.</span>
+<span class="sd">        </span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            mode: specify mode</span>
+<span class="sd">            t_data: time data</span>
+<span class="sd">            u_data: input control data</span>
+<span class="sd">            d_data: disturbance data</span>
+<span class="sd">            Tset_data: set point data</span>
+<span class="sd">            TS_data: experimental data</span>
+<span class="sd">            Tamb: ambient temperature, deg C</span>
+<span class="sd">            alpha: watts / (units P1 * percent U1)</span>
+<span class="sd">            P1: max power, P1 units</span>
+<span class="sd">            Ua: heat transfer coefficient from heater to environment, watts/deg C</span>
+<span class="sd">            Ub: heat transfer coefficient from heater to sensor, watts/deg C</span>
+<span class="sd">            CpH: heat capacity of the heater, joules/deg C</span>
+<span class="sd">            CpS: heat capacity of the sensor, joules/deg C</span>
+<span class="sd">            integrate_to_initialize: Boolean</span>
+<span class="sd">            obj_weight_observe: weight for disturbance in objective function, default is 0.1</span>
+<span class="sd">            obj_weight_optimize: weight for heater temperature in objective function, default is 0.01</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="c1"># establish the valid operating modes</span>
+        <span class="n">valid_modes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;simulate&#39;</span><span class="p">,</span><span class="s1">&#39;optimize&#39;</span><span class="p">,</span><span class="s1">&#39;estimate&#39;</span><span class="p">,</span><span class="s1">&#39;observe&#39;</span><span class="p">]</span>
+
+        <span class="c1"># raise an error if the user feeds in invalid operating mode</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_modes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;mode&#39; must be one of the following:&quot;</span><span class="o">+</span><span class="n">valid_modes</span><span class="p">)</span>
+
+        <span class="c1"># define mode and data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span> <span class="o">=</span> <span class="n">t_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u_data</span> <span class="o">=</span> <span class="n">u_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d_data</span> <span class="o">=</span> <span class="n">d_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Tset_data</span> <span class="o">=</span> <span class="n">Tset_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span> <span class="o">=</span> <span class="n">TS_data</span>
+
+        <span class="c1"># set parameter values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Tamb</span> <span class="o">=</span> <span class="n">Tamb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ua</span> <span class="o">=</span> <span class="n">Ua</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ub</span> <span class="o">=</span> <span class="n">Ub</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CpH</span> <span class="o">=</span> <span class="n">CpH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CpS</span> <span class="o">=</span> <span class="n">CpS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">P1</span> <span class="o">=</span> <span class="n">P1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alphaP</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">*</span><span class="n">P1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integrate_to_initialize</span> <span class="o">=</span> <span class="n">integrate_to_initialize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_weight_observe</span> <span class="o">=</span> <span class="n">obj_weight_observe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_weight_optimize</span> <span class="o">=</span> <span class="n">obj_weight_optimize</span>
+
+        <span class="c1"># create the pyomo model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_pyomo_model</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">None</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_pyomo_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Method that creates and defines the pyomo model for each mode.</span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            None</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            m: the pyomo model</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="c1"># create the pyomo model</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">ConcreteModel</span><span class="p">()</span>
+
+        <span class="c1"># create the time set</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">ContinuousSet</span><span class="p">(</span><span class="n">initialize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">)</span>  <span class="c1"># make sure the experimental time grid are discretization points</span>
+        <span class="c1"># define the heater and sensor temperatures as variables</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Th</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">75</span><span class="p">],</span> <span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Ts</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">75</span><span class="p">],</span> <span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">helper</span><span class="p">(</span><span class="n">my_array</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Method that builds a dictionary to help initialization.</span>
+<span class="sd">            Arguments:</span>
+<span class="sd">                my_array: an array</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                data: a dict {time: array_value}</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+            <span class="c1"># ensure that the dimensions of array and time data match</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_array</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">),</span> <span class="s2">&quot;Dimension mismatch.&quot;</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">):</span>
+                <span class="n">data</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_array</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="c1"># for the simulate, observe, estimate modes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;simulate&#39;</span><span class="p">,</span> <span class="s1">&#39;observe&#39;</span><span class="p">,</span> <span class="s1">&#39;estimate&#39;</span><span class="p">]:</span>
+            <span class="c1"># control decision is a parameter initialized with the input control data dict</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u_data</span><span class="p">),</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># otherwise (optimize) control decision is a variable</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+        <span class="c1"># for the simulate, optimize, estimate modes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;simulate&#39;</span><span class="p">,</span> <span class="s1">&#39;optimize&#39;</span><span class="p">,</span> <span class="s1">&#39;estimate&#39;</span><span class="p">]:</span>
+            <span class="c1"># if no distrubance data exists, initialize parameter at 0</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                 <span class="n">m</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># otherwise initialize parameter with disturbance data dict</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_data</span><span class="p">))</span>
+        <span class="c1"># otherwise (observe) the disturbance is a variable</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="c1"># define parameters that do not depend on mode</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Tamb</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">alphaP</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alphaP</span><span class="p">)</span>
+
+        <span class="c1"># for the simulate, optimize, observe modes</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;simulate&#39;</span><span class="p">,</span> <span class="s1">&#39;optimize&#39;</span><span class="p">,</span> <span class="s1">&#39;observe&#39;</span><span class="p">]:</span>
+            <span class="c1"># Ua, Ub, CpH, and CpS are parameters</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ua</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ua</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ub</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ub</span><span class="p">)</span>
+            <span class="c1"># 1/CpH and 1/CpS parameters</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">inv_CpH</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">CpH</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">inv_CpS</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">CpS</span><span class="p">)</span>
+        <span class="c1"># otherwise (estimate) they are variables</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ua</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ua</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1E-5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ub</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Ub</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1E-5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">inv_CpH</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">CpH</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1E-2</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">inv_CpS</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">CpS</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1E-1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+
+        <span class="c1"># define variables for change in temperature wrt to time</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Thdot</span> <span class="o">=</span> <span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">,</span> <span class="n">wrt</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Tsdot</span> <span class="o">=</span> <span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">,</span> <span class="n">wrt</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="c1"># define differential equations (model) as contraints</span>
+        <span class="c1"># moved Cps to the right hand side to diagnose integrator</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Th_ode</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">rule</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> 
+                            <span class="n">m</span><span class="o">.</span><span class="n">Thdot</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Ua</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Tamb</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">Ub</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">alphaP</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">inv_CpH</span><span class="p">)</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">Ts_ode</span> <span class="o">=</span> <span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">rule</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> 
+                            <span class="n">m</span><span class="o">.</span><span class="n">Tsdot</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Ub</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">inv_CpS</span><span class="p">)</span>
+
+        <span class="c1">##### Simulate to initialize</span>
+        <span class="c1"># Specify time-varying input data</span>
+        <span class="c1"># This is a dictionary of the form {time: value}</span>
+        <span class="c1"># This is used only for the simulate mode,</span>
+        <span class="c1"># which just initializes the model</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">integrate_to_initialize</span><span class="p">:</span>
+
+            <span class="n">m</span><span class="o">.</span><span class="n">var_input</span> <span class="o">=</span> <span class="n">Suffix</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">Suffix</span><span class="o">.</span><span class="n">LOCAL</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># initialize with data</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">var_input</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">U</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u_data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># otherwise initialize control decision of 0</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">var_input</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">U</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># initialize with data</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">var_input</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">D</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d_data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># otherwise initialize disturbance of 0</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">var_input</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">D</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+            
+
+            <span class="c1"># Simulate to initiialize</span>
+            <span class="c1"># Makes the solver more efficient</span>
+            <span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s1">&#39;scipy&#39;</span><span class="p">)</span> 
+            <span class="n">tsim</span><span class="p">,</span> <span class="n">profiles</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">numpoints</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                                        <span class="n">integrator</span><span class="o">=</span><span class="s1">&#39;vode&#39;</span><span class="p">,</span> 
+                                        <span class="n">varying_inputs</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">var_input</span><span class="p">)</span>
+            <span class="n">sim</span><span class="o">.</span><span class="n">initialize_model</span><span class="p">()</span>
+
+        <span class="c1"># for the optimize mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;optimize&#39;</span><span class="p">:</span>
+            <span class="c1"># Add requested constraints on U ramping here</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Udot</span> <span class="o">=</span> <span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="n">wrt</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+
+            <span class="c1"># Add your solution here</span>
+
+        <span class="c1"># for the optimize mode, set point data is a parameter</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;optimize&#39;</span><span class="p">:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Tset</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Tset_data</span><span class="p">))</span>
+            <span class="c1"># otherwise, we are not using it</span>
+
+        <span class="c1"># for the estimate and observe modes, experimental data is a parameter</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;estimate&#39;</span><span class="p">,</span> <span class="s1">&#39;observe&#39;</span><span class="p">]:</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ts_measure</span> <span class="o">=</span> <span class="n">Param</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">initialize</span><span class="o">=</span><span class="n">helper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span><span class="p">))</span>
+            <span class="c1"># otherwise, we are not using it</span>
+
+        <span class="c1"># apply backward finite difference to the model</span>
+        <span class="n">TransformationFactory</span><span class="p">(</span><span class="s1">&#39;dae.finite_difference&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;BACKWARD&#39;</span><span class="p">,</span><span class="n">nfe</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;optimize&#39;</span><span class="p">:</span>
+            <span class="c1"># defining the tracking objective function</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Tset</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_weight_optimize</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Tset</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">sense</span><span class="o">=</span><span class="n">minimize</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;observe&#39;</span><span class="p">:</span>
+            <span class="c1"># define observation (state estimation)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="nb">sum</span><span class="p">((</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Ts_measure</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_weight_observe</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">sense</span><span class="o">=</span><span class="n">minimize</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;estimate&#39;</span><span class="p">:</span>
+            <span class="c1"># define parameter estimation objective</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">Objective</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="nb">sum</span><span class="p">((</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">Ts_measure</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">sense</span><span class="o">=</span><span class="n">minimize</span><span class="p">)</span>
+
+        <span class="c1"># initial conditions</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Initilize with first temperature measurement</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Otherwise, initialize with Tamb</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Solves the pyomo model using ipopt.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">solver</span> <span class="o">=</span> <span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;ipopt&#39;</span><span class="p">)</span>
+        <span class="c1">#solver.options[&#39;linear_solver&#39;] = &#39;ma57&#39;</span>
+        <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns time data from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_Th</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns heater temperature data from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_Ts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns sensor temperature data from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_U</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns control decision data from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns disturbance data from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
+    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns model parameters from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Ua</span><span class="p">),</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Ub</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">inv_CpH</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">inv_CpS</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Prints out the model parameters from solved pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Ua</span><span class="p">,</span> <span class="n">Ub</span><span class="p">,</span> <span class="n">CpH</span><span class="p">,</span> <span class="n">CpS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of Ua is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">Ua</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;Watts/degC.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of Ub is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">Ub</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;Watts/degC.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of CpH is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">CpH</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;Joules/degC.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of CpS is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">CpS</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="s2">&quot;Joules/degC.&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Method to plot the results from the pyomo model.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># extract predictions</span>
+        <span class="n">Th</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Th</span><span class="p">()</span>
+        <span class="n">Ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_Ts</span><span class="p">()</span>
+        <span class="n">U</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_U</span><span class="p">()</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_D</span><span class="p">()</span>
+
+        <span class="c1"># create figure</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+        <span class="c1"># subplot 1: temperatures</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">TS_data</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$T_</span><span class="si">{S}</span><span class="s2">$ measured&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">,</span> <span class="n">Th</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_</span><span class="si">{H}</span><span class="s1">$ predicted&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">,</span> <span class="n">Ts</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_</span><span class="si">{S}</span><span class="s1">$ predicted&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tset_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tset_data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$T_</span><span class="si">{set}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;temperatures&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;deg C&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># subplot 2: control decision</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;heater power&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;percent of max&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># subplot 3: disturbance</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;disturbance&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;watts&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (s)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="process-inputs">
+<h3>Process Inputs<a class="headerlink" href="#process-inputs" title="Link to this heading">#</a></h3>
+<p>The next cell defines some process inputs that will be used throughout the notebook to demonstrate aspects of process simulation, control, and estimation.  These are gathered in one place to make it easier to modify the notebook to test the response under different conditions. These functions are implemented using the <code class="docutils literal notranslate"><span class="pre">interp1d</span></code> from the <code class="docutils literal notranslate"><span class="pre">scipy</span></code> library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">tclab_disturbance</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span>   <span class="c1"># time</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">.5</span><span class="p">],</span>      <span class="c1"># disturbance value</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="n">tclab_input</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">451</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span>   <span class="c1"># time</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span>  <span class="mi">80</span><span class="p">,</span>   <span class="mi">25</span><span class="p">,</span>   <span class="mi">25</span><span class="p">],</span>  <span class="c1"># input value</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="n">tclab_setpoint</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">450</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">9999</span><span class="p">],</span>   <span class="c1"># time </span>
+    <span class="p">[</span><span class="n">Tamb</span><span class="p">,</span> <span class="n">Tamb</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span>   <span class="c1"># set point value</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation`</span>
+
+<span class="n">t_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>       <span class="c1"># create 201 time points between 0 and 1000 seconds</span>
+<span class="n">u_sim</span> <span class="o">=</span> <span class="n">tclab_input</span><span class="p">(</span><span class="n">t_sim</span><span class="p">)</span>              <span class="c1"># calculate input signal at time points</span>
+<span class="n">d_sim</span> <span class="o">=</span> <span class="n">tclab_disturbance</span><span class="p">(</span><span class="n">t_sim</span><span class="p">)</span>        <span class="c1"># calculate disturbance at time points</span>
+<span class="n">setpoint_sim</span> <span class="o">=</span> <span class="n">tclab_setpoint</span><span class="p">(</span><span class="n">t_sim</span><span class="p">)</span>    <span class="c1"># calculate set point at time points</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_sim</span><span class="p">,</span> <span class="n">setpoint_sim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;setpoint&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;deg C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_sim</span><span class="p">,</span> <span class="n">u_sim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;heat power input&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;percent of max&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_sim</span><span class="p">,</span> <span class="n">d_sim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;unmeasured disturbance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;watts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how well our initial guess at a control strategy will work for us.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+C_p^H \frac{dT_H}{dt} &amp; = U_a (T_{amb} - T_H) + U_b (T_S - T_H) + \alpha P u(t) + d(t)\\
+C_p^S \frac{dT_S}{dt} &amp; = - U_b (T_S - T_H) 
+\end{align*}\]</div>
+<p>subject to initial conditions</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+T_H(t_0) &amp; = T_{amb} \\
+T_S(t_0) &amp; = T_{amb}
+\end{align*}\]</div>
+<p>and prior specification of inputs <span class="math notranslate nohighlight">\(u(t)\)</span> and <span class="math notranslate nohighlight">\(d(t)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">TCLabPyomo</span><span class="p">(</span><span class="s1">&#39;simulate&#39;</span><span class="p">,</span>
+                <span class="n">t_sim</span><span class="p">,</span>
+                <span class="n">u_sim</span><span class="p">,</span>
+                <span class="n">d_sim</span><span class="p">,</span>
+                <span class="n">setpoint_sim</span><span class="p">,</span>
+                <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">sim</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion">
+<h3>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h3>
+<p><strong>How well does the initial control strategy perform? Quantitatively justify your response using plots from the Pyomo model results.</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+</section>
+<section id="optimal-control-with-knowledge-of-disturbances">
+<h2>Optimal Control with Knowledge of Disturbances<a class="headerlink" href="#optimal-control-with-knowledge-of-disturbances" title="Link to this heading">#</a></h2>
+<p>An optimal control policy minimizes the differences</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{u} \int_{t_0}^{t_f} \left( \|T_S^{SP}(t) - T_S(t)\|^2\ + w \|T_S^{SP}(t) - T_H(t)\|^2\, \right) dt \\
+\end{align*}\]</div>
+<p>subject to constraints</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+C_p^H \frac{dT_H}{dt} &amp; = U_a (T_{amb} - T_H) + U_c (T_S - T_H) + P u(t) + d(t)\\
+C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H) 
+\end{align*}\]</div>
+<p>initial conditions</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+T_H(t_0) &amp; = T_{amb} \\
+T_S(t_0) &amp; = T_{amb}
+\end{align*}\]</div>
+<p>and prior knowledge of <span class="math notranslate nohighlight">\(d(t)\)</span>.</p>
+</section>
+<section id="exercise-1">
+<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h2>
+<p>The optimal control computed above requires rapid changes in power level. In process systems where control action requires movement of a valve stem position, there are often limits on how fast the manipulated variable can change. Modify the model to include differential inequalities that limit the time rate of change of control to 0.25 <span class="math notranslate nohighlight">\(s^{-1}\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{du}{dt} &amp; \leq \dot{u}_{max} \\
+\frac{du}{dt} &amp; \geq -\dot{u}_{max}
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\dot{u}_{max}\)</span> is the maximum rate of change.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Be sure to check and update the ambient temperature!</span>
+<span class="c1"># Hint: you can do this with the hardware</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">TCLabPyomo</span><span class="p">(</span><span class="s1">&#39;optimize&#39;</span><span class="p">,</span>
+                 <span class="n">t_sim</span><span class="p">,</span>
+                 <span class="n">u_sim</span><span class="p">,</span>
+                 <span class="n">d_sim</span><span class="p">,</span>
+                 <span class="n">setpoint_sim</span><span class="p">,</span>
+                 <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">obj_weight_optimize</span><span class="o">=</span><span class="mf">0.01</span>   <span class="c1"># keep default value</span>
+<span class="p">)</span>
+
+<span class="n">opt</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">opt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Discussion<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><strong>Using what you know about how the <code class="docutils literal notranslate"><span class="pre">simulate</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> modes operate, desctibe the differences in the controller performance and why those differences are occuring. How does the optimal control with knowledge of disturbances impact the controller performance? Quantitatively justify your response using plots from the Pyomo model results.</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+</section>
+<section id="exercise-2">
+<h2>Exercise 2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h2>
+<p>Implement your calculated solution on the TC Lab hardware. Save the simulation results to a text file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recommended: Check that the device is at steady state and ambient temperature</span>
+<span class="c1"># experimental parameters</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="c1"># To complete the experiment, change this to True</span>
+<span class="c1"># After completing the experiment, be sure to change it back to False</span>
+<span class="c1"># This will prevent you from overwriting your data</span>
+<span class="n">run_exercise2_tclab</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">run_exercise2_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># perform experiment</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">tfinal</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_solution</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
+<span class="n">u_solution</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_U</span><span class="p">()</span>
+<span class="n">TS_solution</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_Ts</span><span class="p">()</span>
+<span class="n">TH_solution</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_Th</span><span class="p">()</span>
+
+<span class="n">u_open_loop</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="n">t_solution</span><span class="p">,</span>   <span class="c1"># time</span>
+    <span class="n">u_solution</span><span class="p">,</span>   <span class="c1"># control value</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="n">TS_predict</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="n">t_solution</span><span class="p">,</span>   <span class="c1"># time</span>
+    <span class="n">TS_solution</span><span class="p">,</span>   <span class="c1"># sensor temperature prediction</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="n">TH_predict</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="n">t_solution</span><span class="p">,</span>   <span class="c1"># time</span>
+    <span class="n">TH_solution</span><span class="p">,</span>   <span class="c1"># sensor temperature prediction</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="k">if</span> <span class="n">run_exercise2_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">t_final</span> <span class="o">=</span> <span class="n">t_solution</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># change this to 500 seconds for the actual experiment</span>
+    <span class="n">t_step</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;T2&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;T1pred&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">TS_predict</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;SP1&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">tclab_setpoint</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;Q1&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Q2&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q2</span><span class="p">)]</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">((</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="s2">&quot;SP1&quot;</span><span class="p">,</span><span class="s2">&quot;T1pred&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;T2&quot;</span><span class="p">,),</span> <span class="p">(</span><span class="s2">&quot;Q1&quot;</span><span class="p">,</span> <span class="s2">&quot;Q2&quot;</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+            <span class="n">U1</span> <span class="o">=</span> <span class="n">u_open_loop</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_tclab_data</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">overwrite_file</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Save TCLab data to csv file</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        h: tclab historian objective</span>
+<span class="sd">        file_name: valid file name as a string</span>
+<span class="sd">        overwrite_file: bool, if True, overwrite exisiting file</span>
+<span class="sd">            default is False to safeguard against accidentally rerunning this function</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">overwrite_file</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span><span class="n">file_name</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="n">file_name</span> <span class="o">+</span> <span class="s1">&#39; already exisits. Either choose a new filename or set overwrite_file = True.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">h</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully saved data to &quot;</span><span class="o">+</span><span class="n">file_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">file_name</span>
+
+<span class="n">excercise2_tclab_data_file</span> <span class="o">=</span> <span class="s1">&#39;tclab-open-loop1.csv&#39;</span>
+
+<span class="k">if</span> <span class="n">run_exercise2_tclab</span><span class="p">:</span>
+    <span class="n">data_file</span> <span class="o">=</span> <span class="n">save_tclab_data</span><span class="p">(</span><span class="n">h</span><span class="p">,</span>
+                    <span class="n">excercise2_tclab_data_file</span><span class="p">,</span> <span class="c1"># tip: change this to end in &quot;2&quot; when copying code later in assignment</span>
+                    <span class="kc">False</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h3>Discussion<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><strong>How do your optimzized simulation results (with pyomo model) compare to the implementation results (with TCLab hardware)? Why do you think these differences do (or don’t) occur?</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+</section>
+<section id="estimation-observation">
+<h2>Estimation/Observation<a class="headerlink" href="#estimation-observation" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“… and now my watch begins …” ―The Night’s Watch oath, Game of Thrones</p>
+</div></blockquote>
+<p>The trouble with open-loop optimal control is that we cannot anticipate or know the values of unmeasured disturbances, much less the future values of those disturbances. The best we can do is use available data and process models to estimate the process state and disturbances. The state estimation problem is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{\hat{T}_H, \hat{T}_S, \hat{d}} \int_{t - h}^t (\|\hat{T}_S(t) - T_S(t)\|^2\, + wd(t)^2 ) dt \\
+\end{align*}\]</div>
+<p>subject to</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+C_p^H \frac{d\hat{T}_H}{dt} &amp; = U_a (T_{amb} - \hat{T}_H) + U_c (\hat{T}_S - \hat{T}_H) + P u(t) + \hat{d}(t)\\
+C_p^S \frac{d\hat{T}_S}{dt} &amp; = - U_c (\hat{T}_S - \hat{T}_H) 
+\end{align*}\]</div>
+<p>and initial conditions</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+T_H(t_0) &amp; = T_{amb} \\
+T_S(t_0) &amp; = T_{amb}
+\end{align*}\]</div>
+</section>
+<section id="exercise-3">
+<h2>Exercise 3<a class="headerlink" href="#exercise-3" title="Link to this heading">#</a></h2>
+<p>Using the simulation data you saved in Exercise 2, estimate the heater temperature and disturbance when the disturbance has no impact on the objective function (i.e., <span class="math notranslate nohighlight">\(w\)</span> = 0).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment and run the following line to run exercise 3 if returning to notebook with a restarted kernel</span>
+<span class="c1"># excercise2_tclab_data_file = &#39;tclab-open-loop1.csv&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">experiment_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">excercise2_tclab_data_file</span><span class="p">)</span>
+<span class="n">experiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time_data</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">array</span> <span class="c1"># grab column from pandas, convert to array</span>
+<span class="n">time_data</span> <span class="o">-=</span> <span class="n">time_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># make initial time 0</span>
+
+<span class="n">u_data</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">array</span>
+<span class="n">T1_data</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;T1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">array</span>
+
+<span class="n">obs</span> <span class="o">=</span> <span class="n">TCLabPyomo</span><span class="p">(</span><span class="s1">&#39;observe&#39;</span><span class="p">,</span>
+                 <span class="n">time_data</span><span class="p">,</span>
+                 <span class="n">u_data</span><span class="p">,</span>
+                 <span class="kc">None</span><span class="p">,</span>
+                 <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">T1_data</span><span class="p">,</span>
+                 <span class="n">obj_weight_observe</span><span class="o">=</span><span class="mf">0.1</span>   <span class="c1"># keep default value</span>
+<span class="p">)</span>
+
+<span class="n">obs</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id3">
+<h3>Discussion<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>Interpret your estimates for the heater temperature and disturbance.</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+</section>
+<section id="parameter-estimation">
+<h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Link to this heading">#</a></h2>
+<p>It is also possible our model does not match the physics of the system (e.g., wrong assumptions) or our estimated parameters are no longer valid or both. To investigate the later, we can repeat the parameter estimation problem for earlier in the semester:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\min_{\hat{T}_H, \hat{T}_S, \hat{U_a}, \hat{U_b}, \hat{C_p^H}, \hat{C_p^S}} \int_{t - h}^t \|\hat{T}_S(t) - T_S(t)\|^2\,dt \\
+\end{align*}\]</div>
+<p>subject to</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\hat{C_p^H} \frac{d\hat{T}_H}{dt} &amp; = \hat{U_a} (T_{amb} - \hat{T}_H) + \hat{U_b} (\hat{T}_S - \hat{T}_H) + \alpha P u(t) + d(t)\\
+\hat{C_p^S} \frac{d\hat{T}_S}{dt} &amp; = - \hat{U_b} (\hat{T}_S - \hat{T}_H) 
+\end{align*}\]</div>
+<p>and initial conditions</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+T_H(t_0) &amp; = T_{amb} \\
+T_S(t_0) &amp; = T_{amb}
+\end{align*}\]</div>
+<p>and assumption disturbance is zero</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2b15491b-82a9-4b30-8039-85dd5da6947a">
+<span class="eqno">(8)<a class="headerlink" href="#equation-2b15491b-82a9-4b30-8039-85dd5da6947a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+d(t) = 0
+\end{equation}\]</div>
+</section>
+<section id="exercise-4">
+<h2>Exercise 4<a class="headerlink" href="#exercise-4" title="Link to this heading">#</a></h2>
+<p>Using data from your experiment, restimate the model parameters <span class="math notranslate nohighlight">\(U_a\)</span>, <span class="math notranslate nohighlight">\(U_b\)</span>, <span class="math notranslate nohighlight">\(C_p^H\)</span>, <span class="math notranslate nohighlight">\(C_p^S\)</span>.</p>
+<p>NOTE: Depending on your operating system, the following code cell may take up to 2 minutes to solve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">est</span> <span class="o">=</span> <span class="n">TCLabPyomo</span><span class="p">(</span><span class="s1">&#39;estimate&#39;</span><span class="p">,</span>
+                 <span class="n">time_data</span><span class="p">,</span>
+                 <span class="n">u_data</span><span class="p">,</span>
+                 <span class="kc">None</span><span class="p">,</span>
+                 <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">T1_data</span><span class="p">)</span>
+
+<span class="n">est</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">est</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Ua</span><span class="p">,</span> <span class="n">Ub</span><span class="p">,</span> <span class="n">CpH</span><span class="p">,</span> <span class="n">CpS</span> <span class="o">=</span> <span class="n">est</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()</span>
+
+<span class="n">est</span><span class="o">.</span><span class="n">print_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id4">
+<h3>Discussion<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><strong>Are these parameters close to what you expected (i.e., your Lab 3 results)? Why or why not?</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+</section>
+<section id="exercise-5">
+<h2>Exercise 5<a class="headerlink" href="#exercise-5" title="Link to this heading">#</a></h2>
+<p>Compare the profiles of <span class="math notranslate nohighlight">\(T_H\)</span>, <span class="math notranslate nohighlight">\(T_S\)</span>, <span class="math notranslate nohighlight">\(Q_1\)</span>, and <span class="math notranslate nohighlight">\(d\)</span> (disturbance) across:</p>
+<ul class="simple">
+<li><p>The open loop optimization (prediction)</p></li>
+<li><p>The hardware results</p></li>
+<li><p>The state estimation</p></li>
+</ul>
+<p>Write a short paragraph or a bulleted list of observations.</p>
+<p><strong>Your Observations:</strong></p>
+<p><em>Answer</em>:</p>
+<p>Compare the mean absolute and mean squared tracking error <span class="math notranslate nohighlight">\(T_S - T_{set}\)</span> and <span class="math notranslate nohighlight">\(T_H - T_{set}\)</span> across:</p>
+<ul class="simple">
+<li><p>The open loop optimization</p></li>
+<li><p>The state estimation (using hardware results)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hint: pay attention to how the set point was calculated and the size of your temperature data sets.</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Write a short paragraph or a bulleted list of observations that interpret the above data.</p>
+<p><strong>Your Observations:</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+<section id="excerise-6-chocolate-tempering">
+<h2>Excerise 6. Chocolate Tempering<a class="headerlink" href="#excerise-6-chocolate-tempering" title="Link to this heading">#</a></h2>
+<p>Repeat the procedure from this lab for the dark chocolate tempering profile. You may optionally use the new model parameters you estimated in Exercise 4.</p>
+<section id="open-loop-optimization">
+<h3>Open Loop Optimization<a class="headerlink" href="#open-loop-optimization" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># experimental parameters</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># To complete the experiment, change this to True</span>
+<span class="c1"># After completing the experiment, be sure to change it back to False</span>
+<span class="c1"># This will prevent you from overwriting your data</span>
+<span class="n">run_tamb2_tclab</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">if</span> <span class="n">run_tamb2_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># initialize list to store temperature</span>
+    <span class="n">T_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># perform experiment</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
+        
+        <span class="c1"># save temperatures to access later</span>
+        <span class="n">T_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">)</span>
+        <span class="n">T_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">tfinal</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># estimate ambient temperature</span>
+    <span class="n">Tamb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">T_list</span><span class="p">)</span> <span class="c1"># deg C</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The ambient temperature is </span><span class="si">{</span><span class="n">Tamb</span><span class="si">}</span><span class="s2"> degrees C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment and update value from code cell and run above if returning to notebook with reset kernel</span>
+<span class="c1"># Tamb = 22.36 # deg C</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Be sure to check and update the ambient temperature!</span>
+
+<span class="c1"># Determine the optimal control scheme</span>
+<span class="c1"># Hint: the correct implementation of the set point can be found in Lab 2 solutions</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hardware-implementation">
+<h3>Hardware Implementation<a class="headerlink" href="#hardware-implementation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recommended: Check that the device is at steady state and ambient temperature</span>
+<span class="c1"># experimental parameters</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># To complete the experiment, change this to True</span>
+<span class="c1"># After completing the experiment, be sure to change it back to False</span>
+<span class="c1"># This will prevent you from overwriting your data</span>
+<span class="n">run_exercise6_tclab</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="k">if</span> <span class="n">run_exercise6_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># perform experiment</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">tfinal</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement optimal solution on your TCLab</span>
+<span class="c1">## BEGIN SOLUTION</span>
+
+<span class="n">t_solution</span> <span class="o">=</span> <span class="n">choc_opt</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
+<span class="n">u_solution</span> <span class="o">=</span> <span class="n">choc_opt</span><span class="o">.</span><span class="n">get_U</span><span class="p">()</span>
+<span class="n">TS_solution</span> <span class="o">=</span> <span class="n">choc_opt</span><span class="o">.</span><span class="n">get_Ts</span><span class="p">()</span>
+<span class="n">TH_solution</span> <span class="o">=</span> <span class="n">choc_opt</span><span class="o">.</span><span class="n">get_Th</span><span class="p">()</span>
+
+<span class="n">u_open_loop</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="n">t_solution</span><span class="p">,</span>   <span class="c1"># time</span>
+    <span class="n">u_solution</span><span class="p">,</span>   <span class="c1"># control value</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="n">TS_predict</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="n">t_solution</span><span class="p">,</span>   <span class="c1"># time</span>
+    <span class="n">TS_solution</span><span class="p">,</span>   <span class="c1"># sensor temperature prediction</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="n">TH_predict</span> <span class="o">=</span> <span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span>
+    <span class="n">t_solution</span><span class="p">,</span>   <span class="c1"># time</span>
+    <span class="n">TH_solution</span><span class="p">,</span>   <span class="c1"># sensor temperature prediction</span>
+    <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="k">if</span> <span class="n">run_exercise6_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">t_final</span> <span class="o">=</span> <span class="n">t_chocolate</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">t_step</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;T2&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;T1pred&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">TS_predict</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;SP1&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">chocolate_setpoint</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;Q1&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Q2&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q2</span><span class="p">)]</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">((</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="s2">&quot;SP1&quot;</span><span class="p">,</span> <span class="s2">&quot;T1pred&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;T2&quot;</span><span class="p">,),</span> <span class="p">(</span><span class="s2">&quot;Q1&quot;</span><span class="p">,</span> <span class="s2">&quot;Q2&quot;</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+            <span class="n">U1</span> <span class="o">=</span> <span class="n">u_open_loop</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+<span class="c1">### END SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save your experimental data as data_file2.</span>
+
+<span class="n">excercise6_tclab_data_file</span> <span class="o">=</span> <span class="s1">&#39;tclab-open-loop2.csv&#39;</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>Discussion<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p><strong>How does the open loop optimization control scheme compare to the other implememntations we have seen this semester (e.g., relay, PI, etc.)? Justify your answer using knowlege of the mathematical models.</strong></p>
+<p><em>Answer</em>:</p>
+<p><strong>Does your hardware implementation make sense based on your optimization results from the Pyomo model? Justify your answer.</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+<section id="state-estimation">
+<h3>State Estimation<a class="headerlink" href="#state-estimation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment and run the following line to run exercise 6 if returning to notebook with a restarted kernel</span>
+<span class="c1"># excercise6_tclab_data_file = &#39;tclab-open-loop2.csv&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_data2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">excercise6_tclab_data_file</span><span class="p">)</span>
+
+<span class="n">time_data2</span> <span class="o">=</span> <span class="n">experiment_data2</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">array</span> <span class="c1"># grab column from pandas, convert to array</span>
+<span class="n">time_data2</span> <span class="o">-=</span> <span class="n">time_data2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># make initial time 0</span>
+
+<span class="c1"># Estimate TH and d from data</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>Discussion<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p><strong>Interpret your estimates for the heater temperature and disturbance. Do these makes sense? How do you know?</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+<section id="id7">
+<h3>Parameter Estimation<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>NOTE: Depending on your operating system, the following code cell may take up to 2 minnutes to solve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Estimate model parameters</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">est2</span><span class="o">.</span><span class="n">print_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>Discussion<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p><strong>How do your parameters compare to those found in previous labs? Does this make sense?</strong></p>
+<p><em>Answer</em>:</p>
+</section>
+</section>
+<section id="declarations">
+<h2>Declarations<a class="headerlink" href="#declarations" title="Link to this heading">#</a></h2>
+<p><strong>Collaboration</strong>: If you worked with any classmates, please give their names here. Describe the nature of the collaboration.</p>
+<p><strong>Generative AI</strong>: If you used any Generative AI tools, please elaborate here.</p>
+<p><strong>Reminder:</strong> The written discussions responses must be in your own words. Many of these questions ask about your specific results or are open-ended questions with many reasonable answers. Thus we expect unique responses, analyses, and ideas.</p>
+<p>We may use writing analysis software to check for overly similar written responses. You are responsible for reviewing the colaboration policy outlined in the class syllabus to avoid violations of the honor code.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./assignments"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Homework-2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework 2: Optimization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab-6-MPC.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 6: Model Predictive Control (MPC)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-0-develop-the-mathematical-model-and-pyomo-simulation">Exercise 0: Develop the Mathematical Model and Pyomo Simulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyomo-model">Pyomo Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-inputs">Process Inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-control-with-knowledge-of-disturbances">Optimal Control with Knowledge of Disturbances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">Exercise 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">Exercise 2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-observation">Estimation/Observation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3">Exercise 3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-estimation">Parameter Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4">Exercise 4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5">Exercise 5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#excerise-6-chocolate-tempering">Excerise 6. Chocolate Tempering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-loop-optimization">Open Loop Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardware-implementation">Hardware Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation">State Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Parameter Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarations">Declarations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

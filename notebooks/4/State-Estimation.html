@@ -1,0 +1,1369 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.3. State Estimation &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4/State-Estimation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.4. Lab Assignment 5: State Estimation" href="Lab-Assigment-State-Estimation.html" />
+    <link rel="prev" title="4.2. Data/Process/Operational Historian" href="Process-Historians.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2/Process-Modeling.html">2. Process Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2/One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Process-Analytics.html">4. Process Analytics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/notebooks/4/State-Estimation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fnotebooks/4/State-Estimation.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/4/State-Estimation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>State Estimation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-feedback-control">4.3.1. Output Feedback Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trouble-with-output-feedback">4.3.2. The Trouble with Output Feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heater-sensor-model">4.3.3. Heater/Sensor Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-a-state-space-model">4.3.4. Converting to a State-Space Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">4.3.5. Model Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trouble-with-model-predictions">4.3.6. The Trouble with Model Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-1-heater-temperature-is-markedly-different-from-the-sensor-temperature">4.3.6.1. Issue 1: Heater temperature is markedly different from the sensor temperature.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-2-the-model-may-not-be-an-accurate-predictor-of-temperatures">4.3.6.2. Issue 2: The model may not be an accurate predictor of temperatures.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-measurements">4.3.7. Incorporating Measurements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fun-with-eigenvalues">4.3.7.1. Fun with Eigenvalues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-prediction-measurement-correction">4.3.7.2. Model Prediction / Measurement Correction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation-and-closed-loop-relay-control">4.3.8. State Estimation and Closed-Loop Relay Control</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="state-estimation">
+<h1><span class="section-number">4.3. </span>State Estimation<a class="headerlink" href="#state-estimation" title="Link to this heading">#</a></h1>
+<p>This notebook outlines state estimation using the TCLab hardware.</p>
+<section id="output-feedback-control">
+<h2><span class="section-number">4.3.1. </span>Output Feedback Control<a class="headerlink" href="#output-feedback-control" title="Link to this heading">#</a></h2>
+<p>Let’s begin our investigations by considering the single loop control problem for a single heater/sensor assembly in the Temperature Control Lab. First we define a setpoint function that we’ll be using throughout the notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Temperature Setpoint</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="p">[</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">200</span><span class="p">,</span>  <span class="mi">250</span><span class="p">,</span>  <span class="mi">400</span><span class="p">,</span>  <span class="mi">600</span><span class="p">]</span>
+    <span class="n">Tp</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">50</span><span class="p">,</span>   <span class="mi">50</span><span class="p">,</span>   <span class="mi">40</span><span class="p">,</span>   <span class="mi">40</span><span class="p">,</span>   <span class="mi">50</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">Tp</span><span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">801</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Temperature Setpoint&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time / seconds&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;deg C&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f2e3be59656f78dbe1a55f79a2ab43c7f403642f26c933d5774c3ac0b4ea7dae.png" src="../../_images/f2e3be59656f78dbe1a55f79a2ab43c7f403642f26c933d5774c3ac0b4ea7dae.png" />
+</div>
+</div>
+<p>Next we implement a simple relay controller using the Python <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Relay Control</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">relay</span><span class="p">(</span><span class="n">MV_min</span><span class="p">,</span> <span class="n">MV_max</span><span class="p">):</span>
+    <span class="n">MV</span> <span class="o">=</span> <span class="n">MV_min</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">SP</span><span class="p">,</span> <span class="n">PV</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">MV</span>
+        <span class="n">MV</span> <span class="o">=</span> <span class="n">MV_max</span> <span class="k">if</span> <span class="n">PV</span> <span class="o">&lt;</span> <span class="n">SP</span> <span class="k">else</span> <span class="n">MV_min</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we put these together to form a control system for the regulation of temperature T1 to the desired setpoint using relay control to manipulate <code class="docutils literal notranslate"><span class="pre">U1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span>
+
+<span class="c1"># run time</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">700</span> 
+<span class="n">t_step</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># create a controller instance</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">relay</span><span class="p">(</span><span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">U1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+
+<span class="c1"># execute the event loop</span>
+<span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">([(</span><span class="s1">&#39;SP&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">)])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="s1">&#39;SP&#39;</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span>
+        <span class="n">U1</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">T1</span><span class="p">])</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5349ccb4afdef7154c99463e05cc56e9297b7bdc99f1bb5b0db3d99e9b88a4af.png" src="../../_images/5349ccb4afdef7154c99463e05cc56e9297b7bdc99f1bb5b0db3d99e9b88a4af.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TCLab Model disconnected successfully.
+</pre></div>
+</div>
+<img alt="../../_images/5349ccb4afdef7154c99463e05cc56e9297b7bdc99f1bb5b0db3d99e9b88a4af.png" src="../../_images/5349ccb4afdef7154c99463e05cc56e9297b7bdc99f1bb5b0db3d99e9b88a4af.png" />
+</div>
+</div>
+</section>
+<section id="the-trouble-with-output-feedback">
+<h2><span class="section-number">4.3.2. </span>The Trouble with Output Feedback<a class="headerlink" href="#the-trouble-with-output-feedback" title="Link to this heading">#</a></h2>
+<p>So how did we do? Let’s look at the response of the measured sensor temperature and heater input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SP&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Q1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Q1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9fe950b084e724284fed63be3185a88830a7f6c584427f05e0941002a8b4325c.png" src="../../_images/9fe950b084e724284fed63be3185a88830a7f6c584427f05e0941002a8b4325c.png" />
+</div>
+</div>
+<p>As shown, the controller does a reasonably good job of controlling the sensor temperature. But if the goal is to control heater temperature, then there is no assuronce the controller has accomplished that objective.</p>
+<p>In the context of control, the control variable (CV) is heater temperature, the measured process variable (PV) is the sensor temperature, and we haven’t yet established the relationship between them.</p>
+</section>
+<section id="heater-sensor-model">
+<h2><span class="section-number">4.3.3. </span>Heater/Sensor Model<a class="headerlink" href="#heater-sensor-model" title="Link to this heading">#</a></h2>
+<p>In chapter two we explored various models for describing the response of the heater/sensor assemblies to heater inputs. For heater/sensor assembly 1 we developed the following model</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7e12ee3b-8876-4746-a701-b2ec807b591b">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-7e12ee3b-8876-4746-a701-b2ec807b591b" title="Permalink to this equation">#</a></span>\[\begin{align}
+C^H_p\frac{dT_{H,1}}{dt} &amp; = U_a(T_{amb} - T_{H,1}) + U_b(T_{S,1} - T_{H,1}) + \alpha P_1 u_1\\
+C^S_p\frac{dT_{S,1}}{dt} &amp; = U_b(T_{H,1} - T_{S,1}) 
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(C^H_p\)</span> and <span class="math notranslate nohighlight">\(C^S_p\)</span> are the gross heat capacities of the heater and sensor, respectively, <span class="math notranslate nohighlight">\(U_a\)</span> is the heat transfer coefficient characterizing the exchange of heat with the surroundings, and <span class="math notranslate nohighlight">\(U_b\)</span> is a heat transfer coefficient between the heater and sensor.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7697eb53-4882-4b8c-9dd1-5e120673354a">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-7697eb53-4882-4b8c-9dd1-5e120673354a" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{dT_{H,1}}{dt} &amp; = -\frac{U_a+U_b}{C^H_p}T_{H,1} + \frac{U_b}{C^H_p}T_{S,1} + \frac{\alpha P_1}{C^H_p}u_1 + \frac{U_a}{C^H_p}T_{amb}\\
+\frac{dT_{S,1}}{dt} &amp; = \frac{U_b}{C^S_p}(T_{H,1} - T_{S,1}) 
+\end{align}\]</div>
+<p>Where measured temperature, that is, the temperature recorded by the Arduino, <span class="math notranslate nohighlight">\(T_1\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[T_1 = T_{S,1}\]</div>
+</section>
+<section id="converting-to-a-state-space-model">
+<h2><span class="section-number">4.3.4. </span>Converting to a State-Space Model<a class="headerlink" href="#converting-to-a-state-space-model" title="Link to this heading">#</a></h2>
+<p>The same model can be written in a <strong>state-space</strong> matrix/vector format:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e57326ae-22a6-4faa-a081-4ec4cddd1605">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-e57326ae-22a6-4faa-a081-4ec4cddd1605" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{dx}{dt} &amp; = A x + B_u u + B_d d \\
+y &amp; = C x
+\end{align}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x = \begin{bmatrix} T_{H,1} \\ T_{S,1} \end{bmatrix}
+\qquad
+u = \begin{bmatrix} u_1 \end{bmatrix}
+\qquad
+d = \begin{bmatrix} T_{amb} \end{bmatrix}
+\qquad
+y = \begin{bmatrix} T_{S,1} \end{bmatrix}\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = \begin{bmatrix} -\frac{U_a+U_b}{C^H_p} &amp; \frac{U_b}{C^H_p} \\ \frac{U_b}{C^S_p} &amp; -\frac{U_b}{C^S_p} \end{bmatrix}
+\qquad
+B_u = \begin{bmatrix} \frac{\alpha P_1}{C^H_p} \\ 0 \end{bmatrix}
+\qquad
+B_d = \begin{bmatrix} \frac{U_a}{C_p^H} \\ 0 \end{bmatrix}
+\qquad
+C = \begin{bmatrix} 0 &amp; 1 \end{bmatrix}\end{split}\]</div>
+<p>By common convention, in state-space models the vector <span class="math notranslate nohighlight">\(x\)</span> contains all variables representing the <strong>state</strong> of the system. The input vector <span class="math notranslate nohighlight">\(u\)</span> is reserved for all manipulated variables (MV’s), and the input vector <span class="math notranslate nohighlight">\(d\)</span> for all disturbance variables (DV’s). The vector <span class="math notranslate nohighlight">\(y\)</span> holds all measured process variables (PV’s).</p>
+<p><img alt="" src="../../_images/FeedbackControlDiagram2.png" /></p>
+</section>
+<section id="model-predictions">
+<h2><span class="section-number">4.3.5. </span>Model Predictions<a class="headerlink" href="#model-predictions" title="Link to this heading">#</a></h2>
+<p>For a sufficiently small time step, the change in state is approximated to first-order by</p>
+<div class="math notranslate nohighlight">
+\[\frac{dx}{dt}\bigg\rvert_{k-1} \approx \frac{x_{k} - x_{k-1}}{t_k - t_{k-1}}\]</div>
+<p>Substituting we get</p>
+<div class="math notranslate nohighlight">
+\[\frac{x_{k} - x_{k-1}}{t_k - t_{k-1}} = A x_{k-1} + B_u u_{k-1} + B_d d_{k-1}\]</div>
+<p>which is rearranged to give a means of predicting a value <span class="math notranslate nohighlight">\(x_{k}\)</span> at <span class="math notranslate nohighlight">\(t_k\)</span> given information available up to time <span class="math notranslate nohighlight">\(t_{k-1}\)</span></p>
+<div class="math notranslate nohighlight">
+\[x_{k} = x_{k-1} + (t_k - t_{k-1}) ( A x_{k-1} + B_u u_{k-1} + B_d d_{k-1})\]</div>
+<p>We call this the state update equation.</p>
+<p>To put this to work, we first use the Python <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement to create co-routine that accepts values for time and the manipulated process inputs, then uses those values to update an estimate of the state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># This generate creates a model of the temperature control lab to run in parallel</span>
+<span class="c1"># with real-time control. This uses the Python &#39;yield&#39; statement to </span>
+<span class="c1"># share data with a calling script.</span>
+
+<span class="c1"># parameter estimates.</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.00016</span>       <span class="c1"># watts / (units P * percent U1)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="mi">200</span>              <span class="c1"># P units</span>
+<span class="n">P2</span> <span class="o">=</span> <span class="mi">100</span>              <span class="c1"># P units</span>
+<span class="n">Ua</span> <span class="o">=</span> <span class="mf">0.050</span>            <span class="c1"># heat transfer coefficient from heater to environment</span>
+<span class="n">CpH</span> <span class="o">=</span> <span class="mf">2.2</span>             <span class="c1"># heat capacity of the heater (J/deg C)</span>
+<span class="n">CpS</span> <span class="o">=</span> <span class="mf">1.9</span>             <span class="c1"># heat capacity of the sensor (J/deg C)</span>
+<span class="n">Ub</span> <span class="o">=</span> <span class="mf">0.021</span>            <span class="c1"># heat transfer coefficient from heater to sensor</span>
+<span class="n">Tamb</span> <span class="o">=</span> <span class="mi">21</span>             <span class="c1"># ambient room temperature</span>
+
+<span class="c1"># state space model</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span><span class="p">)</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="n">Ub</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span> <span class="p">[</span><span class="n">Ub</span><span class="o">/</span><span class="n">CpS</span><span class="p">,</span> <span class="o">-</span><span class="n">Ub</span><span class="o">/</span><span class="n">CpS</span><span class="p">]])</span>
+<span class="n">Bu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">alpha</span><span class="o">*</span><span class="n">P1</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]])</span>     <span class="c1"># single column</span>
+<span class="n">Bd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">Ua</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]])</span>           <span class="c1"># single column</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>                   <span class="c1"># single row</span>
+
+<span class="n">u_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>                <span class="c1"># initial manipulable input</span>
+<span class="n">d_initial</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tamb</span><span class="p">]</span>                       <span class="c1"># initial disturbance input</span>
+<span class="n">x_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Tamb</span><span class="p">,</span> <span class="n">Tamb</span><span class="p">])</span>       <span class="c1"># initial steady state</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tclab_model</span><span class="p">():</span>
+    <span class="c1"># initialize variables</span>
+    <span class="n">t_now</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_now</span> <span class="o">=</span> <span class="n">x_initial</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">d_initial</span>
+    
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># yield current state, get MV for next period</span>
+        <span class="n">t_next</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">x_now</span>
+        
+        <span class="c1"># compute next state</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">Q</span><span class="p">]</span>
+        <span class="n">x_next</span> <span class="o">=</span> <span class="n">x_now</span> <span class="o">+</span> <span class="p">(</span><span class="n">t_next</span> <span class="o">-</span> <span class="n">t_now</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x_now</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bu</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bd</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        
+        <span class="c1"># update time and state</span>
+        <span class="n">t_now</span> <span class="o">=</span> <span class="n">t_next</span>
+        <span class="n">x_now</span> <span class="o">=</span> <span class="n">x_next</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s run the model in parallel with the event loop, feeding both the hardware and model the same information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span>
+<span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">700</span>        <span class="c1"># run time</span>
+
+<span class="c1"># create a controller instance</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">relay</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">U1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+
+<span class="c1"># create model instance</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tclab_model</span><span class="p">()</span>
+<span class="n">Th</span><span class="p">,</span> <span class="n">Ts</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># execute the event loop</span>
+<span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">([(</span><span class="s1">&#39;SP&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Th&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Th</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Ts&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Ts</span><span class="p">)])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="s1">&#39;SP&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Th&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span>                        <span class="c1"># get a new measurement</span>
+        <span class="n">Th</span><span class="p">,</span> <span class="n">Ts</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">U1</span><span class="p">])</span>       <span class="c1"># update estimates for the current Th, Ts</span>
+        <span class="n">U1</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">T1</span><span class="p">])</span>  <span class="c1"># compute the value of U1 for the next time interval</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">cm</span><span class="o">/</span><span class="n">z3t28j296f98jdp1vqyplkz00000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_28459</span><span class="o">/</span><span class="mf">390447493.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># create a controller instance</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">controller</span> <span class="o">=</span> <span class="n">relay</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">U1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+
+<span class="ne">NameError</span>: name &#39;relay&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-trouble-with-model-predictions">
+<h2><span class="section-number">4.3.6. </span>The Trouble with Model Predictions<a class="headerlink" href="#the-trouble-with-model-predictions" title="Link to this heading">#</a></h2>
+<p>So far what we’re doing is interesting, but with no real consequence for control. All we are doing is passing input information along to the model so that it can operate in parallel with our actual hardware.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">h</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#xy = np.array((h.logdict[&quot;Time&quot;][20], h.logdict[&quot;SP&quot;][20]))</span>
+<span class="c1">#ax.annotate(&#39;Setpoint SP&#39;, xy=xy, xytext=xy + np.array([-50, 5]), </span>
+<span class="c1">#            arrowprops = dict(arrowstyle=&quot;-&gt;&quot;, facecolor =&#39;green&#39;,lw=2))</span>
+
+<span class="c1">#df.plot(y=[&quot;T1&quot;], ax=ax, grid=True, lw=3)</span>
+<span class="c1">#xy = np.array((h.logdict[&quot;Time&quot;][20], h.logdict[&quot;T1&quot;][20]))</span>
+<span class="c1">#ax.annotate(&#39;Measurement T1&#39;, xy=xy, xytext=xy + np.array([50, -5]),</span>
+<span class="c1">#            arrowprops = dict(arrowstyle=&quot;-&gt;&quot;, facecolor =&#39;green&#39;,lw=2))</span>
+
+<span class="c1">#df.plot(y=[&quot;Ts&quot;], ax=ax, grid=True)</span>
+
+<span class="c1">#df.plot(y=[&quot;Th&quot;], ax=ax, grid=True)</span>
+<span class="c1">#xy = np.array((h.logdict[&quot;Time&quot;][194], h.logdict[&quot;Th&quot;][194]))</span>
+<span class="c1">#ax.annotate(&#39;Predicted Heater Temperature Th&#39;, xy=xy, xytext=xy + np.array([-100, 7]), </span>
+<span class="c1">#            arrowprops = dict(arrowstyle=&quot;-&gt;&quot;, facecolor =&#39;green&#39;,lw=2))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">cm</span><span class="o">/</span><span class="n">z3t28j296f98jdp1vqyplkz00000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_28459</span><span class="o">/</span><span class="mf">3202207800.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">h</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">NameError</span>: name &#39;h&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<section id="issue-1-heater-temperature-is-markedly-different-from-the-sensor-temperature">
+<h3><span class="section-number">4.3.6.1. </span>Issue 1: Heater temperature is markedly different from the sensor temperature.<a class="headerlink" href="#issue-1-heater-temperature-is-markedly-different-from-the-sensor-temperature" title="Link to this heading">#</a></h3>
+<p>Let’s first compare the setpoint to the heater temperature predicted by the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Th&quot;</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Th&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Measurement T1&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]),</span>
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Setpoint SP&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">194</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Th&quot;</span><span class="p">][</span><span class="mi">194</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Predicted Heater Temperature Th&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">7</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(396.05, 52.148085730216195, &#39;Predicted Heater Temperature Th&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/9c0cf2d8552ecba3f36de483943ac0f66c7d58754cbe1778d5aa320f4bdf6e57.png" src="../../_images/9c0cf2d8552ecba3f36de483943ac0f66c7d58754cbe1778d5aa320f4bdf6e57.png" />
+</div>
+</div>
+<p>We see that the heater temperature predicted by the model is substantially different from the desired setpoint. Using the measured temperature as a proxy for heater temperature turns out not to work for applications requiring precise temperature control.</p>
+</section>
+<section id="issue-2-the-model-may-not-be-an-accurate-predictor-of-temperatures">
+<h3><span class="section-number">4.3.6.2. </span>Issue 2: The model may not be an accurate predictor of temperatures.<a class="headerlink" href="#issue-2-the-model-may-not-be-an-accurate-predictor-of-temperatures" title="Link to this heading">#</a></h3>
+<p>Next, let’s compare the actual temperature measurements to the sensor temperature predicted by the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Ts&quot;</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">98</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">][</span><span class="mi">98</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Measurement T1&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]),</span>
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Setpoint SP&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">105</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Ts&quot;</span><span class="p">][</span><span class="mi">105</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Predicted Sensor Temperature Ts&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">7</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(300.03, 51.968562652669576, &#39;Predicted Sensor Temperature Ts&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/67ebcc8edde3f8aefc24f5e97cc3345b55f4cc85c3940cfe6ba3af66571a370e.png" src="../../_images/67ebcc8edde3f8aefc24f5e97cc3345b55f4cc85c3940cfe6ba3af66571a370e.png" />
+</div>
+</div>
+<p>We see is a notable difference between the sensor temperature predicted by the model and the actual measurement.</p>
+</section>
+</section>
+<section id="incorporating-measurements">
+<h2><span class="section-number">4.3.7. </span>Incorporating Measurements<a class="headerlink" href="#incorporating-measurements" title="Link to this heading">#</a></h2>
+<p>As this example has made clear, we need a notation that distinguishes the actual state of the physical system from our best estimate of that state. We will use <span class="math notranslate nohighlight">\(\hat{x}\)</span> to denote our best estimate of <span class="math notranslate nohighlight">\(x\)</span>, and use <span class="math notranslate nohighlight">\(\hat{y}\)</span> to denote the measurement that would result from <span class="math notranslate nohighlight">\(\hat{x}\)</span>. We can write two systems of equations corresponding to the dynamics of the actual process and to a model of the process.</p>
+<ul class="simple">
+<li><p><strong>Process</strong>
+\begin{align*}
+\frac{dx}{dt} &amp; = A x + B_u u + B_d d \
+y &amp; = C x
+\end{align*}</p></li>
+<li><p><strong>Prediction Model</strong>
+\begin{align*}
+\frac{d\hat{x}}{dt} &amp; = A \hat{x} + B_u u + B_d \hat{d}\
+\hat{y} &amp; = C \hat{x}
+\end{align*}</p></li>
+</ul>
+<p>We have made a bold assumption that the equatons and coefficients in these systems are the same. Any differences are due to different values for the states <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\hat{x}\)</span>, and differences between unmeasured process disturbances <span class="math notranslate nohighlight">\(d\)</span> and our estimate for those disturbances, <span class="math notranslate nohighlight">\(\hat{d}\)</span>.</p>
+<p>As we learned from the example, the problem with using this formulation for the feedback control of unmeasured states is that we are neglecting available measurements. This is a obvious oversight. How can this be addressed?</p>
+<p>A brilliant answer to this question was given by David Luenberger in the early 1960’s while a graduate student at Stanford University. The answer was to modify the second system of equations to include a corrective action due to differences between actual process measurements and predictions of what those measurments should be.</p>
+<ul class="simple">
+<li><p><strong>Observer</strong>
+\begin{align*}
+\frac{d\hat{x}}{dt} &amp; = \underbrace{A \hat{x} + B_u u + B_d \hat{d}}<em>{\text{prediction}} - \underbrace{L(\hat{y} - y)}</em>{\text{correction}}\
+\hat{y} &amp; = C \hat{x}
+\end{align*}</p></li>
+</ul>
+<p>The idea is that if predicted measurements <span class="math notranslate nohighlight">\(\hat{y}\)</span> are different from the actual measurements <span class="math notranslate nohighlight">\(y\)</span>, then corrective action will be imposed to modify the state estimates. In a sense, this is imposing feedback control on our process model to cause the model states to track the actual process states. We will need find values for a matrrix <span class="math notranslate nohighlight">\(L\)</span> (after Luenberger?) to make this work.</p>
+<p>Taking the difference between predicted and actual measurements, we find</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\hat{y} - y &amp; = C \hat{x} - C x \\
+&amp; = C\underbrace{(\hat{x} - x)}_e
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(e = \hat{x} - x\)</span> is error in our prediction of the state. Subtracting the new model equations from the process model, we get an expression for the dynamics of the model error <span class="math notranslate nohighlight">\(e = \hat{x} - x\)</span></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{de}{dt} &amp; = \frac{d\hat{x}}{dt} - \frac{dx}{dt} \\
+\\
+\frac{de}{dt} &amp; = (A\hat{x} + B_u u + B_d \hat{d}) - (Ax + B_u u B_d d + L(C\hat{x} - C x)) \\
+\\
+\frac{de}{dt} &amp; = (A - LC)(\hat{x} - x) + B_d(\hat{d} - d) \\
+\\
+\implies \frac{de}{dt} &amp; = (A - LC) e + B_d(\hat{d} - d) 
+\end{align*}\]</div>
+<p>The choice of <span class="math notranslate nohighlight">\(L\)</span> determines observer performance. What we seek is a matrix <span class="math notranslate nohighlight">\(L\)</span> such that <span class="math notranslate nohighlight">\(A - LC\)</span> results in error <span class="math notranslate nohighlight">\(e\)</span> that quickly decays to zero.</p>
+<section id="fun-with-eigenvalues">
+<h3><span class="section-number">4.3.7.1. </span>Fun with Eigenvalues<a class="headerlink" href="#fun-with-eigenvalues" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># get the eigenvalues of A and report time constants</span>
+<span class="n">eigenvalues</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time constants of A are:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">),</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time constants of A are: [ 27.44985926 145.02633122] seconds
+</pre></div>
+</div>
+</div>
+</div>
+<p>With a little trial and error, find values for <span class="math notranslate nohighlight">\(L\)</span> that produce acceptable time constants. Later we will discuss more deliberate methods for finding values for <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]])</span>
+
+<span class="n">eigenvalues_observer</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">C</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time constants of A - LC are:&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eigenvalues_observer</span><span class="p">),</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time constants of A - LC are: [16.38248746  5.48592793] seconds
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-prediction-measurement-correction">
+<h3><span class="section-number">4.3.7.2. </span>Model Prediction / Measurement Correction<a class="headerlink" href="#model-prediction-measurement-correction" title="Link to this heading">#</a></h3>
+<p>Making the substitution <span class="math notranslate nohighlight">\(\hat{y} = C\hat{x}\)</span>, the observer equation becomes</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{d\hat{x}}{dt} &amp; = \underbrace{A \hat{x} + B_u u + B_d \hat{d}}_{\text{prediction}} - \underbrace{L(C\hat{x} - y)}_{\text{correction}}
+\end{align*}\]</div>
+<p>As before, we can try approximating the derivative with a first order difference formula over small intervals of time. One clever detail is to choose the start of the interval, time <span class="math notranslate nohighlight">\(t_{k-1}\)</span>, to evaluate the model prediction part of the obsever equation, and use the process measurement available at end of the interval, time <span class="math notranslate nohighlight">\(t_k\)</span>, to evaluate the correction term.</p>
+<div class="math notranslate nohighlight">
+\[\frac{\hat{x}_{k} - \hat{x}_{k-1}}{t_k - t_{k-1}} = \underbrace{A \hat{x}_{k-1} + B_u u_{k-1} + B_d \hat{d}_{k-1}}_{\text{prediction at time $t_{k-1}$}} - \underbrace{L(C \hat{x}_k - y_k)}_{\text{correction at time $t_k$}}\]</div>
+<p>For this purpose we introduce some extra notation. We use <span class="math notranslate nohighlight">\(\hat{x}_{k-1}\)</span> to represent the state estimate at time <span class="math notranslate nohighlight">\(t_{k-1}\)</span> using all information up to time <span class="math notranslate nohighlight">\(t_{k-1}\)</span>. Given knowledge of the manipulated inputs <span class="math notranslate nohighlight">\(u_{k-1}\)</span> and an estimate of the disturbances <span class="math notranslate nohighlight">\(\hat{d}_{k-1}\)</span>, we will use the model to create a predicted state <span class="math notranslate nohighlight">\(\hat{x}_k^{pred}\)</span> for time <span class="math notranslate nohighlight">\(t_k\)</span>. A measurement is then taken at time <span class="math notranslate nohighlight">\(t_k\)</span> which is used to produce a new estimate <span class="math notranslate nohighlight">\(\hat{x}_k\)</span>.</p>
+<p>At each time step <span class="math notranslate nohighlight">\(t_k\)</span> there are two calculations to perform:</p>
+<ul class="simple">
+<li><p><strong>Model Prediction:</strong> Use the model to update the state to the next time step, i.e., <span class="math notranslate nohighlight">\(\hat{x}_{k-1|k-1} \rightarrow \hat{x}_{k|k-1}\)</span> with the equation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{x}_k^{pred} = \hat{x}_{k-1} + (t_k - t_{k-1}) ( A \hat{x}_{k-1} + B_u u_{k-1} + B_d \hat{d}_{k-1})\]</div>
+<ul class="simple">
+<li><p><strong>Measurement Correction:</strong> Use measurement <span class="math notranslate nohighlight">\(y_k\)</span> to update <span class="math notranslate nohighlight">\(\hat{x}_{k}^{pred} \rightarrow \hat{x}_{k}\)</span> with the equation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{x}_{k} = \hat{x}_{k}^{pred} - (t_k - t_{k-1}) L (C\hat{x}_{k}^{pred} - y_k)\]</div>
+<p>While the notation may be a little daunting, the underlying concepts are quite straightforward. At each time step we have two calculations to perform. First, use all available information to predict the current state using the process model. Second, when a measurement becomes available, compare the measure to the model prediction and apply an appropriate correction to the state estimate.</p>
+<p>Let’s see how this works in practice. The next cell introduces <code class="docutils literal notranslate"><span class="pre">tclab_observer</span></code>, Python generator that creates instances of observers using the two-state model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tclab_observer</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+    <span class="c1"># initialize variables</span>
+    <span class="n">t_now</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_now</span> <span class="o">=</span> <span class="n">x_initial</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">d_initial</span>                         <span class="c1"># estimate of unmeasured disturbances</span>
+    
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># yield current state, get MV for next period</span>
+        <span class="n">t_next</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">T_measured</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">x_now</span>
+        
+        <span class="c1"># model prediction</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">Q</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tamb</span><span class="p">]</span>
+        <span class="n">x_predict</span> <span class="o">=</span> <span class="n">x_now</span> <span class="o">+</span> <span class="p">(</span><span class="n">t_next</span> <span class="o">-</span> <span class="n">t_now</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x_now</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bu</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bd</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+        
+        <span class="c1"># measurement correction</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">T_measured</span><span class="p">])</span>
+        <span class="n">x_correct</span> <span class="o">=</span> <span class="n">x_predict</span> <span class="o">-</span> <span class="p">(</span><span class="n">t_next</span> <span class="o">-</span> <span class="n">t_now</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x_predict</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+        
+        <span class="c1"># update time and state</span>
+        <span class="n">t_now</span> <span class="o">=</span> <span class="n">t_next</span>
+        <span class="n">x_now</span> <span class="o">=</span> <span class="n">x_correct</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first experiment is to test if the observer does a better job of matching the model response to the measured temperatures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_final</span> <span class="o">=</span> <span class="mi">700</span>        <span class="c1"># run time</span>
+<span class="n">t_step</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># create a controller instance</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">relay</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">U1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+
+<span class="c1"># create estimator instance</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]])</span>
+<span class="n">observer</span> <span class="o">=</span> <span class="n">tclab_observer</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">Th</span><span class="p">,</span> <span class="n">Ts</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+
+<span class="c1"># execute the event loop</span>
+<span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">([(</span><span class="s1">&#39;SP&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Th&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Th</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Ts&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Ts</span><span class="p">)])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="s1">&#39;SP&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Th&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span> 
+        <span class="n">Th</span><span class="p">,</span> <span class="n">Ts</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">U1</span><span class="p">,</span> <span class="n">T1</span><span class="p">])</span>   <span class="c1"># &lt;= use the last value of U1 to estimate the current Th, Ts</span>
+        <span class="n">U1</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">T1</span><span class="p">])</span>  <span class="c1"># &lt;= compute the value of U1 to use for the next time interval</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c696d7112927e37a46fc0fd65441799f015b7934797c611f363889e8ce789e4e.png" src="../../_images/c696d7112927e37a46fc0fd65441799f015b7934797c611f363889e8ce789e4e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TCLab Model disconnected successfully.
+</pre></div>
+</div>
+<img alt="../../_images/c696d7112927e37a46fc0fd65441799f015b7934797c611f363889e8ce789e4e.png" src="../../_images/c696d7112927e37a46fc0fd65441799f015b7934797c611f363889e8ce789e4e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Ts&quot;</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">98</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">][</span><span class="mi">98</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Measurement T1&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]),</span>
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Setpoint SP&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">105</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Ts&quot;</span><span class="p">][</span><span class="mi">105</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Predicted Sensor Temperature Ts&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">7</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(308.02, 47.92549374693902, &#39;Predicted Sensor Temperature Ts&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/ac32e6845659f40c16494c64e9a7aace95e1c89e551cd7fe33a7ba21443eb8d4.png" src="../../_images/ac32e6845659f40c16494c64e9a7aace95e1c89e551cd7fe33a7ba21443eb8d4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Th&quot;</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Th&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Measurement T1&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]),</span>
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Setpoint SP&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">][</span><span class="mi">194</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Th&quot;</span><span class="p">][</span><span class="mi">194</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Predicted Heater Temperature Th&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="n">xy</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="n">xy</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">7</span><span class="p">]),</span> 
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(418.03, 61.06556757920749, &#39;Predicted Heater Temperature Th&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/ae04079a83d7c7aef02e96421b08b9342a70612267d36258bb82107253b69088.png" src="../../_images/ae04079a83d7c7aef02e96421b08b9342a70612267d36258bb82107253b69088.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="state-estimation-and-closed-loop-relay-control">
+<h2><span class="section-number">4.3.8. </span>State Estimation and Closed-Loop Relay Control<a class="headerlink" href="#state-estimation-and-closed-loop-relay-control" title="Link to this heading">#</a></h2>
+<p>Zounds!!  We now have an estimator that locks on to the measured value of the sensor temperature.</p>
+<p>Now, if we really trust our model, let’s take it a step further and control the estimated heater temperature. The following cell replaaces the temperature measurement in the relay feedback using estimated heater temperature. Measurements are still be used, but for estimation raather than directly in the controller feedback.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_final</span> <span class="o">=</span> <span class="mi">700</span>        <span class="c1"># run time</span>
+<span class="n">t_step</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># create a controller instance</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">relay</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">U1</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+
+<span class="c1"># create estimator instance</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]])</span>
+<span class="n">observer</span> <span class="o">=</span> <span class="n">tclab_observer</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">Th</span><span class="p">,</span> <span class="n">Ts</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+
+<span class="c1"># execute the event loop</span>
+<span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">([(</span><span class="s1">&#39;SP&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Th&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Th</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Ts&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Ts</span><span class="p">)])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;T1&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Ts&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Th&#39;</span><span class="p">,</span> <span class="s1">&#39;SP&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span> 
+        <span class="n">Th</span><span class="p">,</span> <span class="n">Ts</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">U1</span><span class="p">,</span> <span class="n">T1</span><span class="p">])</span>
+        <span class="n">U1</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">SP</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">Th</span><span class="p">])</span> 
+        <span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">U1</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2874a5e00ccc6ac65f87275e3d5d09a71964553072b065b4c1a0d41e1cf449c8.png" src="../../_images/2874a5e00ccc6ac65f87275e3d5d09a71964553072b065b4c1a0d41e1cf449c8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TCLab Model disconnected successfully.
+</pre></div>
+</div>
+<img alt="../../_images/2874a5e00ccc6ac65f87275e3d5d09a71964553072b065b4c1a0d41e1cf449c8.png" src="../../_images/2874a5e00ccc6ac65f87275e3d5d09a71964553072b065b4c1a0d41e1cf449c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;T1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;SP&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SP&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Th&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Th&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Ts&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ts&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">],</span> <span class="n">h</span><span class="o">.</span><span class="n">logdict</span><span class="p">[</span><span class="s2">&quot;Q1&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Q1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c1d7253db9288376ef0e488668e235a2b3517e3af24a900174604d05b01e030b.png" src="../../_images/c1d7253db9288376ef0e488668e235a2b3517e3af24a900174604d05b01e030b.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Process-Historians.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Data/Process/Operational Historian</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab-Assigment-State-Estimation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Lab Assignment 5: State Estimation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-feedback-control">4.3.1. Output Feedback Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trouble-with-output-feedback">4.3.2. The Trouble with Output Feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heater-sensor-model">4.3.3. Heater/Sensor Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-to-a-state-space-model">4.3.4. Converting to a State-Space Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-predictions">4.3.5. Model Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trouble-with-model-predictions">4.3.6. The Trouble with Model Predictions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-1-heater-temperature-is-markedly-different-from-the-sensor-temperature">4.3.6.1. Issue 1: Heater temperature is markedly different from the sensor temperature.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-2-the-model-may-not-be-an-accurate-predictor-of-temperatures">4.3.6.2. Issue 2: The model may not be an accurate predictor of temperatures.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-measurements">4.3.7. Incorporating Measurements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fun-with-eigenvalues">4.3.7.1. Fun with Eigenvalues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-prediction-measurement-correction">4.3.7.2. Model Prediction / Measurement Correction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-estimation-and-closed-loop-relay-control">4.3.8. State Estimation and Closed-Loop Relay Control</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

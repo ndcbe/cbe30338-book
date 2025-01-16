@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.6. Fed-Batch Bioreactor &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2/Fed-Batch-Bioreactor';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.7. Characteristics of Second Order Systems" href="Spring-Mass-Damper.html" />
+    <link rel="prev" title="2.5. Second Order Model" href="Second-Order.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Process-Modeling.html">2. Process Modeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4/Process-Analytics.html">4. Process Analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4/Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/notebooks/2/Fed-Batch-Bioreactor.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2/Fed-Batch-Bioreactor.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/2/Fed-Batch-Bioreactor.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fed-Batch Bioreactor</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-tank-volume">2.6.1. Modeling Tank Volume</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-substrate-composition">2.6.2. Modeling Substrate Composition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-biomass">2.6.3. Modeling Biomass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substrate-modeling-revisited">2.6.3.1. Substrate Modeling, revisited</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-modeling">2.6.3.2. Product Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-putting-the-simulation-model-to-work">2.6.4. Exercises: Putting the Simulation Model to Work</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fed-batch-bioreactor">
+<h1><span class="section-number">2.6. </span>Fed-Batch Bioreactor<a class="headerlink" href="#fed-batch-bioreactor" title="Link to this heading">#</a></h1>
+<p>Batch reactors are commonly used in the production of speciality chemicals, pharmaceuticals, and beverage and food products.</p>
+<p><img alt="" src="https://live.staticflickr.com/5129/5283264793_973c8f0bea_c.jpg" />
+<br>Source: Sanofi Pasteur, Creative Commons License</p>
+<p>The following links provide additional illustrations of fed-batch fermentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ib.bioninja.com.au/_Media/penicillin-production-2_med.jpeg">https://ib.bioninja.com.au/_Media/penicillin-production-2_med.jpeg</a></p></li>
+<li><p><a class="reference external" href="https://biologyreader.com/wp-content/uploads/2021/07/diagram-of-fed-batch-culture.jpg">https://biologyreader.com/wp-content/uploads/2021/07/diagram-of-fed-batch-culture.jpg</a></p></li>
+</ul>
+<p>Our goal is to demonstrate modeling of a fed-batch fermentation process. The learning goals are:</p>
+<ul class="simple">
+<li><p>Learn to develop models for reactive systems using mass balances.</p></li>
+<li><p>Model variable volume dilution effects.</p></li>
+<li><p>Simulate the response of the model using Python solvers for initial value problems.</p></li>
+</ul>
+<section id="modeling-tank-volume">
+<h2><span class="section-number">2.6.1. </span>Modeling Tank Volume<a class="headerlink" href="#modeling-tank-volume" title="Link to this heading">#</a></h2>
+<p>The volumetric inlet flowrate to a fed-batch reactor is <span class="math notranslate nohighlight">\(F(t)\)</span>. Assuming changes in specific volume due to mixing, the volume of liquid in the reactor is given by</p>
+<div class="math notranslate nohighlight">
+\[\frac{dV}{dt} = F(t)\]</div>
+<p>Assume the initial volume is 1 liter and a constant flowrate of 0.05 liters/hour. Simulate the volume of the reactor for 50 hours.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># inlet flowrate</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.05</span>
+
+<span class="c1"># differential equations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">dV</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dV</span><span class="p">]</span>
+
+<span class="c1"># initial conditions</span>
+<span class="n">IC</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+
+<span class="c1"># integration period</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># solve ivp</span>
+<span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">],</span> <span class="n">IC</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># extract solution into a data frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;V&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">t</span>
+
+<span class="c1"># plot</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Time&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/c3bc3fd807a8a0a597302ec60876ef2a7b01ce501d2f46863d1d2c3be5a63653.png" src="../../_images/c3bc3fd807a8a0a597302ec60876ef2a7b01ce501d2f46863d1d2c3be5a63653.png" />
+</div>
+</div>
+</section>
+<section id="modeling-substrate-composition">
+<h2><span class="section-number">2.6.2. </span>Modeling Substrate Composition<a class="headerlink" href="#modeling-substrate-composition" title="Link to this heading">#</a></h2>
+<p>The feed entering the tank carries important nutrients for the fermentation. Assume the substrate feed composition <span class="math notranslate nohighlight">\(S_f\)</span> is 10 grams/liter. Simulate the concentration in the fed-batch reactor.</p>
+<div class="math notranslate nohighlight">
+\[\frac{d(VS)}{dt} = F S_f\]</div>
+<p>Applying the chain rule</p>
+<div class="math notranslate nohighlight">
+\[\frac{d(VS)}{dt} = V\frac{dS}{dt} + S\frac{dV}{dt}\]</div>
+<p>so the mass balance becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+&amp; V\frac{dS}{dt} + S\frac{dV}{dt} = F S_f \\
+\implies &amp;  V\frac{dS}{dT} + S F = F S_f \\
+\implies &amp; V\frac{dS}{dt} = F (S_f - S) \\
+\implies &amp; \frac{dS}{dt} = \frac{F}{V} (S_f - S)\\
+\end{align*}
+\end{split}\]</div>
+<p>which accounts for dilution due to changing tank volume. The model now has state variables for substrate composition and tank volume.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{dS}{dt} &amp; = \frac{F(t)}{V} (S_f - S) \\
+\frac{dV}{dt} &amp;  = F(t)
+\end{align*}
+\end{split}\]</div>
+<p>The following cell extends our simulation model to include substrate concentration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># parameter values</span>
+<span class="n">Sf</span> <span class="o">=</span> <span class="mf">10.0</span>         <span class="c1"># g/liter</span>
+
+<span class="c1"># inlet flowrate</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.05</span>
+
+<span class="c1"># differential equations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dS</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Sf</span> <span class="o">-</span> <span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="n">V</span>
+    <span class="n">dV</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dS</span><span class="p">,</span> <span class="n">dV</span><span class="p">]</span>
+
+<span class="c1"># initial conditions</span>
+<span class="n">IC</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+
+<span class="c1"># integration period</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># solve ivp</span>
+<span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">],</span> <span class="n">IC</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># extract solution into a data frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">t</span>
+
+<span class="c1"># plot</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&lt;AxesSubplot:xlabel=&#39;Time&#39;&gt;, &lt;AxesSubplot:xlabel=&#39;Time&#39;&gt;],
+      dtype=object)
+</pre></div>
+</div>
+<img alt="../../_images/2937859501396f9afa4ed8d32e08e26f8e2a6ca8df8e47e4f5193537dec0f8c1.png" src="../../_images/2937859501396f9afa4ed8d32e08e26f8e2a6ca8df8e47e4f5193537dec0f8c1.png" />
+</div>
+</div>
+</section>
+<section id="modeling-biomass">
+<h2><span class="section-number">2.6.3. </span>Modeling Biomass<a class="headerlink" href="#modeling-biomass" title="Link to this heading">#</a></h2>
+<p>Fermentation is process in which biomass consumes substrate to produce more biomass and by-products.</p>
+<div class="math notranslate nohighlight">
+\[\text{Biomass (X)} + \frac{1}{Y_{X/S}}\text{Substrate (S)} \stackrel{r_g(X, S)}{\longrightarrow} \text{Biomass (X)} + Y_{P/X}\text{Products (P)}\]</div>
+<p>The rate <span class="math notranslate nohighlight">\(r_g(X,S)\)</span> is the production of fresh cell biomass in units of grams/liter/hr. The volume specific growth rate is expressed as</p>
+<div class="math notranslate nohighlight">
+\[r_g(X,S) = \mu(S)X\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu(S)\)</span> is the cell specific growth rate. In the Monod model, the cell specific growth rate is a function of substrate concentration given by</p>
+<div class="math notranslate nohighlight">
+\[\mu(S) = \mu_{max}\frac{S}{K_S + S}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_{max}\)</span> is the maximum specific growth rate, and <span class="math notranslate nohighlight">\(K_S\)</span> is the saturation constant. <span class="math notranslate nohighlight">\(K_S\)</span> is equal to the value of <span class="math notranslate nohighlight">\(S\)</span> for which <span class="math notranslate nohighlight">\(\mu = \frac{1}{2}\mu_{max}\)</span>.</p>
+<p>The overall balance for biomass is</p>
+<div class="math notranslate nohighlight">
+\[\frac{d(VX)}{dt} = V r_g(X, S)\]</div>
+<p>After accounting for the dilution effect our model becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{dX}{dt} &amp; = - \frac{F(t)}{V} X +  r_g(X, S) \\
+\frac{dS}{dt} &amp; = \frac{F(t)}{V} (S_f - S) \\
+\frac{dV}{dt} &amp;  = F(t)
+\end{align*}
+\end{split}\]</div>
+<p>The following cell shows the results of incorporating biomass growth into the model for the fed-batch reaction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># parameter values</span>
+<span class="n">Sf</span> <span class="o">=</span> <span class="mf">10.0</span>         <span class="c1"># g/liter</span>
+<span class="n">mumax</span> <span class="o">=</span> <span class="mf">0.20</span>      <span class="c1"># 1/hour</span>
+<span class="n">Ks</span> <span class="o">=</span> <span class="mf">1.00</span>         <span class="c1"># g/liter</span>
+
+<span class="c1"># inlet flowrate</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.05</span>
+
+<span class="c1"># reaction rates</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mumax</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">Ks</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mu</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">*</span><span class="n">X</span>
+
+<span class="c1"># differential equations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dX</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">/</span><span class="n">V</span> <span class="o">+</span> <span class="n">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+    <span class="n">dS</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Sf</span> <span class="o">-</span> <span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="n">V</span>
+    <span class="n">dV</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dX</span><span class="p">,</span> <span class="n">dS</span><span class="p">,</span> <span class="n">dV</span><span class="p">]</span>
+
+<span class="c1"># initial conditions</span>
+<span class="n">IC</span> <span class="o">=</span> <span class="p">[</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+
+<span class="c1"># integration period</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># solve ivp</span>
+<span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">],</span> <span class="n">IC</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># extract solution into a data frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">t</span>
+
+<span class="c1"># plot</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&lt;AxesSubplot: xlabel=&#39;Time&#39;&gt;, &lt;AxesSubplot: xlabel=&#39;Time&#39;&gt;,
+       &lt;AxesSubplot: xlabel=&#39;Time&#39;&gt;], dtype=object)
+</pre></div>
+</div>
+<img alt="../../_images/8fb38594c06838849e3eab64298fb218ed89849df5cd3922abb7640c63ee16cd.png" src="../../_images/8fb38594c06838849e3eab64298fb218ed89849df5cd3922abb7640c63ee16cd.png" />
+</div>
+</div>
+<div class="admonition-experiment-with-this-model admonition">
+<p class="admonition-title">Experiment with this model</p>
+<p>At this stage the model is not complete and will give implausible simulation results. But is still important to understand what the model is doing and why the simulation results do provide the results you may expect.</p>
+<p>Before going further with this notebook, run this notebook and experiment with different initial conditions for <span class="math notranslate nohighlight">\(X\)</span>. Choose small values and see what happens. Why are the results different than one might expect of a fed-batch bioreactor?</p>
+</div>
+<section id="substrate-modeling-revisited">
+<h3><span class="section-number">2.6.3.1. </span>Substrate Modeling, revisited<a class="headerlink" href="#substrate-modeling-revisited" title="Link to this heading">#</a></h3>
+<p>The growth of biomass consumes substrate which serves to limit the production of biomass.  Assume the substrate is consumed is proportion to the mass of new cells formed where <span class="math notranslate nohighlight">\(Y_{X/S}\)</span> is the yield coefficient for new cells.</p>
+<div class="math notranslate nohighlight">
+\[Y_{X/S} = \frac{\text{mass~of~new~cells~formed}}{\text{mass~of~substrate~consumed}} ~.\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu(S)\)</span> is the cell specific growth rate. So the total consumption of substrate becomes</p>
+<div class="math notranslate nohighlight">
+\[\frac{V}{Y_{X/S}} r_g(X, S)\]</div>
+<p>Including this in our model</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{dX}{dt} &amp; = - \frac{F(t)}{V} X +  r_g(X, S) \\
+\frac{dS}{dt} &amp; = \frac{F(t)}{V} (S_f - S) - \frac{1}{Y_{X/S}}r_g(X,S) \\
+\frac{dV}{dt} &amp;  = F(t)
+\end{align*}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># parameter values</span>
+<span class="n">Sf</span> <span class="o">=</span> <span class="mf">10.0</span>         <span class="c1"># g/liter</span>
+<span class="n">mumax</span> <span class="o">=</span> <span class="mf">0.20</span>      <span class="c1"># 1/hour</span>
+<span class="n">Ks</span> <span class="o">=</span> <span class="mf">1.00</span>         <span class="c1"># g/liter</span>
+<span class="n">Yxs</span> <span class="o">=</span> <span class="mf">0.5</span>         <span class="c1"># g/g</span>
+
+<span class="c1"># inlet flowrate</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.05</span>
+
+<span class="c1"># reaction rates</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mumax</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">Ks</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mu</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">*</span><span class="n">X</span>
+
+<span class="c1"># differential equations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dX</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">/</span><span class="n">V</span> <span class="o">+</span> <span class="n">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+    <span class="n">dS</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Sf</span> <span class="o">-</span> <span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="n">V</span> <span class="o">-</span> <span class="n">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="n">Yxs</span>
+    <span class="n">dV</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dX</span><span class="p">,</span> <span class="n">dS</span><span class="p">,</span> <span class="n">dV</span><span class="p">]</span>
+
+<span class="c1"># initial conditions</span>
+<span class="n">IC</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+
+<span class="c1"># integration period</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># solve ivp</span>
+<span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">],</span> <span class="n">IC</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># extract solution into a data frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">t</span>
+
+<span class="c1"># plot</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&lt;AxesSubplot: xlabel=&#39;Time&#39;&gt;, &lt;AxesSubplot: xlabel=&#39;Time&#39;&gt;,
+       &lt;AxesSubplot: xlabel=&#39;Time&#39;&gt;], dtype=object)
+</pre></div>
+</div>
+<img alt="../../_images/499a5aa1f66b4bfec9c9bd821df4f7abaf8e3bdaccd5bd7addc9f0fa9acfca69.png" src="../../_images/499a5aa1f66b4bfec9c9bd821df4f7abaf8e3bdaccd5bd7addc9f0fa9acfca69.png" />
+</div>
+</div>
+</section>
+<section id="product-modeling">
+<h3><span class="section-number">2.6.3.2. </span>Product Modeling<a class="headerlink" href="#product-modeling" title="Link to this heading">#</a></h3>
+<p>At this stage this is just one last consideration, modeling of the product produced by the fed-batch fermenter. For this model, the product is assumed to be a by-product of cell growth</p>
+<div class="math notranslate nohighlight">
+\[r_P(X,S) = Y_{P/X}r_g(X,S)\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y_{P/X}\)</span> is the product yield coefficient defined as</p>
+<div class="math notranslate nohighlight">
+\[Y_{P/X} = \frac{\text{mass~of~product~formed}}{\text{mass~of~new~cells~formed}} ~.\]</div>
+<p>The mass balance for product is given by</p>
+<div class="math notranslate nohighlight">
+\[\frac{d(VP)}{dt} =  r_P(X,S)\]</div>
+<p>Applying the chain rule for derivatives results in the final version of our model.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+\frac{dX}{dt} &amp; = - \frac{F(t)}{V}X + r_g(X,S)  \\
+\frac{dP}{dt} &amp; = - \frac{F(t)}{V}P + r_P(X,S) \\
+\frac{dS}{dt} &amp; = \frac{F(t)}{V}(S_f - S) - \frac{1}{Y_{X/S}}r_g(X,S) \\
+\frac{dV}{dt} &amp; = F(t)
+\end{align*}\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># parameter values</span>
+<span class="n">mumax</span> <span class="o">=</span> <span class="mf">0.20</span>      <span class="c1"># 1/hour</span>
+<span class="n">Ks</span> <span class="o">=</span> <span class="mf">1.00</span>         <span class="c1"># g/liter</span>
+<span class="n">Yxs</span> <span class="o">=</span> <span class="mf">0.5</span>         <span class="c1"># g/g</span>
+<span class="n">Ypx</span> <span class="o">=</span> <span class="mf">0.2</span>         <span class="c1"># g/g</span>
+<span class="n">Sf</span> <span class="o">=</span> <span class="mf">10.0</span>         <span class="c1"># g/liter</span>
+
+<span class="c1"># inlet flowrate</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.05</span>
+
+<span class="c1"># reaction rates</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mumax</span><span class="o">*</span><span class="n">S</span><span class="o">/</span><span class="p">(</span><span class="n">Ks</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">mu</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">*</span><span class="n">X</span>
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">Rp</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Ypx</span><span class="o">*</span><span class="n">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">)</span>
+
+<span class="c1"># differential equations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dX</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="o">/</span><span class="n">V</span> <span class="o">+</span> <span class="n">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">)</span>
+    <span class="n">dP</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="n">P</span><span class="o">/</span><span class="n">V</span> <span class="o">+</span> <span class="n">Rp</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">)</span>
+    <span class="n">dS</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Sf</span> <span class="o">-</span> <span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="n">V</span> <span class="o">-</span> <span class="n">Rg</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">S</span><span class="p">)</span><span class="o">/</span><span class="n">Yxs</span>
+    <span class="n">dV</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dX</span><span class="p">,</span> <span class="n">dP</span><span class="p">,</span> <span class="n">dS</span><span class="p">,</span> <span class="n">dV</span><span class="p">]</span>
+
+<span class="n">IC</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">t_final</span><span class="p">],</span> <span class="n">IC</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">t</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+       <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Biomass (X)&quot;</span><span class="p">,</span> <span class="s2">&quot;Product (P)&quot;</span><span class="p">,</span> <span class="s2">&quot;Substrate (S)&quot;</span><span class="p">,</span> <span class="s2">&quot;Volume (V)&quot;</span><span class="p">],</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&lt;AxesSubplot: title={&#39;center&#39;: &#39;Biomass (X)&#39;}, xlabel=&#39;Time&#39;&gt;,
+       &lt;AxesSubplot: title={&#39;center&#39;: &#39;Product (P)&#39;}, xlabel=&#39;Time&#39;&gt;,
+       &lt;AxesSubplot: title={&#39;center&#39;: &#39;Substrate (S)&#39;}, xlabel=&#39;Time&#39;&gt;,
+       &lt;AxesSubplot: title={&#39;center&#39;: &#39;Volume (V)&#39;}, xlabel=&#39;Time&#39;&gt;],
+      dtype=object)
+</pre></div>
+</div>
+<img alt="../../_images/e3bafb0476456be650048e865f82d2456ea21b07bac732dbe4652003bfbc6e60.png" src="../../_images/e3bafb0476456be650048e865f82d2456ea21b07bac732dbe4652003bfbc6e60.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="exercises-putting-the-simulation-model-to-work">
+<h2><span class="section-number">2.6.4. </span>Exercises: Putting the Simulation Model to Work<a class="headerlink" href="#exercises-putting-the-simulation-model-to-work" title="Link to this heading">#</a></h2>
+<p>Simulation has many uses, among them is to gain insight into operating strategies.</p>
+<div class="admonition-exercise-1 admonition">
+<p class="admonition-title">Exercise 1</p>
+<p>The above simulations have been run with initial conditions <span class="math notranslate nohighlight">\(X_0\)</span> = 0.05 g/liter, <span class="math notranslate nohighlight">\(V\)</span> = 1 liter, and <span class="math notranslate nohighlight">\(P_0\)</span> = <span class="math notranslate nohighlight">\(S_0\)</span> = 0 g/liter. Suppose the economic operation of the downstream separations process require a product concentration <span class="math notranslate nohighlight">\(P\)</span> of at least 0.8 g/liter. How long would you have to operate the reactor?  (Hint: Modify the simulation to create a terminal event corresponding to the desired product concentration. See Section 2.2 for an example, or consult the documentation for <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code> to see how this is done.)</p>
+</div>
+<div class="admonition-exercise-2 admonition">
+<p class="admonition-title">Exercise 2</p>
+<p>One problem with the operation is that the initial load of the bioreactor has no substrate. Suppose we change the operating strategy to set the initial substrate concentration equal to the feed concentration <span class="math notranslate nohighlight">\(S_0 = S_f\)</span>.  Now how long does it take to get to a product concentration <span class="math notranslate nohighlight">\(P\)</span> = 0.8 g/liter?</p>
+</div>
+<div class="admonition-exercise-3 admonition">
+<p class="admonition-title">Exercise 3</p>
+<p>We know now have decided to operate the bioreactor with an initial substrate concentration <span class="math notranslate nohighlight">\(S_0\)</span> = <span class="math notranslate nohighlight">\(S_f\)</span>. Now we need to decide how long to run the reactor before shutting down, cleaning, and restarting with a new batch. Assume the turn around time is 4 hours, and productivity is measured as</p>
+<div class="math notranslate nohighlight">
+\[\text{Productivity} = \frac{P \cdot V}{t_{turn-around} + t}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t\)</span> is time since start of the batch. Modify the dataframe to compute productivity as a function of <span class="math notranslate nohighlight">\(t\)</span>, and decide the optimal time to run the batch.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Second-Order.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>Second Order Model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Spring-Mass-Damper.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.7. </span>Characteristics of Second Order Systems</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-tank-volume">2.6.1. Modeling Tank Volume</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-substrate-composition">2.6.2. Modeling Substrate Composition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-biomass">2.6.3. Modeling Biomass</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substrate-modeling-revisited">2.6.3.1. Substrate Modeling, revisited</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-modeling">2.6.3.2. Product Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises-putting-the-simulation-model-to-work">2.6.4. Exercises: Putting the Simulation Model to Work</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

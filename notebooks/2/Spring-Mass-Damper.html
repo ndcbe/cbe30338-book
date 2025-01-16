@@ -1,0 +1,1690 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2.7. Characteristics of Second Order Systems &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2/Spring-Mass-Damper';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.8. Exothermic Continuous Stirred Tank Reactor" href="Exothermic-CSTR.html" />
+    <link rel="prev" title="2.6. Fed-Batch Bioreactor" href="Fed-Batch-Bioreactor.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Process-Modeling.html">2. Process Modeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4/Process-Analytics.html">4. Process Analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4/Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4/Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/notebooks/2/Spring-Mass-Damper.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2/Spring-Mass-Damper.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/2/Spring-Mass-Damper.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Characteristics of Second Order Systems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#car-suspension-spring-mass-damper-system">2.7.1. Car Suspension: Spring-Mass-Damper System</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model">2.7.1.1. Mathematical Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-simulation">2.7.1.2. Numeric Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">2.7.1.3. Activity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-linear-ode-systems">2.7.2. Second Order Linear ODE Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-model">2.7.2.1. Generalized Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overdamped-zeta-1">2.7.2.2. Overdamped (<span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#critically-damped-zeta-1">2.7.2.3. Critically Damped (<span class="math notranslate nohighlight">\(\zeta = 1\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underdamped-zeta-1">2.7.2.4. Underdamped (<span class="math notranslate nohighlight">\(\zeta &lt; 1\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-modes">2.7.2.5. Comparison of Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-mass-damper-example">2.7.2.6. Spring-Mass-Damper Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-of-eigenvalues">2.7.2.7. Sensitivity of Eigenvalues</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-linear-ode-systems">2.7.3. General Linear ODE Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytic-solution">2.7.3.1. Analytic Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-with-scipy-signal">2.7.3.2. Simulation with <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-response">2.7.4. Frequency Response</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-driving-over-speed-bumps">2.7.4.1. Simulate Driving Over Speed Bumps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bode-analysis">2.7.4.2. Bode Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-driving-over-a-rumble-strip">2.7.4.3. Simulate Driving Over a Rumble Strip</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away-messages">2.7.5. Take Away Messages</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="characteristics-of-second-order-systems">
+<h1><span class="section-number">2.7. </span>Characteristics of Second Order Systems<a class="headerlink" href="#characteristics-of-second-order-systems" title="Link to this heading">#</a></h1>
+<section id="car-suspension-spring-mass-damper-system">
+<h2><span class="section-number">2.7.1. </span>Car Suspension: Spring-Mass-Damper System<a class="headerlink" href="#car-suspension-spring-mass-damper-system" title="Link to this heading">#</a></h2>
+<p>A car suspension (shock absorbers) includes a spring and damper. The spring absorbs bumps in the road and the damper keeps the spring from oscillating too much.</p>
+<p><img alt="" src="https://www.howacarworks.com/illustration/127/coil-spring.base&#64;1x.jpg" /></p>
+<p>We will use this classic example to understand the characteristics of second order linear systems. These ideas generalize to higher-order linear and nonlinear systems. Figure source: <a class="reference external" href="https://www.howacarworks.com/basics/how-car-springs-and-dampers-work">How a Car Works</a></p>
+<section id="mathematical-model">
+<h3><span class="section-number">2.7.1.1. </span>Mathematical Model<a class="headerlink" href="#mathematical-model" title="Link to this heading">#</a></h3>
+<p>We will start with a free body diagram (figure source: <a class="reference external" href="https://en.wikipedia.org/wiki/Mass-spring-damper_model">Wikipedia</a>) and sum of forces acting on mass <span class="math notranslate nohighlight">\(m\)</span>:</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Mass_spring_damper.svg/663px-Mass_spring_damper.svg.png" /></p>
+<div class="math notranslate nohighlight">
+\[\sum F = \quad \underbrace{-kx}_{\text{Hooke's~law}} \quad + \quad \underbrace{-c \dot{x}}_{\text{damper}} \quad + \quad \underbrace{f(t)}_{\text{input}} = \quad m \underbrace{\ddot{x}}_{\text{acceleration}}\]</div>
+<p>We can rewrite this as a coupled system of linear ODEs:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{v} = -\frac{k}{m} x - \frac{c}{m} v + \frac{f(t)}{m}, \qquad \dot{x} = v
+\]</div>
+<p>Let’s assume the mass of the car is 450 kg per wheel. Furthermore, let’s assume the spring constant <span class="math notranslate nohighlight">\(k\)</span> is 100,000 N/m and the dampening constant <span class="math notranslate nohighlight">\(c\)</span> is 2,000 Ns/m. Of course, this is a simplified model for a car suspection. See <a class="reference external" href="https://ctms.engin.umich.edu/CTMS/index.php?example=Suspension&amp;amp;section=SystemModeling">this example</a> of a more sophisticate model of a bus’ suspension.</p>
+</section>
+<section id="numeric-simulation">
+<h3><span class="section-number">2.7.1.2. </span>Numeric Simulation<a class="headerlink" href="#numeric-simulation" title="Link to this heading">#</a></h3>
+<p>Let’s consider the empty car starts at rest. Then at time zero, the driver, who weighs 80 kg, gets into the car. The external forcing function is <span class="math notranslate nohighlight">\(-80~\text{kg} \times 9.81~\text{m}~\text{s}^{-2} \times 1/4 = 196~\text{N}\)</span> per tire.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.integrate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">suspension</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1E5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">2E3</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">450</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Linear model of a car suspension system</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    t: time (s)</span>
+<span class="sd">    y: array of the state variables [x, v] </span>
+<span class="sd">        where x is the displacement (m) and v is the velocity (m/s)</span>
+<span class="sd">    f: extenal forcing function (N)</span>
+<span class="sd">    k: spring constant (N/m)</span>
+<span class="sd">    c: damping constant (Ns/m)</span>
+<span class="sd">    m: mass per wheel (kg)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># unpack state variables</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># derivative of velocity</span>
+    <span class="n">vdot</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">c</span><span class="o">*</span><span class="n">v</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">/</span><span class="n">m</span>
+
+    <span class="c1"># derivative of displacement</span>
+    <span class="n">xdot</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xdot</span><span class="p">,</span> <span class="n">vdot</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_driver_getting_in</span><span class="p">(</span><span class="n">driver_mass</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1E5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">2E3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Simulate the suspension system with a step input (driver getting in)</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    driver_mass: mass of the driver (kg)</span>
+<span class="sd">    k: spring constant (N/m)</span>
+<span class="sd">    c: damping constant (Ns/m)</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+
+    <span class="n">initial_conditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+    <span class="n">t_span</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span> <span class="c1"># m/s^2</span>
+
+    <span class="n">driver_gets_in</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">suspension</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">t_</span><span class="p">:</span> <span class="o">-</span><span class="n">driver_mass</span><span class="o">*</span><span class="n">g</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="n">driver_gets_in</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">initial_conditions</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement (cm)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity (cm/s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">simulate_driver_getting_in</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fbbd7bf677bd4429da430b571d0afbafa9ba68f8a92bd2c5af92a7740741cd6e.png" src="../../_images/fbbd7bf677bd4429da430b571d0afbafa9ba68f8a92bd2c5af92a7740741cd6e.png" />
+<img alt="../../_images/d1101d0a8af5fea28b59c5e9d953a53308a9a3c12769801eae6aebed0ba47465.png" src="../../_images/d1101d0a8af5fea28b59c5e9d953a53308a9a3c12769801eae6aebed0ba47465.png" />
+</div>
+</div>
+</section>
+<section id="activity">
+<h3><span class="section-number">2.7.1.3. </span>Activity<a class="headerlink" href="#activity" title="Link to this heading">#</a></h3>
+<p>Simulate the following what if scenarios:</p>
+<ul class="simple">
+<li><p>Double the spring stiffness</p></li>
+<li><p>Double the strength of the dampers</p></li>
+<li><p>Four people instead of one person gets in the car</p></li>
+</ul>
+<p>Do the results make sense?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Double the spring constant</span>
+<span class="n">simulate_driver_getting_in</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mf">2E5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/df98512ec6b126f3f33dd8dee80f2c12163d6917788e5ed0badbd64e3bb317c7.png" src="../../_images/df98512ec6b126f3f33dd8dee80f2c12163d6917788e5ed0badbd64e3bb317c7.png" />
+<img alt="../../_images/5267bdb33fb93c984a14bf88dd676568f1870a52ac9ee44a8aa1a594bbbf58ff.png" src="../../_images/5267bdb33fb93c984a14bf88dd676568f1870a52ac9ee44a8aa1a594bbbf58ff.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Double the damping constant</span>
+<span class="n">simulate_driver_getting_in</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="mf">4E3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/61d091ddb4680c582fd9163d654bb349e27931431b5099dbebf9eef620aac67a.png" src="../../_images/61d091ddb4680c582fd9163d654bb349e27931431b5099dbebf9eef620aac67a.png" />
+<img alt="../../_images/c3357f09e5f9856acf1a555b517b28a5ba9388f86e9cd5c313428dd49ebabce7.png" src="../../_images/c3357f09e5f9856acf1a555b517b28a5ba9388f86e9cd5c313428dd49ebabce7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Four people get in the car</span>
+<span class="n">simulate_driver_getting_in</span><span class="p">(</span><span class="n">driver_mass</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/42dd18347ec63e208cfea98ca1e5ca90a5a1e528db309fe04649453c8af5f45c.png" src="../../_images/42dd18347ec63e208cfea98ca1e5ca90a5a1e528db309fe04649453c8af5f45c.png" />
+<img alt="../../_images/a8a62488621eed92b6c9f96888703695a4026fe2aadef055e39dfed03de58b2f.png" src="../../_images/a8a62488621eed92b6c9f96888703695a4026fe2aadef055e39dfed03de58b2f.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="second-order-linear-ode-systems">
+<h2><span class="section-number">2.7.2. </span>Second Order Linear ODE Systems<a class="headerlink" href="#second-order-linear-ode-systems" title="Link to this heading">#</a></h2>
+<section id="generalized-model">
+<h3><span class="section-number">2.7.2.1. </span>Generalized Model<a class="headerlink" href="#generalized-model" title="Link to this heading">#</a></h3>
+<p>More generally, the second order linear system with a single state is:</p>
+<div class="math notranslate nohighlight">
+\[
+\ddot{x} + \omega_{n}^2 x + 2 \zeta \omega_{n} \dot{x} = \omega_n^2 K_p u(t)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\omega_n\)</span> is the natural frequency, i.e., frequency of oscillations with no forcing <span class="math notranslate nohighlight">\(u(t) = 0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\zeta\)</span> is the damping coefficient, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(K_p\)</span> is the gain.</p></li>
+</ul>
+<p>This can be also written using the <a class="reference external" href="https://apmonitor.com/pdc/index.php/Main/SecondOrderSystems">second order characteristic time</a> <span class="math notranslate nohighlight">\(\tau_s = \omega_n^{-1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\tau_s^2 \ddot{x} + 2 \zeta \tau_s \dot{x} + x = K_p u(t)
+\]</div>
+<p>These general forms are convienent because there are three “modes” of the analytic solution, depending on the value of <span class="math notranslate nohighlight">\(\zeta\)</span>. Here <span class="math notranslate nohighlight">\(\bar{x}\)</span> is the steady-state after a step change in the input.</p>
+</section>
+<section id="overdamped-zeta-1">
+<h3><span class="section-number">2.7.2.2. </span>Overdamped (<span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>)<a class="headerlink" href="#overdamped-zeta-1" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+x(t) = \bar{x} \left(1 - e^{-\zeta \omega_n t} \left[ \cosh \left(t \omega_n \sqrt{\zeta^2 - 1} \right) + \frac{\zeta}{\sqrt{\zeta^2 - 1}}   \sinh \left(t \omega_n \sqrt{\zeta^2 - 1}  \right) \right]   \right)
+\]</div>
+</section>
+<section id="critically-damped-zeta-1">
+<h3><span class="section-number">2.7.2.3. </span>Critically Damped (<span class="math notranslate nohighlight">\(\zeta = 1\)</span>)<a class="headerlink" href="#critically-damped-zeta-1" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+x(t) = \bar{x} \left[1 - \left(1 + t \omega_n \right) e^{-t \omega_n} \right]
+\]</div>
+</section>
+<section id="underdamped-zeta-1">
+<h3><span class="section-number">2.7.2.4. </span>Underdamped (<span class="math notranslate nohighlight">\(\zeta &lt; 1\)</span>)<a class="headerlink" href="#underdamped-zeta-1" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+x(t) = \bar{x} \left(1 - e^{-\zeta \omega_n t} \left[ \cos \left(t \omega_n \sqrt{1 - \zeta^2} \right) + \frac{\zeta}{\sqrt{1 - \zeta^2}}   \sin \left(t \omega_n \sqrt{1 - \zeta^2}  \right) \right]   \right)
+\]</div>
+</section>
+<section id="comparison-of-modes">
+<h3><span class="section-number">2.7.2.5. </span>Comparison of Modes<a class="headerlink" href="#comparison-of-modes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">second_order</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">xbar</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">zeta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Analytic solution of second order system</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            t: times to evaluate solution</span>
+<span class="sd">            xbar: steady-state after step response</span>
+<span class="sd">            zeta: damping coefficient</span>
+<span class="sd">            omega: natural frequency</span>
+<span class="sd">        </span>
+<span class="sd">        Note: t and omega need to have consistent units (time and inverse time)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            x(t), states x evaluated at times t</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">zeta</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1E-6</span><span class="p">:</span>
+        <span class="c1"># Critically damped, zeta approx 1</span>
+        <span class="c1"># Hint: need the tolerance 1E-6 because of float point errors</span>
+        <span class="k">return</span> <span class="n">xbar</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">zeta</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Overdamped, zeta &gt; 1</span>
+        <span class="k">return</span> <span class="n">xbar</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">zeta</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">zeta</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">zeta</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">zeta</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">zeta</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Underdampled (oscillates), zeta &lt; 1</span>
+        <span class="k">return</span> <span class="n">xbar</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">zeta</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">zeta</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">zeta</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">zeta</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">zeta</span><span class="o">**</span><span class="mi">2</span><span class="p">))))</span>
+    
+
+<span class="n">teval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1001</span><span class="p">)</span>
+<span class="n">x_over</span> <span class="o">=</span> <span class="n">second_order</span><span class="p">(</span><span class="n">teval</span><span class="p">,</span> <span class="n">zeta</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">x_crit</span> <span class="o">=</span> <span class="n">second_order</span><span class="p">(</span><span class="n">teval</span><span class="p">,</span> <span class="n">zeta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">x_under</span> <span class="o">=</span> <span class="n">second_order</span><span class="p">(</span><span class="n">teval</span><span class="p">,</span> <span class="n">zeta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">teval</span><span class="p">,</span><span class="n">x_under</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Underdamped ($\zeta = 0.5$)&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">teval</span><span class="p">,</span><span class="n">x_crit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Critcally damped ($\zeta = 1.0$)&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">teval</span><span class="p">,</span><span class="n">x_over</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Overdamped ($\zeta=1.5$)&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time, $t$&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;State, $x(t)$&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10e924040&gt;
+</pre></div>
+</div>
+<img alt="../../_images/e55adac7b9f2e4428fd5c48a4e67aa550d664e18a69f6b1f1b9a1ee2a985ae5c.png" src="../../_images/e55adac7b9f2e4428fd5c48a4e67aa550d664e18a69f6b1f1b9a1ee2a985ae5c.png" />
+</div>
+</div>
+</section>
+<section id="spring-mass-damper-example">
+<h3><span class="section-number">2.7.2.6. </span>Spring-Mass-Damper Example<a class="headerlink" href="#spring-mass-damper-example" title="Link to this heading">#</a></h3>
+<p>Now let’s convert the spring-mass-damper systems into the general form. Recall,</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{v} = -\frac{k}{m} x - \frac{c}{m} v + \frac{f(t)}{m}, \qquad \dot{x} = v
+\]</div>
+<p>which is equivalent to:</p>
+<div class="math notranslate nohighlight">
+\[
+\ddot{x} + \frac{k}{m} x + \frac{c}{m} \dot{x} = \frac{f(t)}{m}
+\]</div>
+<p>Comparing this to the general form,</p>
+<div class="math notranslate nohighlight">
+\[
+\ddot{x} + \omega_{n}^2 x + 2 \zeta \omega_{n} \dot{x} = \omega_n^2 K_p u(t)
+\]</div>
+<p>we see that</p>
+<div class="math notranslate nohighlight">
+\[
+\omega_n = \sqrt{\frac{k}{m}}, \qquad \zeta = \frac{c}{2 m \omega_n} = \frac{c}{2 \sqrt{k m}}~.
+\]</div>
+<p>Let’s revist our example and run some calculations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suspension</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1E5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">2E3</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">450</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Linear model of a car suspension system</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    t: time (s)</span>
+<span class="sd">    y: array of the state variables [x, v] </span>
+<span class="sd">        where x is the displacement (m) and v is the velocity (m/s)</span>
+<span class="sd">    f: extenal forcing function (N)</span>
+<span class="sd">    k: spring constant (N/m)</span>
+<span class="sd">    c: damping constant (Ns/m)</span>
+<span class="sd">    m: mass per wheel (kg)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># unpack state variables</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># derivative of velocity</span>
+    <span class="n">vdot</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">c</span><span class="o">*</span><span class="n">v</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">/</span><span class="n">m</span>
+
+    <span class="c1"># derivative of displacement</span>
+    <span class="n">xdot</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xdot</span><span class="p">,</span> <span class="n">vdot</span><span class="p">])</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_driver_getting_in</span><span class="p">(</span><span class="n">driver_mass</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1E5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">2E3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Simulate the suspension system with a step input (driver getting in)</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    driver_mass: mass of the driver (kg)</span>
+<span class="sd">    k: spring constant (N/m)</span>
+<span class="sd">    c: damping constant (Ns/m)</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+
+    <span class="n">initial_conditions</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+    <span class="n">t_span</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span> <span class="c1"># m/s^2</span>
+
+    <span class="n">driver_gets_in</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">suspension</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">t_</span><span class="p">:</span> <span class="o">-</span><span class="n">driver_mass</span><span class="o">*</span><span class="n">g</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="n">driver_gets_in</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">initial_conditions</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement (cm)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity (cm/s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">car_revisited</span><span class="p">(</span><span class="n">car_mass</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="mi">450</span><span class="p">,</span> <span class="n">driver_mass</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1E5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">2E3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Convert car suspension example into 2nd order system general form</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        car_mass: total mass of the vehicle without driver (kg)</span>
+<span class="sd">        driver_mass: total mass of the driver (kg)</span>
+<span class="sd">        k: spring constant (N/m)</span>
+<span class="sd">        c: damping constant (Ns/m)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        omega_n: natural frequency (1/s)</span>
+<span class="sd">        zeta: critical coefficient (dimensionless)</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        All masses are divided by 4 within the calculations to convert from total to per wheel.</span>
+<span class="sd">        User should input total masses.</span>
+
+<span class="sd">        This function returns omega and zeta for the loaded car</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Spring constant, k =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s2">&quot;N/m&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Damping constant, c =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s2">&quot;Ns/m&quot;</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">car_mass</span><span class="o">/</span><span class="mi">4</span>
+    <span class="n">omega_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">zeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">omega_n</span><span class="o">*</span><span class="n">m</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Empty car, m =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;kg per wheel&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;omega_n =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">omega_n</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zeta =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">zeta</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;dimensionless&quot;</span><span class="p">)</span>
+        
+    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">car_mass</span> <span class="o">+</span> <span class="n">driver_mass</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span>
+    <span class="n">omega_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">zeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">omega_n</span><span class="o">*</span><span class="n">m</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Loaded car, m =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;kg per wheel&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;omega_n =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">omega_n</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zeta =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">zeta</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;dimensionless&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">omega_n</span><span class="p">,</span> <span class="n">zeta</span>
+
+<span class="n">car_revisited</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spring constant, k = 100000.0 N/m
+Damping constant, c = 2000.0 Ns/m
+
+Empty car, m = 450.0 kg per wheel
+omega_n = 14.91 rad/s
+zeta = 0.39 dimensionless
+
+Loaded car, m = 470.0 kg per wheel
+omega_n = 14.59 rad/s
+zeta = 0.38 dimensionless
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(14.586499149789455, 0.3819227559309533)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Discussion Questions</strong>:</p>
+<ul class="simple">
+<li><p>Is it okay to ignore how the change in mass <span class="math notranslate nohighlight">\(m\)</span> impacts <span class="math notranslate nohighlight">\(\omega_n\)</span> and <span class="math notranslate nohighlight">\(\zeta\)</span> when analyzes the dynamic response of the suspension?</p></li>
+<li><p>How would you tune the suspension, i.e., change <span class="math notranslate nohighlight">\(k\)</span> or <span class="math notranslate nohighlight">\(c\)</span>, to make it critically damped or overdamped?</p></li>
+<li><p>Is it better to have an overdamped, underdamped, or critically damped suspension?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_adjust</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1E3</span><span class="p">,</span><span class="mf">1E4</span><span class="p">,</span><span class="mi">101</span><span class="p">)</span>
+
+<span class="n">omega</span><span class="p">,</span> <span class="n">zeta</span> <span class="o">=</span> <span class="n">car_revisited</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k_adjust</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\omega_n$ (rad/s)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$k$ (kN / s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Tuning Spring Constant&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">zeta</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\zeta$ (dimensionless)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/55b86c4a7a8c6ed776b07d0eb4d491ceee62dbf3c1c8bdf7172438e2a638b2e1.png" src="../../_images/55b86c4a7a8c6ed776b07d0eb4d491ceee62dbf3c1c8bdf7172438e2a638b2e1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_adjust</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1E4</span><span class="p">,</span><span class="mf">3E4</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="n">omega</span><span class="p">,</span> <span class="n">zeta</span> <span class="o">=</span> <span class="n">car_revisited</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c_adjust</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Convert from scalar to vector</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">omega</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c_adjust</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\omega_n$ (rad/s)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$c$ (kN m / s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Tuning Spring Constant&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">zeta</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\zeta$ (dimensionless)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/12100f0dbd97547142672b1baf6baa6988559a2755b986e863a03525eb02e8b4.png" src="../../_images/12100f0dbd97547142672b1baf6baa6988559a2755b986e863a03525eb02e8b4.png" />
+</div>
+</div>
+</section>
+<section id="sensitivity-of-eigenvalues">
+<h3><span class="section-number">2.7.2.7. </span>Sensitivity of Eigenvalues<a class="headerlink" href="#sensitivity-of-eigenvalues" title="Link to this heading">#</a></h3>
+<p>The dynamic response of the system depends on the eigenvalues of the (linear) differential equations.</p>
+<p>The <strong>real componenent</strong> of the eigenvalues tell us…</p>
+<ul class="simple">
+<li><p>One or more positive real components of the eigenvalues –&gt; system is unstable and one of the states will diverge to positive or negative infinity</p></li>
+<li><p>All negative real components of the eigenvalues –&gt; system is stable and will approach steady-state</p></li>
+<li><p>One or more zero real components of the eigenvalues –&gt; some of the states will neither decay or grow, often coincides with oscillations</p></li>
+</ul>
+<p>The <strong>imaginary components</strong> of the eigenvalues tell us…</p>
+<ul class="simple">
+<li><p>Non-zero imaginary components of two of more eigenvales –&gt; system response will oscillate</p></li>
+<li><p>All imaginary components of eigenvalues are zero –&gt; system response will not oscillate</p></li>
+<li><p>Remember that imaginary eigenvalues come in conjugate pairs</p></li>
+</ul>
+<p>Let’s see these properties in action with our spring-mass-damper example. We start by writing the linear system in cannonical state-space form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underbrace{\begin{bmatrix}
+\dot{v} \\
+\dot{x}
+\end{bmatrix}}_{\mathbf{\dot{x}}} = 
+\underbrace{\begin{bmatrix}
+- \frac{c}{m} &amp; -\frac{k}{m} \\
+1 &amp; 0
+\end{bmatrix}}_{\mathbf{A}}
+\underbrace{\mathbf{\begin{bmatrix} v \\ x
+\end{bmatrix}}}_{\mathbf{x}} + 
+\underbrace{\begin{bmatrix}
+\frac{1}{m} \\ 0
+\end{bmatrix}}_{\mathbf{B}}
+\underbrace{f(t)}_{\mathbf{u}}
+\end{split}\]</div>
+<p>Next, we will calculate the eigenvalues of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span>
+<span class="n">c</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;c m k&#39;</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalues(A) =&quot;</span><span class="p">,)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =
+ Matrix([[-c/m, -k/m], [1, 0]])
+Eigenvalues(A) =
+{-c/(2*m) - sqrt(c**2 - 4*k*m)/(2*m): 1, -c/(2*m) + sqrt(c**2 - 4*k*m)/(2*m): 1}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\lambda_1 = \frac{-c}{2m} - \frac{\sqrt{c^2 - 4 k m}}{2 m}, \qquad \lambda_2 = \frac{-c}{2m} + \frac{\sqrt{c^2 - 4 k m}}{2 m}\]</div>
+<p>We see these eigenvalues are imaginary when</p>
+<div class="math notranslate nohighlight">
+\[
+c^2 &lt; 4 k m \Leftrightarrow \frac{c^2}{4 k m} &lt; 1 \Leftrightarrow \zeta^2 &lt; 1
+\]</div>
+<p>The real components of both eigenvalues are positive when</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{c}{2m} &lt; \frac{\sqrt{c^2 - 4 k m}}{2m} \Leftrightarrow c &lt; \sqrt{c^2 - 4 k m} \Leftrightarrow c^2 &lt; c^2 - 4 k m
+\]</div>
+<p>This would require <span class="math notranslate nohighlight">\(km &lt; 0\)</span>, which is not possible because <span class="math notranslate nohighlight">\(k &gt; 0\)</span>, <span class="math notranslate nohighlight">\(c &gt; 0\)</span>, and <span class="math notranslate nohighlight">\(m &gt; 0\)</span> for the model to be physically realistic. Therefore, the real components must be negative.</p>
+<p>This analysis explains the behavior of our simulations for this system so far!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eigenvalues_car_revisited</span><span class="p">(</span><span class="n">car_mass</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="mi">450</span><span class="p">,</span> <span class="n">driver_mass</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1E5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">2E3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Convert car suspension example into 2nd order system general form</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        car_mass: total mass of the vehicle without driver (kg)</span>
+<span class="sd">        driver_mass: total mass of the driver (kg)</span>
+<span class="sd">        k: spring constant (N/m)</span>
+<span class="sd">        c: damping constant (Ns/m)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        eigenvalues</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        All masses are divided by 4 within the calculations to convert from total to per wheel.</span>
+<span class="sd">        User should input total masses.</span>
+
+<span class="sd">        This function assumes k and c are scalars!</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    
+    
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Spring constant, k =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s2">&quot;N/m&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Damping constant, c =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s2">&quot;Ns/m&quot;</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">car_mass</span><span class="o">/</span><span class="mi">4</span>
+    <span class="n">omega_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">zeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">omega_n</span><span class="o">*</span><span class="n">m</span><span class="p">))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">evals</span><span class="p">,</span> <span class="n">evec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Empty car, m =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;kg per wheel&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;omega_n =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">omega_n</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;1/s&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zeta =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">zeta</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;dimensionless&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eignvalues=&quot;</span><span class="p">,</span><span class="n">evals</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">car_mass</span> <span class="o">+</span> <span class="n">driver_mass</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span>
+    <span class="n">omega_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">zeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">omega_n</span><span class="o">*</span><span class="n">m</span><span class="p">))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">evals</span><span class="p">,</span> <span class="n">evec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Loaded car, m =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;kg per wheel&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;omega_n =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">omega_n</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;1/s&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zeta =&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">zeta</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;dimensionless&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eignvalues=&quot;</span><span class="p">,</span><span class="n">evals</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">evals</span>
+
+<span class="n">eigenvalues_car_revisited</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spring constant, k = 100000.0 N/m
+Damping constant, c = 2000.0 Ns/m
+
+Empty car, m = 450.0 kg per wheel
+omega_n = 14.91 1/s
+zeta = 0.39 dimensionless
+eignvalues= [-2.22222222+14.74055462j -2.22222222-14.74055462j]
+
+Loaded car, m = 470.0 kg per wheel
+omega_n = 14.59 1/s
+zeta = 0.38 dimensionless
+eignvalues= [-2.12765957+14.43048933j -2.12765957-14.43048933j]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-2.12765957+14.43048933j, -2.12765957-14.43048933j])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform sensitivity analysis of eigenvalues to k</span>
+<span class="n">k_adjust</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1E3</span><span class="p">,</span><span class="mf">1E4</span><span class="p">,</span><span class="mi">101</span><span class="p">)</span>
+
+<span class="n">evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">k_adjust</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span><span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_adjust</span><span class="p">)):</span>
+    <span class="n">evals</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">eigenvalues_car_revisited</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k_adjust</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;real($\lambda_1$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;real($\lambda_2$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Real&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$k$ (kN / s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Tuning Spring Constant&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;imag($\lambda_1$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;imag($\lambda_2$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Imaginary&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29c6d8214b0d6d575116daeea3f1fdbe18827ec97c5718afa48509f4e73e9c2b.png" src="../../_images/29c6d8214b0d6d575116daeea3f1fdbe18827ec97c5718afa48509f4e73e9c2b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform sensitivity analysis of eigenvalues to c</span>
+
+<span class="n">c_adjust</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1E4</span><span class="p">,</span><span class="mf">3E4</span><span class="p">,</span><span class="mi">201</span><span class="p">)</span>
+
+<span class="n">evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">c_adjust</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span><span class="n">dtype</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c_adjust</span><span class="p">)):</span>
+    <span class="n">evals</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">eigenvalues_car_revisited</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c_adjust</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;real($\lambda_1$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;real($\lambda_2$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Real&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$c$ (kN m / s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Tuning Damper Constant&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;imag($\lambda_1$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_adjust</span><span class="o">/</span><span class="mf">1E3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">evals</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;imag($\lambda_2$)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Imaginary&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1c023d30bb79bd6284e2a840e82ddd34e7a359e3c9e2d863900f1db35a4a926a.png" src="../../_images/1c023d30bb79bd6284e2a840e82ddd34e7a359e3c9e2d863900f1db35a4a926a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="general-linear-ode-systems">
+<h2><span class="section-number">2.7.3. </span>General Linear ODE Systems<a class="headerlink" href="#general-linear-ode-systems" title="Link to this heading">#</a></h2>
+<p>Second order systems (e.g., mass-spring-damper) are excellent to understand the types of dynamic system responses. But we will need to analyze higher order systems in practice.</p>
+<p>Recall the general state-space of a linear ODE system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+\mathbf{\dot{x}} &amp;= \mathbf{A} \mathbf{x}(t) + \mathbf{B} \mathbf{u}(t)~, \\
+\mathbf{y} &amp;= \mathbf{C} \mathbf{x} + \mathbf{D} \mathbf{u}~,
+\end{align*}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> are the state variables and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are the measured/observed variables. This is called a <strong>time-invarient linear system</strong> because the ODE system is linear with respect to the states <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and the matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> are constants and do not depend on time.</p>
+<p>Many chemical engineering examples are more complicated, which means matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>, or <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> depend on time <span class="math notranslate nohighlight">\(t\)</span> or states <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> or both. But to analyze stability, we can construct linear approximations of the form above around the steady-states of interest. Hence building up our toolbox of techniques to analyze LTI systems is important!</p>
+<section id="analytic-solution">
+<h3><span class="section-number">2.7.3.1. </span>Analytic Solution<a class="headerlink" href="#analytic-solution" title="Link to this heading">#</a></h3>
+<p>The LTI <a class="reference external" href="https://web.mit.edu/2.14/www/Handouts/StateSpaceResponse.pdf">analytic solution</a> is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}(t) = \mathbf{\Phi}(t) \mathbf{x}(0) + \int_{0}^{t}\mathbf{\Phi}(t - \tau) \mathbf{B} \mathbf{u}(\tau) d \tau
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{\Phi}(t) = e^{-\mathbf{A}t} = \left( \mathbf{I} + \mathbf{A} t + \frac{\mathbf{A}^2 t^2}{2!} + ... + \frac{\mathbf{A}^k t^k}{k!} + ...\right)
+\]</div>
+<p>There are many ways to compute <span class="math notranslate nohighlight">\(\mathbf{\Phi}(t)\)</span>. For the case where <span class="math notranslate nohighlight">\(\mathbf{u}(t) = \mathbf{0}\)</span>, i.e., no external input, the analytic solution of <span class="math notranslate nohighlight">\(\dot{x} = \mathbf{A} \mathbf{x}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{x}(t) = \left[\mathbf{M} e^{\mathbf{\Lambda t}} \mathbf{M}^-1 \right] \mathbf{x}(0)
+\]</div>
+<p>where the columns of <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> and the eigenvectors (<span class="math notranslate nohighlight">\(\mathbf{v}_1\)</span>, …, <span class="math notranslate nohighlight">\(\mathbf{v}_n\)</span>) of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and the diagonal of <span class="math notranslate nohighlight">\(\Lambda\)</span> are the eigenvalues (<span class="math notranslate nohighlight">\(\lambda_1\)</span>, …, <span class="math notranslate nohighlight">\(\lambda_n\)</span>) of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{M} = \begin{bmatrix} v_1 &amp; v_2 &amp; \cdots &amp; v_n \end{bmatrix}, \qquad \Lambda = 
+\begin{bmatrix} \lambda_1 &amp; 0 &amp; \dots &amp; 0 \\
+0 &amp; \lambda_1 &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; \lambda_n
+\end{bmatrix}
+\end{split}\]</div>
+<p>Because <span class="math notranslate nohighlight">\(\Lambda\)</span> is a diagnol matrix, the matrix exponential simplies:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+e^{\mathbf{\Lambda t}} = 
+\begin{bmatrix} 
+e^{\lambda_1 t} &amp; 0 &amp; \cdots &amp; 0 \\
+0 &amp; e^{\lambda_2 t} &amp; \cdots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; e^{\lambda_n t}
+\end{bmatrix}
+\end{split}\]</div>
+<p>The situation is more nuanced if the eigenvalues are not distinct. Nevertheless, this gives the general idea and we will press on.</p>
+<p>How does this related to our interpretation of the eigenvalues in the spring-mass-damper example above?</p>
+<p>Recall <strong>Euluer’s formula</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+e^{x + i y} = e^{x}(\cos y + i \sin y)
+\]</div>
+<p>Using Euler’s formula, we can express cosine, sine, hyperbolic cosine, and hyperbolic sine as:</p>
+<div class="math notranslate nohighlight">
+\[\cos y = \frac{e^{i y} + e^{-iy}}{2}, \qquad \sin y = \frac{e^{i y} - e^{i y}}{2 i}\]</div>
+<div class="math notranslate nohighlight">
+\[\cosh y = \frac{e^{y} + e^{-y}}{2}, \qquad \sinh y = \frac{e^{y} - e^{-y}}{2}\]</div>
+<p>If the eigenvalues are real and the imaginary component is zero, i.e., <span class="math notranslate nohighlight">\(y = 0\)</span> in Euler’s formula, then the solution does not oscillate and constains a hyperbolic cosine and hyperbolic sine. Take a minute to review the analytic solution for the overdamped system (<span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>).</p>
+<p>If the eigenvalues include a non-zero imaginary component, then the solution includes a sine or cosine and oscillates. Take a minute to review the analytic solution for the underdamped system <span class="math notranslate nohighlight">\(\zeta &lt; 1\)</span>.</p>
+<p>It is possible for a large system (<span class="math notranslate nohighlight">\(n &gt; 2\)</span>) to have some eigenvalues that are overdamped and some that are underdamped. Recall our second order system has two eigenvalues and imaginary eigenvalues come in conjugate pairs. This means for a second order system, both eigenvalues have either a non-zero or zero imaginary component.</p>
+</section>
+<section id="simulation-with-scipy-signal">
+<h3><span class="section-number">2.7.3.2. </span>Simulation with <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code><a class="headerlink" href="#simulation-with-scipy-signal" title="Link to this heading">#</a></h3>
+<p>The good news is that <code class="docutils literal notranslate"><span class="pre">scipy</span></code> has a functions to model and simulate LTI systems. This means you do not need to explicitly code up the analytic solution of eigendecomposition above.</p>
+<p>Let’s define the spring-mass-damper system as a state-space model. We will use the <code class="docutils literal notranslate"><span class="pre">StateSpace</span></code> function in <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code>, which takes the matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> as arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateSpace</span><span class="p">,</span> <span class="n">lsim</span><span class="p">,</span> <span class="n">bode</span>
+
+<span class="c1"># Define constants</span>
+<span class="n">car_mass</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="mi">450</span> <span class="c1"># kg</span>
+<span class="n">driver_mass</span><span class="o">=</span><span class="mi">80</span> <span class="c1"># kg</span>
+<span class="n">k</span><span class="o">=</span><span class="mf">1E5</span> <span class="c1"># N/m</span>
+<span class="n">c</span><span class="o">=</span><span class="mf">2E3</span> <span class="c1"># Nm/s</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">car_mass</span><span class="p">)</span><span class="o">/</span><span class="mi">4</span> <span class="c1"># kg</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span> <span class="c1"># m/s^2</span>
+
+<span class="c1"># Define the state space model</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">/</span><span class="n">m</span><span class="p">],[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="c1"># Print state space model</span>
+<span class="n">sys</span> <span class="o">=</span> <span class="n">StateSpace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StateSpaceContinuous(
+array([[  -4.44444444, -222.22222222],
+       [   1.        ,    0.        ]]),
+array([[0.00222222],
+       [0.        ]]),
+array([[0, 1]]),
+array([[0]]),
+dt: None
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, let’s simulate the step response of a driver getting into the car. We will use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lsim.html"><code class="docutils literal notranslate"><span class="pre">lsim</span></code> function</a> from <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code> which takes as arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sys</span></code> which is a LTI system, e.g., created using <code class="docutils literal notranslate"><span class="pre">StateSpace</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> which is the time point, which must be evenly spaced. We use <code class="docutils literal notranslate"><span class="pre">numpy.linspace</span></code> to create this time grid.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">U</span></code> which is the control grid defined for the time grid <code class="docutils literal notranslate"><span class="pre">T</span></code>. By default, <code class="docutils literal notranslate"><span class="pre">lsim</span></code> with linearly interpolate <code class="docutils literal notranslate"><span class="pre">U</span></code>. Another option is zero-order hold, which means a piecewise constant signal for <code class="docutils literal notranslate"><span class="pre">U</span></code>, i.e., a sequence of steps.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X0</span></code> which are the initial conditions for the states.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define initial conditions</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># m/s</span>
+      <span class="mi">0</span><span class="p">]</span> <span class="c1"># m</span>
+
+<span class="c1"># Define the time vector</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Calculate the input signal on the time grid</span>
+<span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">driver_mass</span><span class="o">*</span><span class="n">g</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="c1"># N</span>
+
+<span class="c1"># Plot the input signal</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Force (N)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Driver getting in&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Simulate the system using scipy.signal.lsim</span>
+<span class="n">t_</span><span class="p">,</span> <span class="n">yout</span><span class="p">,</span> <span class="n">xout</span> <span class="o">=</span> <span class="n">lsim</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+
+<span class="c1"># Plot the output signal</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_</span><span class="p">,</span><span class="n">yout</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Displacement (cm)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Driver getting in&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0d13df7c171781366c9e65b981ed6b493c735b40132e0477dbe854eee75da7f9.png" src="../../_images/0d13df7c171781366c9e65b981ed6b493c735b40132e0477dbe854eee75da7f9.png" />
+<img alt="../../_images/e75d31d840603e6fd6a590bc1361ac3591da0bbf5af26590647313df17af4acb.png" src="../../_images/e75d31d840603e6fd6a590bc1361ac3591da0bbf5af26590647313df17af4acb.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="frequency-response">
+<h2><span class="section-number">2.7.4. </span>Frequency Response<a class="headerlink" href="#frequency-response" title="Link to this heading">#</a></h2>
+<p>What is our system experiences period excitement, such as driving over a series of speed bumps at constant speed?</p>
+<p>Let’s say the external force <span class="math notranslate nohighlight">\(f(t) = u(t)\)</span> experienced by our spring-mass-damper system is a sine wave:</p>
+<p><span class="math notranslate nohighlight">\(u(t) = A \sin(\omega t)\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is the amplitude, <span class="math notranslate nohighlight">\(\omega\)</span> is the frequency, and <span class="math notranslate nohighlight">\(\phi\)</span> is the phase shift.</p>
+<p>What is the response of the system subject to this dynamic response?</p>
+<section id="simulate-driving-over-speed-bumps">
+<h3><span class="section-number">2.7.4.1. </span>Simulate Driving Over Speed Bumps<a class="headerlink" href="#simulate-driving-over-speed-bumps" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_bumps</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Simulate driving over bumps</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        A: amplitude (N)</span>
+<span class="sd">        omega: frequency (rad/s)</span>
+<span class="sd">        phi: phase angle (rad)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing</span>
+
+<span class="sd">    Action:</span>
+<span class="sd">        Creates plot</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Time domain, s</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># External forcing function, N</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Initial conditions</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># m/s</span>
+        <span class="mi">0</span><span class="p">]</span> <span class="c1"># m</span>
+
+    <span class="c1"># Simulate linear system with scipy.signal.lsim</span>
+    <span class="n">t_</span><span class="p">,</span> <span class="n">yout</span><span class="p">,</span> <span class="n">xout</span> <span class="o">=</span> <span class="n">lsim</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">U</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+
+    <span class="c1"># Create plot</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="c1"># Plot forcing function of left y axis</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;u(t)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Force (N)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="c1"># Plot suspension displacement on right y axis</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_</span><span class="p">,</span><span class="n">yout</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;x(t)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Suspension Displacement (cm)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Update colors and show plot</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">simulate_bumps</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Speed Bumps&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9a9a34e235a90617440444ffebc600c24a686044132d3bb17e5e993f3733a555.png" src="../../_images/9a9a34e235a90617440444ffebc600c24a686044132d3bb17e5e993f3733a555.png" />
+</div>
+</div>
+</section>
+<section id="bode-analysis">
+<h3><span class="section-number">2.7.4.2. </span>Bode Analysis<a class="headerlink" href="#bode-analysis" title="Link to this heading">#</a></h3>
+<p>We can see in this example the input <span class="math notranslate nohighlight">\(u(t)\)</span> is a sine wave,</p>
+<div class="math notranslate nohighlight">
+\[
+u(t) = A \sin(\omega t)
+\]</div>
+<p>and the output response is a shifted sine wave with a different amplitude:</p>
+<div class="math notranslate nohighlight">
+\[
+y(t) = y_0 \sin(\omega t + \psi)
+\]</div>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Bode_plot">Bode plot</a> relates the gain of the system <span class="math notranslate nohighlight">\(K\)</span> and the phase shift <span class="math notranslate nohighlight">\(\psi\)</span> to the input frequency <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
+<p>We will use <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code> to construct Bode plots. In a “classical controls class”, students often learn how to <a class="reference external" href="https://en.wikipedia.org/wiki/Bode_plot">draw Bode plots</a> by hand!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform Bode analysis using the StateSpace model stored in `sy`</span>
+<span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">phase</span> <span class="o">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+
+<span class="c1"># Plot the magnitude of the output signal as a function of input signal frequency</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>    <span class="c1"># Bode magnitude plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Input Frequency (rad/s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Output Magnitude (dB)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Plot the phase shift of the output signal as a function of input signal frequency</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Input Frequency (rad/s)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Output Phase Shift (degrees)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/adowling/opt/anaconda3/envs/controls/lib/python3.10/site-packages/scipy/signal/_filter_design.py:1101: BadCoefficients: Badly conditioned filter coefficients (numerator): the results may be meaningless
+  b, a = normalize(b, a)
+</pre></div>
+</div>
+<img alt="../../_images/54d35c8170f3877340d0bc57de48e43d7c92d41f2d626c2aedfd099634b3eff5.png" src="../../_images/54d35c8170f3877340d0bc57de48e43d7c92d41f2d626c2aedfd099634b3eff5.png" />
+<img alt="../../_images/3ed05a76e51ee9243d548566860df4fb683228f22941592e85a70d83beeedbbb.png" src="../../_images/3ed05a76e51ee9243d548566860df4fb683228f22941592e85a70d83beeedbbb.png" />
+</div>
+</div>
+</section>
+<section id="simulate-driving-over-a-rumble-strip">
+<h3><span class="section-number">2.7.4.3. </span>Simulate Driving Over a Rumble Strip<a class="headerlink" href="#simulate-driving-over-a-rumble-strip" title="Link to this heading">#</a></h3>
+<p>Based on the analysis above, let’s consider a higher frequency oscillation, such as driving over a rumple strip at high speed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulate_bumps</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Rumble Strip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dd1d3698ee2e410254c3bbcae78ce8abfc62f9a51e69b0fa3f2e6e10e330c0f4.png" src="../../_images/dd1d3698ee2e410254c3bbcae78ce8abfc62f9a51e69b0fa3f2e6e10e330c0f4.png" />
+</div>
+</div>
+<p>We see the higher frequency forcing function results in a larger phase shift, which is expected based on the Bode plot.</p>
+</section>
+</section>
+<section id="take-away-messages">
+<h2><span class="section-number">2.7.5. </span>Take Away Messages<a class="headerlink" href="#take-away-messages" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>State-space form with matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{C}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is convenient to model dynamical systems</p></li>
+<li><p>The characteristics of the response depends on the eigenvalues of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span></p></li>
+<li><p>Looking forward a few weeks, we will design control laws, i.e., formulas to calculate <span class="math notranslate nohighlight">\(\mathbf{u}\)</span>, that shape the eigenvalues of the closed loop dynamics</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Fed-Batch-Bioreactor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.6. </span>Fed-Batch Bioreactor</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Exothermic-CSTR.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2.8. </span>Exothermic Continuous Stirred Tank Reactor</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#car-suspension-spring-mass-damper-system">2.7.1. Car Suspension: Spring-Mass-Damper System</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model">2.7.1.1. Mathematical Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-simulation">2.7.1.2. Numeric Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">2.7.1.3. Activity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-linear-ode-systems">2.7.2. Second Order Linear ODE Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-model">2.7.2.1. Generalized Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overdamped-zeta-1">2.7.2.2. Overdamped (<span class="math notranslate nohighlight">\(\zeta &gt; 1\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#critically-damped-zeta-1">2.7.2.3. Critically Damped (<span class="math notranslate nohighlight">\(\zeta = 1\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underdamped-zeta-1">2.7.2.4. Underdamped (<span class="math notranslate nohighlight">\(\zeta &lt; 1\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-modes">2.7.2.5. Comparison of Modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-mass-damper-example">2.7.2.6. Spring-Mass-Damper Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-of-eigenvalues">2.7.2.7. Sensitivity of Eigenvalues</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-linear-ode-systems">2.7.3. General Linear ODE Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytic-solution">2.7.3.1. Analytic Solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-with-scipy-signal">2.7.3.2. Simulation with <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-response">2.7.4. Frequency Response</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-driving-over-speed-bumps">2.7.4.1. Simulate Driving Over Speed Bumps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bode-analysis">2.7.4.2. Bode Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-driving-over-a-rumble-strip">2.7.4.3. Simulate Driving Over a Rumble Strip</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-away-messages">2.7.5. Take Away Messages</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

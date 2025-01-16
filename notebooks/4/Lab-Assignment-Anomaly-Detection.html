@@ -1,0 +1,1242 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.6. Lab Assignment 6: Anomaly Detection &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/4/Lab-Assignment-Anomaly-Detection';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.7. Observer Synthesis using Linear Matrix Inequalities" href="Observer-Synthesis-LMI.html" />
+    <link rel="prev" title="4.5. Anomaly Detection" href="Anomaly-Detection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2/Process-Modeling.html">2. Process Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2/One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2/Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Process-Analytics.html">4. Process Analytics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/A.00-Python-Tutorials.html">Python Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/notebooks/4/Lab-Assignment-Anomaly-Detection.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fnotebooks/4/Lab-Assignment-Anomaly-Detection.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/4/Lab-Assignment-Anomaly-Detection.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab Assignment 6: Anomaly Detection</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-determing-the-observer-gains-l">4.6.1. Part 1. Determing the Observer Gains <span class="math notranslate nohighlight">\(L\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-model">4.6.1.1. State Space Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observer">4.6.1.2. Observer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-observer">4.6.1.3. Testing the Observer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues-and-eigenvectors">4.6.1.4. Eigenvalues and Eigenvectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#placing-the-eigenvalues-of-a-lc">4.6.1.5. Placing the eigenvalues of <span class="math notranslate nohighlight">\(A-LC\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">4.6.1.6. Exercise 1.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-estimating-disturbances">4.6.2. Part 2. Estimating Disturbances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-disturbance-estimator">4.6.2.1. Testing Disturbance Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">4.6.2.2. Exercise 2.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-assignment-6-anomaly-detection">
+<h1><span class="section-number">4.6. </span>Lab Assignment 6: Anomaly Detection<a class="headerlink" href="#lab-assignment-6-anomaly-detection" title="Link to this heading">#</a></h1>
+<p><em>This assignment is from before Fall 2024.</em></p>
+<p>This lab assignment consists of two exercises which, together, demonstrate the tuning of an observer for the purpose of state and disturbance estimation. The disturbance is a proxy for any variable or modeling that may affect the operation of the Temperature Control Lab. Monitoring the disturbance estimate provides a means for detecting operational anomalies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># standard imports</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">clock</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="part-1-determing-the-observer-gains-l">
+<h2><span class="section-number">4.6.1. </span>Part 1. Determing the Observer Gains <span class="math notranslate nohighlight">\(L\)</span><a class="headerlink" href="#part-1-determing-the-observer-gains-l" title="Link to this heading">#</a></h2>
+<section id="state-space-model">
+<h3><span class="section-number">4.6.1.1. </span>State Space Model<a class="headerlink" href="#state-space-model" title="Link to this heading">#</a></h3>
+<p>The state-space model for the Temperature Control Laboratory was previously developed and included here for reference.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{d}{dt}\underbrace{\left[\begin{array}{c} T_{H,1} \\ T_{S,1} \\ T_{H,2} \\ T_{S,2} \end{array}\right]}_x
+&amp; = 
+\underbrace{\left[\begin{array}{cccc}
+-(\frac{U_a+U_b+U_c}{C^H_p}) &amp; \frac{U_b}{C^H_p} &amp; \frac{U_c}{C^H_p} &amp; 0 \\
+\frac{U_b}{C^S_p} &amp; -\frac{U_b}{C^S_p} &amp; 0 &amp; 0 \\
+\frac{U_c}{C^H_p} &amp; 0 &amp; -(\frac{U_a+U_b+U_c}{C^H_p}) &amp; \frac{U_b}{C^H_p} \\
+0 &amp; 0 &amp; \frac{U_b}{C^S_p} &amp; -\frac{U_b}{C^S_p}
+\end{array}\right]}_A
+\underbrace{\left[\begin{array}{c}T_{H,1} \\ T_{S,1} \\ T_{H,2} \\ T_{S,2}\end{array}\right]}_x
++
+\underbrace{\left[\begin{array}{cc}\frac{\alpha P_1}{C_p} &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; \frac{\alpha P_2}{C_p} \\ 0 &amp; 0 \end{array}\right]}_{B_u}
+\underbrace{\left[\begin{array}{c}u_1 \\ u_2\end{array}\right]}_u
++
+\underbrace{\left[\begin{array}{c}\frac{U_a}{C^H_p} \\ 0 \\ \frac{U_a}{C^H_p} \\ 0 \end{array}\right]}_{B_d}
+\underbrace{\left[\begin{array}{c}T_{amb}\end{array}\right]}_{d}
+\end{align}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\underbrace{\left[\begin{array}{c} T_1 \\ T_2 \end{array}\right]}_y
+&amp; = 
+\underbrace{\left[\begin{array}{cccc} 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{array}\right]}_C
+\underbrace{\left[\begin{array}{c}T_{H,1} \\ T_{S,1} \\ T_{H,2} \\ T_{S,2}\end{array}\right]}_x
+\end{align}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{dx}{dt} &amp; = A x + B_u u + B_d d \\
+y &amp; = C x
+\end{align}
+\end{split}\]</div>
+<p>The process variables are gathered and organized into the state vector <span class="math notranslate nohighlight">\(x\)</span>, manipulable inputs <span class="math notranslate nohighlight">\(u\)</span>, disturbance inputs <span class="math notranslate nohighlight">\(d\)</span>, and measured process variables <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x = \left[\begin{array}{c}T_{H,1} \\ T_{S,1} \\ T_{H,2} \\ T_{S,2}\end{array}\right]
+\qquad
+u = \left[\begin{array}{c}u_1 \\ u_2\end{array}\right]
+\qquad
+d = \left[\begin{array}{c}T_{amb}\end{array}\right]
+\qquad
+y = \left[\begin{array}{c} T_1 \\ T_2 \end{array}\right]
+\end{split}\]</div>
+<p>Coefficients are organized into matrices <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B_u\)</span>, <span class="math notranslate nohighlight">\(B_d\)</span> and <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \left[\begin{array}{cccc}
+-(\frac{U_a+U_b+U_c}{C^H_p}) &amp; \frac{U_b}{C^H_p} &amp; \frac{U_c}{C^H_p} &amp; 0 \\
+\frac{U_b}{C^S_p} &amp; -\frac{U_b}{C^S_p} &amp; 0 &amp; 0 \\
+\frac{U_c}{C^H_p} &amp; 0 &amp; -(\frac{U_a+U_b+U_c}{C^H_p}) &amp; \frac{U_b}{C^H_p} \\
+0 &amp; 0 &amp; \frac{U_b}{C^S_p} &amp; -\frac{U_b}{C^S_p}
+\end{array}\right]
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B_u = \left[\begin{array}{cc}\frac{\alpha P_1}{C_p} &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; \frac{\alpha P_2}{C_p} \\ 0 &amp; 0 \end{array}\right]
+\qquad
+B_d  = \left[\begin{array}{c}\frac{U_a}{C^H_p} \\ 0 \\ \frac{U_a}{C^H_p} \\ 0 \end{array}\right]
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C = \left[\begin{array}{cccc} 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{array}\right]
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameter estimates.</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.00016</span>       <span class="c1"># watts / (units P * percent U1)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="mi">200</span>              <span class="c1"># P units</span>
+<span class="n">P2</span> <span class="o">=</span> <span class="mi">100</span>              <span class="c1"># P units</span>
+<span class="n">CpH</span> <span class="o">=</span> <span class="mf">4.46</span>            <span class="c1"># heat capacity of the heater (J/deg C)</span>
+<span class="n">CpS</span> <span class="o">=</span> <span class="mf">0.819</span>           <span class="c1"># heat capacity of the sensor (J/deg C)</span>
+<span class="n">Ua</span> <span class="o">=</span> <span class="mf">0.050</span>            <span class="c1"># heat transfer coefficient from heater to environment</span>
+<span class="n">Ub</span> <span class="o">=</span> <span class="mf">0.021</span>            <span class="c1"># heat transfer coefficient from heater to sensor</span>
+<span class="n">Uc</span> <span class="o">=</span> <span class="mf">0.0335</span>           <span class="c1"># heat transfer coefficient between heaters</span>
+<span class="n">Tamb</span> <span class="o">=</span> <span class="mi">21</span>             <span class="c1"># ambient room temperature</span>
+
+<span class="c1"># state space model</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span> <span class="o">+</span> <span class="n">Uc</span><span class="p">)</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="n">Ub</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="n">Uc</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+              <span class="p">[</span><span class="n">Ub</span><span class="o">/</span><span class="n">CpS</span><span class="p">,</span> <span class="o">-</span><span class="n">Ub</span><span class="o">/</span><span class="n">CpS</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="n">Uc</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span> <span class="o">+</span> <span class="n">Uc</span><span class="p">)</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="n">Ub</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ub</span><span class="o">/</span><span class="n">CpS</span><span class="p">,</span> <span class="o">-</span><span class="n">Ub</span><span class="o">/</span><span class="n">CpS</span><span class="p">]])</span>
+
+<span class="n">Bu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">alpha</span><span class="o">*</span><span class="n">P1</span><span class="o">/</span><span class="n">CpH</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">*</span><span class="n">P2</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">Bd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">Ua</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">Ua</span><span class="o">/</span><span class="n">CpH</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># initial values for states and inputs</span>
+<span class="n">u_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">d_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Tamb</span><span class="p">])</span>
+<span class="n">x_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Tamb</span><span class="p">,</span> <span class="n">Tamb</span><span class="p">,</span> <span class="n">Tamb</span><span class="p">,</span> <span class="n">Tamb</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="observer">
+<h3><span class="section-number">4.6.1.2. </span>Observer<a class="headerlink" href="#observer" title="Link to this heading">#</a></h3>
+<p>At each time step <span class="math notranslate nohighlight">\(t_k\)</span> there are two calculations to perform:</p>
+<ul class="simple">
+<li><p><strong>Model Prediction:</strong> Use the model to update the state to the next time step, i.e., <span class="math notranslate nohighlight">\(\hat{x}_{k-1} \rightarrow \hat{x}_{k}^{pred}\)</span> with the equation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\hat{x}_k^{pred} &amp; = \hat{x}_{k-1} + (t_k - t_{k-1}) ( A \hat{x}_{k-1} + B_u u_{k-1} + B_d \hat{d}_{k-1}) \\
+\hat{y}_k^{pred} &amp; = C \hat{x}_k^{pred}
+\end{align}
+\end{split}\]</div>
+<ul class="simple">
+<li><p><strong>Measurement Correction:</strong> Use measurement <span class="math notranslate nohighlight">\(y_k\)</span> to update <span class="math notranslate nohighlight">\(\hat{x}_{k}^{pred} \rightarrow \hat{x}_{k}\)</span> with the equation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{x}_{k} = \hat{x}_{k}^{pred} - (t_k - t_{k-1})L (\underbrace{\hat{y}_{k}^{pred} - y_k}_{y_k^{err}})\]</div>
+<p>The following cell presents an implementation of an observer for the Temperature Control Lab. This version of the observer assumes <span class="math notranslate nohighlight">\(\hat{d}_{k} = \hat{d}\)</span> is constant in time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tclab_observer</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">d_hat</span><span class="p">):</span>
+    
+    <span class="c1"># initialize</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">x_hat</span> <span class="o">=</span> <span class="n">x_initial</span>
+    <span class="n">y_err</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># save previous time value</span>
+        <span class="n">t_prev</span> <span class="o">=</span> <span class="n">t</span>
+        
+        <span class="c1"># yield current state and measurement error.</span>
+        <span class="c1"># wait for message with next time, last control input, and measurement</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">x_hat</span><span class="p">,</span> <span class="n">y_err</span>
+        
+        <span class="c1"># update model prediction</span>
+        <span class="n">x_pred</span> <span class="o">=</span> <span class="n">x_hat</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_prev</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bu</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bd</span><span class="p">,</span> <span class="n">d_hat</span><span class="p">))</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">)</span>
+        
+        <span class="c1"># measurement correction</span>
+        <span class="n">y_err</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="n">x_hat</span> <span class="o">=</span> <span class="n">x_pred</span> <span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_prev</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">y_err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="testing-the-observer">
+<h3><span class="section-number">4.6.1.3. </span>Testing the Observer<a class="headerlink" href="#testing-the-observer" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">experiment</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">t_final</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">t_step</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">connected</span><span class="p">:</span>
+        <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        
+        <span class="c1"># setup historian</span>
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;Th1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Ts1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Th2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Ts2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;y_err_1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y_err</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;y_err_2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="p">]</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+        
+        <span class="n">layout</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Th1&#39;</span><span class="p">,</span> <span class="s1">&#39;Th2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="s1">&#39;Ts1&#39;</span><span class="p">,</span> <span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="s1">&#39;Ts2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;y_err_1&#39;</span><span class="p">,</span> <span class="s1">&#39;y_err_2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">]]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+            
+        <span class="c1"># initialize event loop</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">u1</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q2</span><span class="p">(</span><span class="n">u2</span><span class="p">(</span><span class="mi">0</span><span class="p">))]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+            <span class="c1"># get new measurement</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">]</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y_err</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+            <span class="c1"># update plotter and historian</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+            <span class="c1"># set input for next period</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">u1</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q2</span><span class="p">(</span><span class="n">u2</span><span class="p">(</span><span class="n">t</span><span class="p">))]</span>
+            
+    <span class="k">return</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">u1</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">50</span> <span class="k">if</span> <span class="mi">20</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">220</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">u2</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">60</span> <span class="k">if</span> <span class="mi">120</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">320</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">tclab_observer</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">d_initial</span><span class="p">)</span>
+<span class="n">experiment</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/448d0e87aae3a500a7b39c58efe82c740475f5f0403e815dd7cd7870157d3a1b.png" src="../../_images/448d0e87aae3a500a7b39c58efe82c740475f5f0403e815dd7cd7870157d3a1b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TCLab Model disconnected successfully.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tclab.historian.Historian at 0x7f9f91059760&gt;
+</pre></div>
+</div>
+<img alt="../../_images/448d0e87aae3a500a7b39c58efe82c740475f5f0403e815dd7cd7870157d3a1b.png" src="../../_images/448d0e87aae3a500a7b39c58efe82c740475f5f0403e815dd7cd7870157d3a1b.png" />
+</div>
+</div>
+</section>
+<section id="eigenvalues-and-eigenvectors">
+<h3><span class="section-number">4.6.1.4. </span>Eigenvalues and Eigenvectors<a class="headerlink" href="#eigenvalues-and-eigenvectors" title="Link to this heading">#</a></h3>
+<p>For a linear system with dynamics governed by a constant coefficient matrix <span class="math notranslate nohighlight">\(A\)</span>, the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> determine stability. A system is asymptotically stable if all of the eigenvalues have negative real part. Here we demonstrate the calculation and display of the eigenvalues for the model governing the Temperature Control Lab which has all real eigenvalues.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">eigenmodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">mode</span> <span class="k">for</span> <span class="n">mode</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="o">.</span><span class="n">T</span><span class="p">))]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">eigenmodes</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="mf">0.8</span><span class="o">*</span><span class="n">n</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">mode</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">eigenmodes</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="o">-</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+    <span class="nb">eval</span><span class="p">,</span> <span class="n">evec</span> <span class="o">=</span> <span class="n">mode</span>
+    <span class="n">evec</span> <span class="o">=</span> <span class="n">evec</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">evec</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">abs</span><span class="p">)</span>
+    <span class="n">evec</span> <span class="o">=</span> <span class="n">evec</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">evec</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">evec</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;x_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;eval=</span><span class="si">{</span><span class="nb">eval</span><span class="si">:</span><span class="s2">6.4f</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="nb">eval</span><span class="si">:</span><span class="s2"> 6.1f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/232419e34c0c69609ce21a88f18d53356f80526e9fb4de6188b9a658546bc76a.png" src="../../_images/232419e34c0c69609ce21a88f18d53356f80526e9fb4de6188b9a658546bc76a.png" />
+</div>
+</div>
+</section>
+<section id="placing-the-eigenvalues-of-a-lc">
+<h3><span class="section-number">4.6.1.5. </span>Placing the eigenvalues of <span class="math notranslate nohighlight">\(A-LC\)</span><a class="headerlink" href="#placing-the-eigenvalues-of-a-lc" title="Link to this heading">#</a></h3>
+<p>As has been previously demonstrated, the dynamics of the state error <span class="math notranslate nohighlight">\(e = \hat{x} - x\)</span> are described by the equation</p>
+<div class="math notranslate nohighlight">
+\[\frac{de}{dt} = (A - LC) e + B_d (\hat{d} - d)\]</div>
+<p>The coefficient matrix <span class="math notranslate nohighlight">\(A - LC\)</span>, where we get to choose <span class="math notranslate nohighlight">\(L\)</span>, determines the evolution of the error in the state estimate. We would like for the error to decay quickly to a minimal value which implies choosing <span class="math notranslate nohighlight">\(L\)</span> so that eigenvalues of <span class="math notranslate nohighlight">\(A - LC\)</span> are negatives values.</p>
+<p>Let’s compare the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> to the eigenvalues of <span class="math notranslate nohighlight">\(A-LC\)</span> using the <span class="math notranslate nohighlight">\(L\)</span> found in the example above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">evals</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.00876519, -0.01698846, -0.03959427, -0.03279512])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
+
+<span class="n">evals</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">C</span><span class="p">))</span>
+<span class="n">evals</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.09145229+0.j        , -0.12829136+0.02566559j,
+       -0.12829136-0.02566559j, -0.15010801+0.j        ])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Pole placement</strong> describes a family of algorithms which, given <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(C\)</span>, and a desired set of eigenvalues, computes a matrix <span class="math notranslate nohighlight">\(L\)</span> such that <span class="math notranslate nohighlight">\(A-LC\)</span> has the specified set of eigenvalue, or else reports that no such <span class="math notranslate nohighlight">\(L\)</span> exists. The following cell shows how to use <code class="docutils literal notranslate"><span class="pre">scipy.signal.place_poles()</span></code> to compute an <span class="math notranslate nohighlight">\(L\)</span> where the eigenvalues are 3 times larger (i.e, more negative) than the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> alone.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">place_poles</span>
+
+<span class="n">evals</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">place_poles</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">evals</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">gain_matrix</span><span class="o">.</span><span class="n">T</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.05695624 -0.01773553]
+ [ 0.0990523  -0.01497065]
+ [-0.01744486  0.05443456]
+ [-0.01502702  0.09723378]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is notable about this version of <span class="math notranslate nohighlight">\(L\)</span> is that we are now using both sensors to update every estimated state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">u1</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">50</span> <span class="k">if</span> <span class="mi">20</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">220</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">u2</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">60</span> <span class="k">if</span> <span class="mi">120</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">320</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">tclab_observer</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">d_initial</span><span class="p">)</span>
+<span class="n">experiment</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07a789c5d39c0a5bb37a40f6e57b345b7a8f720e212c9d545a19e1c5cfe14478.png" src="../../_images/07a789c5d39c0a5bb37a40f6e57b345b7a8f720e212c9d545a19e1c5cfe14478.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TCLab Model disconnected successfully.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tclab.historian.Historian at 0x7fccf51bc040&gt;
+</pre></div>
+</div>
+<img alt="../../_images/07a789c5d39c0a5bb37a40f6e57b345b7a8f720e212c9d545a19e1c5cfe14478.png" src="../../_images/07a789c5d39c0a5bb37a40f6e57b345b7a8f720e212c9d545a19e1c5cfe14478.png" />
+</div>
+</div>
+</section>
+<section id="exercise-1">
+<h3><span class="section-number">4.6.1.6. </span>Exercise 1.<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
+<p>Test the observer described above for your device. Perform the following calculations:</p>
+<ol class="arabic simple">
+<li><p>Revise the parameters and coefficient matrices <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B_u\)</span>, <span class="math notranslate nohighlight">\(B_d\)</span> to incorporate the best estimates available for your particular device.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(L\)</span> where the eigenvalues are placed multiples of 1, 2, 5, and 10 times the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> alone. Test each <span class="math notranslate nohighlight">\(L\)</span> using your particular device.</p></li>
+<li><p>Report the results of each experimental run for your device. Which of these <span class="math notranslate nohighlight">\(L\)</span> matrices would you recommend for production use? Why?</p></li>
+</ol>
+</section>
+</section>
+<section id="part-2-estimating-disturbances">
+<h2><span class="section-number">4.6.2. </span>Part 2. Estimating Disturbances<a class="headerlink" href="#part-2-estimating-disturbances" title="Link to this heading">#</a></h2>
+<p>Our model for the Temperature Control Lab is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\frac{dx}{dt} &amp; = A x + B_u u + B_d d \\
+y &amp; = C x
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d\)</span> is an unmeasured disturbance. Up to this point we have used an apriori constant estimate <span class="math notranslate nohighlight">\(\hat{d}\)</span> for real-time control calculations. Here we show how, in principle, <span class="math notranslate nohighlight">\(d\)</span> can be estimated in real-time.</p>
+<p>We assume <span class="math notranslate nohighlight">\(d\)</span> is constant or changing so slowly in time that the dynamics can be modeled by</p>
+<div class="math notranslate nohighlight">
+\[\frac{dd}{dt} = w_d\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_d\)</span> is a external signal causiing changes in <span class="math notranslate nohighlight">\(d\)</span>. This additional model equation can be incorporated into the state space framework.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\begin{bmatrix}\frac{dx}{dt} \\ \frac{dd}{dt} \end{bmatrix} &amp; = \underbrace{\begin{bmatrix} A &amp; B_d \\ 0 &amp; 0 \end{bmatrix}}_{A^{aug}} \underbrace{\begin{bmatrix}x \\ d \end{bmatrix}}_{x^{aug}} + \underbrace{\begin{bmatrix}B_u \\ 0 \end{bmatrix}}_{B_u^{aug}} u + \underbrace{\begin{bmatrix} 0 \\ 1\end{bmatrix}}_{B_d^{aug}} w_d\\
+y &amp; = \underbrace{\begin{bmatrix}C &amp; 0 \end{bmatrix}}_{C^{aug}} \begin{bmatrix}x \\ d \end{bmatrix}
+\end{align}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">place_poles</span>
+
+<span class="n">A_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">Bd</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">])])</span>
+<span class="n">Bu_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">Bu</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]])</span>
+<span class="n">Bd_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]]])</span>
+<span class="n">C_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])])</span>
+
+<span class="n">evals</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">place_poles</span><span class="p">(</span><span class="n">A_aug</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">C_aug</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">3</span><span class="o">*</span><span class="n">evals</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">evals</span><span class="p">)]))</span>
+<span class="n">L_aug</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">gain_matrix</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">L_aug</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.16514296 0.13790439]
+ [0.11789634 0.03657137]
+ [0.13768607 0.16538229]
+ [0.03651512 0.117984  ]
+ [0.27664269 0.2771419 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A_aug</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.00876519, -0.01698846, -0.03959427, -0.03279512,  0.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.00876519, -0.01698846, -0.03959427, -0.03279512])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="testing-disturbance-estimator">
+<h3><span class="section-number">4.6.2.1. </span>Testing Disturbance Estimator<a class="headerlink" href="#testing-disturbance-estimator" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tclab_observer_disturbance</span><span class="p">(</span><span class="n">L_aug</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">d_hat</span><span class="p">):</span>
+    
+    <span class="c1"># initialize</span>
+    <span class="n">x_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">x_initial</span><span class="p">,</span> <span class="n">d_hat</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x_hat</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y_err</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># save previous time value</span>
+        <span class="n">t_prev</span> <span class="o">=</span> <span class="n">t</span>
+        
+        <span class="c1"># yield current state and measurement error.</span>
+        <span class="c1"># wait for message with next time, last control input, and measurement</span>
+        <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">x_hat</span><span class="p">,</span> <span class="n">y_err</span>
+        
+        <span class="c1"># model prediction</span>
+        <span class="n">x_pred</span> <span class="o">=</span> <span class="n">x_hat</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_prev</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A_aug</span><span class="p">,</span> <span class="n">x_hat</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bu_aug</span><span class="p">,</span> <span class="n">u</span><span class="p">))</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C_aug</span><span class="p">,</span> <span class="n">x_pred</span><span class="p">)</span>
+        
+        <span class="c1"># measurement correction</span>
+        <span class="n">y_err</span> <span class="o">=</span> <span class="n">y_pred</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="n">x_hat</span> <span class="o">=</span> <span class="n">x_pred</span> <span class="o">-</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t_prev</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L_aug</span><span class="p">,</span> <span class="n">y_err</span><span class="p">)</span>
+                       
+                       
+<span class="k">def</span><span class="w"> </span><span class="nf">experiment_disturbance</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">t_final</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">t_step</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    
+    <span class="c1"># open connection to tclab</span>
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        
+        <span class="c1"># setup historian</span>
+        <span class="n">sources</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;Th1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Ts1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Th2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> 
+                   <span class="p">(</span><span class="s1">&#39;Ts2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;d_hat&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;y_err_1&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y_err</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                   <span class="p">(</span><span class="s1">&#39;y_err_2&#39;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">y_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="p">]</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+        
+        <span class="n">layout</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Th1&#39;</span><span class="p">,</span> <span class="s1">&#39;Th2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span> <span class="s1">&#39;Ts1&#39;</span><span class="p">,</span> <span class="s1">&#39;T2&#39;</span><span class="p">,</span> <span class="s1">&#39;Ts2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;y_err_1&#39;</span><span class="p">,</span> <span class="s1">&#39;y_err_2&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;d_hat&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">]]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">t_final</span><span class="p">,</span> <span class="n">layout</span><span class="p">)</span>
+            
+        <span class="c1"># initialize event loop</span>
+        <span class="nb">next</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">u1</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q2</span><span class="p">(</span><span class="n">u2</span><span class="p">(</span><span class="mi">0</span><span class="p">))]</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">t_final</span><span class="p">,</span> <span class="n">t_step</span><span class="p">):</span>
+            <span class="c1"># get new measurement</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab</span><span class="o">.</span><span class="n">T1</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">lab</span><span class="o">.</span><span class="n">T2</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y_err</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">send</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+            <span class="c1"># update plotter and historian</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+            <span class="c1"># set input for next period</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="n">lab</span><span class="o">.</span><span class="n">Q1</span><span class="p">(</span><span class="n">u1</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="n">lab</span><span class="o">.</span><span class="n">Q2</span><span class="p">(</span><span class="n">u2</span><span class="p">(</span><span class="n">t</span><span class="p">))]</span>
+            
+    <span class="k">return</span> <span class="n">h</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">200</span> <span class="k">else</span> <span class="mi">5</span>
+
+<span class="n">observer</span> <span class="o">=</span> <span class="n">tclab_observer_disturbance</span><span class="p">(</span><span class="n">L_aug</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">d_initial</span><span class="p">)</span>
+<span class="n">experiment_disturbance</span><span class="p">(</span><span class="n">observer</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">t_final</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bdfe6527847125975f3a233988eab79eb68792ca7d1924ceddefd177434f3475.png" src="../../_images/bdfe6527847125975f3a233988eab79eb68792ca7d1924ceddefd177434f3475.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TCLab Model disconnected successfully.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tclab.historian.Historian at 0x7f9f91046700&gt;
+</pre></div>
+</div>
+<img alt="../../_images/bdfe6527847125975f3a233988eab79eb68792ca7d1924ceddefd177434f3475.png" src="../../_images/bdfe6527847125975f3a233988eab79eb68792ca7d1924ceddefd177434f3475.png" />
+</div>
+</div>
+</section>
+<section id="exercise-2">
+<h3><span class="section-number">4.6.2.2. </span>Exercise 2.<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h3>
+<p>Implement a disturbance estimator for your copy of the Temperature Control Lab.</p>
+<ol class="arabic simple">
+<li><p>Using the matrix parameters used for Exercise 1 of this assignment, compute and report numerical values for augmented matrices <span class="math notranslate nohighlight">\(A_{aug}\)</span>, <span class="math notranslate nohighlight">\(B_{aug}\)</span>, <span class="math notranslate nohighlight">\(C_{aug}\)</span> described above.</p></li>
+<li><p>Using the results of exercise 1, choose an initial value for <span class="math notranslate nohighlight">\(L_{aug}\)</span>. Place four of the eigenvalues to match the eigenvalues placed in exercise 1.  The fifth eigenvalue should have a negative value corresponding to a time constant chosen to between 20 and 100 seconds. Test your code as shown above.</p></li>
+<li><p>Test your disturbance estimator on your copy of the Temperature Control Lab. You will need to adapt the testing code presented above for this purpose. Try to detect changes in the environment surrounding your device, such placing in cooler, warmer, or breezy place. A hair dryer would certainly do the job. Does your disturbance estimator detect the change?  If needed, choose a different time constant in part 2.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Anomaly-Detection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Anomaly Detection</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Observer-Synthesis-LMI.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.7. </span>Observer Synthesis using Linear Matrix Inequalities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-determing-the-observer-gains-l">4.6.1. Part 1. Determing the Observer Gains <span class="math notranslate nohighlight">\(L\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-model">4.6.1.1. State Space Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observer">4.6.1.2. Observer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-the-observer">4.6.1.3. Testing the Observer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues-and-eigenvectors">4.6.1.4. Eigenvalues and Eigenvectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#placing-the-eigenvalues-of-a-lc">4.6.1.5. Placing the eigenvalues of <span class="math notranslate nohighlight">\(A-LC\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1">4.6.1.6. Exercise 1.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-estimating-disturbances">4.6.2. Part 2. Estimating Disturbances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-disturbance-estimator">4.6.2.1. Testing Disturbance Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2">4.6.2.2. Exercise 2.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

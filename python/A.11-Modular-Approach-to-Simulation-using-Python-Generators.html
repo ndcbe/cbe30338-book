@@ -1,0 +1,1403 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modular Simulation using Python Generators &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python/A.11-Modular-Approach-to-Simulation-using-Python-Generators';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Animation in Jupyter Notebooks" href="A.30-Animation-in-Jupyter-Notebooks.html" />
+    <link rel="prev" title="Coding Controllers with Python Generators" href="A.10-Coding-Controllers-with-Python-Generators.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../Readme.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="CBE 30338 Data Analytics, Optimization, and Control - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Readme.html">
+                    CBE 30338 Data Analytics, Optimization, and Control
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Schedule.html">Schedule (2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../assignments/assignments.html">Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Homework-1.html">Homework 1: Computing and Data Analysis Review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Lab-1-Step-Testing.html">Lab 1: Step Test of a First-Order System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Lab-2-Model-Identification.html">Lab 2: Model Identification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Lab-3-Relay-Control.html">Lab 3: Relay (On-Off) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Lab-4-PI-Control.html">Lab 4: PI Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Homework-2.html">Homework 2: Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Lab-5-Open-Loop-Optimization.html">Lab 5: Open Loop Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/Lab-6-MPC.html">Lab 6: Model Predictive Control (MPC)</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Topical Materials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/1/What-is-Process-Control.html">1. What is Process Control?</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/1/What-is-Feedback.html">1.1. What is Feedback?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/1/Elements-of-Feedback-Control.html">1.2. Elements of Process Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/2/Process-Modeling.html">2. Process Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/One-Compartment-Pharmacokinetics.html">2.1. One Compartment Pharmacokinetics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Properties-of-Scalar-First-Order-Linear-Systems.html">2.2. First-Order Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/First-Order-Model-for-a-Single-Heater.html">2.3. First Order Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Fitting-a-Model-to-Data.html">2.4. Fitting a Model to Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Second-Order.html">2.5. Second Order Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Fed-Batch-Bioreactor.html">2.6. Fed-Batch Bioreactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Spring-Mass-Damper.html">2.7. Characteristics of Second Order Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Exothermic-CSTR.html">2.8. Exothermic Continuous Stirred Tank Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Hare-and-Lynx.html">2.9. Hare and Lynx Population Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/2/Study-Guide.html">2.10. Study Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/3/Feedback-Control.html">3. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Case-Study-Thermal-Cycling-PCR.html">3.1. Case Study: Thermal Cycling for PCR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Setpoints.html">3.2. Setpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Setpoints-Thermal-Cycler.html">3.3. Case Study: PCR Thermal Cycler Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Relay-Control.html">3.4. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Implementing-Controllers.html">3.5. Implementing Controllers in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Proportional-Integral-Control.html">3.6. Practical Proportional (P) and Proportional-Integral (PI) Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Integral-Windup-and-Bumpless-Transfer.html">3.7. Integral Windup and Bumpless Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/P-Controller-Analysis.html">3.8. Analysis of Proportional Only Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/PI-Controller-Analysis.html">3.9. Analysis of Proportional-Integral Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/3/Controller-Tuning.html">3.10. Controller Tuning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/4/Process-Analytics.html">4. Process Analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Learning-Goals.html">4.1. Learning Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Process-Historians.html">4.2. Data/Process/Operational Historian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/State-Estimation.html">4.3. State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Lab-Assigment-State-Estimation.html">4.4. Lab Assignment 5: State Estimation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Anomaly-Detection.html">4.5. Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Lab-Assignment-Anomaly-Detection.html">4.6. Lab Assignment 6: Anomaly Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Observer-Synthesis-LMI.html">4.7. Observer Synthesis using Linear Matrix Inequalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Envrironmental-Application.html">4.8. Application of Luenberger Observers to Environmental Modeling of Rivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/4/Study-Questions.html">4.9. Study Questions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/5/Optimization.html">5. Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Linear-Production-Model.html">5.1. Linear Production Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Linear-Blending-Problem.html">5.2. Linear Blending Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Homework_2.html">5.3. Homework 2: Optimization (Legacy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Gasoline-Blending.html">5.4. Gasoline Blending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Linear-Programming.html">5.5. Linear Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Design-of-a-Cold-Weather-Fuel.html">5.6. Design of a Cold Weather Fuel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/Pyomo-Examples.html">5.7. Pyomo Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/EV-Example.html">5.8. Recharging Strategy for an Electric Vehicle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/5/milk-pooling.html">5.9. Pooling and Blending</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/6/Predictive-Control-Chapter.html">6. Predictive Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Static-Operability.html">6.1. Static Operability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Simulation-and-Open-Loop-Optimal-Control.html">6.2. Open-Loop Optimal Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Predictive-Control.html">6.3. Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Implementing-Predictive-Control.html">6.4. Implementing Predictive Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/gompertz-tumor-growth.html">6.5. Gompertz Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/gompertz-model-project.html">6.6. Project: Gompertz Model for Tumor Growth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/time-as-decision-variable.html">6.7. Time as a Decision Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/TCLab-Optimization-Estimation-Control.html">6.8. TCLab: Open-Loop Optimization and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/TCLab-Model-Predictive-Control.html">6.9. TCLab: Model Predictive Control (MPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/6/Simulation-and-Optimal-Control-in-Pharmacokinetics.html">6.10. Simulation and Optimal Control in Pharmacokinetics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebooks/08.00-Projects.html">7. Projects (Spring 2023)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebooks/08.01-Project-Ideas.html">7.1. Project Ideas</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/09.00-Bibliography.html">8. References</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Control Laboratory</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/00.00-tclab.html">1. The Temperature Control Laboratory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/00.01-setting-up-tclab.html">1.1. Setting up TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/00.02-troubleshooting-tclab.html">1.2. Testing and Troubleshooting TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/00.03-using-tclab.html">1.3. Python Coding for TCLab</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/testing-software-environment.html">1.4. Testing Your Software Environment and TCLab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/01.00-step-testing.html">2. Step Testing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/01.01-step-testing.html">2.1. Step Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/01.02-first-order-model-for-a-single-heater.html">2.2. Lab Assignment 1: Step Test of a First-Order System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/02.00-Empirical-Model-Identification.html">3. Empirical Model Identification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/02.02-Fitting-Step-Test-Data-to-Empirical-Models.html">3.1. Fitting Step Test Data to Empirical Models</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/03.00-Estimating-Model-Parameters.html">4. Estimating Model Parameters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.04-Two-Input-Two-Output-Model.html">4.1. Two-Input, Two-Output Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.05-Two-State-Model-for-a-Single-Heater.html">4.2. Two State Model for a Single Heater</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.06-Four-State-Model.html">4.3. Four State Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/03.10-TCLab-Lab-2-Model-Indentification.html">4.4. Assignment: Model Identification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/04.00-Feedback-Control.html">5. Feedback Control</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.01-Relay-Control.html">5.1. Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.02-Lab-Assignment-Relay-Control.html">5.2. Lab Assignment 4: Relay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.10-Lab-Assignment-PID-Control.html">5.3. Lab Assignment: PID Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/04.11-Lab-Assignment-PI-Control.html">5.4. Lab Assignment 4: PI Control</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/05.00-State-Estimation.html">6. State Estimation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/05.01-Open-and-Closed-Loop-Estimation.html">6.2. Open and Closed Loop Estimation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../tclab/06.00-Optimal-Control.html">7. Optimization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tclab/07.00-Predictive-Control-and-Real-Time-Optimization.html">8. Predictive Control and Real Time Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/07.01-Optimization-Control-and-Estimation-using-Pyomo.html">8.1. Simulation, Control, and Estimation using Pyomo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tclab/07.02-Optimization-Control-and-Estimation-using-Pyomo-With-Windows-ipopt.html">8.2. Simulation, Control, and Estimation using Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="A.00-Python-Tutorials.html">Python Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="A.05-Tidy-Data-and-Pandas.html">Tidy Data and Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="A.10-Coding-Controllers-with-Python-Generators.html">Coding Controllers with Python Generators</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Modular Simulation using Python Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="A.30-Animation-in-Jupyter-Notebooks.html">Animation in Jupyter Notebooks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/controls/blob/main/python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/controls/issues/new?title=Issue%20on%20page%20%2Fpython/A.11-Modular-Approach-to-Simulation-using-Python-Generators.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python/A.11-Modular-Approach-to-Simulation-using-Python-Generators.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modular Simulation using Python Generators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-using-scipy-integrate-odeint">Simulation using scipy.integrate.odeint()</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-usage">Typical Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-wrong-with-that">What’s Wrong with That?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-generators">Python Generators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yield-statement">Yield Statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterators">Iterators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-way-communcation-with-generators-using-send">Two-way communcation with Generators using Send</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-application-modeling-gravity-drained-tanks-with-python-generators">Example Application: Modeling Gravity-Drained Tanks with Python Generators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generator-for-a-gravity-drained-tank">Generator for a Gravity-Drained Tank</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-a-single-tank-with-constant-inflow">Simulation of a Single Tank with Constant Inflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-two-tanks-in-series">Simulation of Two Tanks in Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-two-tanks-in-series-with-pi-level-control-on-the-second-tank">Simulation of Two Tanks in Series with PI Level Control on the Second Tank</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-pi-control-generator">Adding a PI Control Generator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-cascade-control-for-two-tanks-in-series-with-unmeasured-disturbance">Implementing Cascade Control for Two Tanks in Series with Unmeasured Disturbance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enhancing-modularity-with-class-definitions-for-process-units">Enhancing Modularity with Class Definitions for Process Units</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gravity-drained-tank-class">Gravity-Drained Tank Class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pi-controller-class">PI Controller Class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-simulation-of-cascade-control-for-two-tanks-in-series">Modular Simulation of Cascade Control for Two Tanks in Series</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modular-simulation-using-python-generators">
+<h1>Modular Simulation using Python Generators<a class="headerlink" href="#modular-simulation-using-python-generators" title="Link to this heading">#</a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>This notebook demonstrates shows how to use the Python generators for simulation. This technique implements simulation blocks as Python generators, and shows how to piece blocks together to simulate more complex systems. This is an advanced technique that may be useful in certain projects and a convenient alternative to block diagram simulators.</p>
+</section>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#section1"><span class="xref myst">Simulation using scipy.integrate.odeint()</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#section1-1"><span class="xref myst">Typical Usage</span></a></p></li>
+<li><p><a class="reference internal" href="#section1-2"><span class="xref myst">What’s Wrong with That? </span></a><br><br></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#section2"><span class="xref myst">Python Generators</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#section2-1"><span class="xref myst">Yield Statement</span></a></p></li>
+<li><p><a class="reference internal" href="#section2-2"><span class="xref myst">Iterators</span></a></p></li>
+<li><p><a class="reference internal" href="#section2-3"><span class="xref myst">Two-way communcation with Generators using Send</span></a><br><br></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#section3"><span class="xref myst">Example Application: Modeling Gravity-Drained Tanks with Python Generators</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#section3-1"><span class="xref myst">Generator for a Gravity-Drained Tank</span></a></p></li>
+<li><p><a class="reference internal" href="#section3-2"><span class="xref myst">Simulation of a Single Tank with Constant Inflow</span></a></p></li>
+<li><p><a class="reference internal" href="#section3-3"><span class="xref myst">Simulation of Two Tanks in Series</span></a></p></li>
+<li><p><a class="reference internal" href="#section3-4"><span class="xref myst">Simulation of Two Tanks in Series with PI Level Control on the Second Tank</span></a></p></li>
+<li><p><a class="reference internal" href="#section3-5"><span class="xref myst">Adding a PI Control Generator</span></a></p></li>
+<li><p><a class="reference internal" href="#section3-6"><span class="xref myst">Implementing Cascade Control for Two Tanks in Series with Unmeasured Disturbance</span></a><br><br></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#section4"><span class="xref myst">Enhancing Modularity with Class Definitions for Process Units</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#section4-1"><span class="xref myst">Gravity-Drained Tank Class</span></a></p></li>
+<li><p><a class="reference internal" href="#section4-2"><span class="xref myst">PI Controller Class</span></a></p></li>
+<li><p><a class="reference internal" href="#section4-3"><span class="xref myst">Modular Simulation of Cascade Control for Two Tanks in Series</span></a><br><br></p></li>
+</ol>
+</li>
+</ol>
+<p><a id='section1'></a></p>
+</section>
+<section id="simulation-using-scipy-integrate-odeint">
+<h2>Simulation using scipy.integrate.odeint()<a class="headerlink" href="#simulation-using-scipy-integrate-odeint" title="Link to this heading">#</a></h2>
+<p><a id='section1-1'></a></p>
+<section id="typical-usage">
+<h3>Typical Usage<a class="headerlink" href="#typical-usage" title="Link to this heading">#</a></h3>
+<p>The SciPy library provides a convenient and familiar means of simulating systems modeled by systems of ordinary differential equations.  As demonstrated in other notebooks, the straightforward approach consists of several common steps</p>
+<ol class="arabic simple">
+<li><p>Initialize graphics and import libraries</p></li>
+<li><p>Fix parameter values</p></li>
+<li><p>Write a function to evaluate RHS of the differential equations</p></li>
+<li><p>Choose initial conditions and time grid</p></li>
+<li><p>Perform the simulation by numerical solution of the differential equations</p></li>
+<li><p>Prepare visualizations and post-processing</p></li>
+</ol>
+<p>Here we demonstrate this approach for a two gravity-drained tanks connected in series with constant inflow.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Initialize graphics and import libraries</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># 2. Fix parameter values</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">Cv</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">qin</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+<span class="c1"># 3. Write a function to evaluate RHS of the differential equations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">qin</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">h1</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">dh1</span> <span class="o">=</span> <span class="p">(</span><span class="n">qin</span> <span class="o">-</span> <span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span><span class="o">/</span><span class="n">A</span>
+    <span class="n">dh2</span> <span class="o">=</span>  <span class="p">(</span><span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h2</span><span class="p">))</span><span class="o">/</span><span class="n">A</span> 
+    <span class="k">return</span> <span class="p">[</span><span class="n">dh1</span><span class="p">,</span><span class="n">dh2</span><span class="p">]</span>
+
+<span class="c1"># 4. Choose initial conditions and time grid</span>
+<span class="n">IC</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># 5. Perform the simulation by numerical solution of the differential equations</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span><span class="n">IC</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">qin</span><span class="p">,))</span>
+
+<span class="c1"># 6. Prepare visualizations and post-processing</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">sol</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Tank 1&#39;</span><span class="p">,</span><span class="s1">&#39;Tank 2&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Simulation of Two Gravity-Drained Tanks in Series&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fea22e6fa1714b4b58e0d9b88a8f71b1f518f59aa0eba94e1cc5a207bfdca9e5.png" src="../_images/fea22e6fa1714b4b58e0d9b88a8f71b1f518f59aa0eba94e1cc5a207bfdca9e5.png" />
+</div>
+</div>
+<p><a id='section1-2'></a></p>
+</section>
+</section>
+<section id="what-s-wrong-with-that">
+<h2>What’s Wrong with That?<a class="headerlink" href="#what-s-wrong-with-that" title="Link to this heading">#</a></h2>
+<p>If direct simulation as outlined above meets the needs of your project, then be satisfied and move on. This is how these tools are intended to be used.</p>
+<p>However, as written above, simulation with scipy.integrate.odeint requires you to write a function that calculates the right hand side of a system of differential equations. This can be challenging for complex system. For example, you may have multiple PID controllers, each implementing logic for anti-reset windup. Or you may have components in the process that exhibit hysterisis, time-delay, or other difficult-to-model dynamics. These cases call for a more modular approach to modeling and simulation.</p>
+<p>In these cases we’d like to combine the continous time dynamics modeled by differential equations with more complex logic executed at discrete points in the time.</p>
+<p><a id='section2'></a></p>
+</section>
+<section id="python-generators">
+<h2>Python Generators<a class="headerlink" href="#python-generators" title="Link to this heading">#</a></h2>
+<p><a id='section2-1'></a></p>
+<section id="yield-statement">
+<h3>Yield Statement<a class="headerlink" href="#yield-statement" title="Link to this heading">#</a></h3>
+<p>One of the more advanced and often overlooked features of Python is the use of <a class="reference external" href="http://nvie.com/posts/iterators-vs-generators/">generators and iterators</a> for performing operations on sequences of information. In particular, a generator is a function that returns information to via the <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement rather then the more commonly encountered return statement. When called again, the generator picks right up at the point of the yield statement.</p>
+<p>Let’s demonsrate this by writing a generator of Fibonacci numbers. This generator returns all Fibonacci numbers less or equal to a given number <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">j</span>
+        <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="n">j</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s a typical usage.  What are the Fibonacci numbers less than or equal to 100?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+</pre></div>
+</div>
+</div>
+</div>
+<p>The generator can also be used inside list comprehensions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">fib</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='section2-2'></a></p>
+</section>
+<section id="iterators">
+<h3>Iterators<a class="headerlink" href="#iterators" title="Link to this heading">#</a></h3>
+<p>When called, a generator function creates an intermediate function called an iterator. Here we construct the iterator  and use it within a loop to find the first 10 Fibonacci numbers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">next</span></code> on an iterator returns the next value.</p>
+<p><a id='section2-3'></a></p>
+</section>
+<section id="two-way-communcation-with-generators-using-send">
+<h3>Two-way communcation with Generators using Send<a class="headerlink" href="#two-way-communcation-with-generators-using-send" title="Link to this heading">#</a></h3>
+<p>So far we have demonstrated the use of <code class="docutils literal notranslate"><span class="pre">yield</span></code> as a way to communicate information from the generator to the calling program. Which is fine if all you need is one-way communication. But for the modular simulation of processes, we need to be able to send information both ways.  A feedback control module, for example, will need to obtain current values of the process variable in order to update its internal state to provide an update of the manipulated variable to calling programm.</p>
+<p>Here’s the definition of a generator for negative feedback proportional control where the control gain <span class="math notranslate nohighlight">\(K_p\)</span> and setpoint <span class="math notranslate nohighlight">\(SP\)</span> are specified constants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">proportionalControl</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">SP</span><span class="p">):</span>
+    <span class="n">MV</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">PV</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">MV</span>
+        <span class="n">MV</span> <span class="o">=</span> <span class="n">Kp</span><span class="o">*</span><span class="p">(</span><span class="n">SP</span><span class="o">-</span><span class="n">PV</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement is now doing double duty.  When first called it sends the value of MV back to the calling program, then stops and waits. It is waiting for the calling program to send a value of PV using the <code class="docutils literal notranslate"><span class="pre">.send()</span></code> method. Execution resumes until the yield statement is encountered again and the new value of MV returned to the calling program.</p>
+<p>With this behavior in mind, gettting the generator ready for use is a two step process. The first step is to create an instance (i.e., an iterator).  The second step is to initialize the instance by issuing <code class="docutils literal notranslate"><span class="pre">.send(None)</span></code> command.  This is will halt execution at the first <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement. At that point the generator instance will be ready to go for subsequent simulation.</p>
+<p>Here’s the initialization of a new instance of proportional control with <span class="math notranslate nohighlight">\(K_p = 2.5\)</span> and <span class="math notranslate nohighlight">\(SP = 2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pc</span> <span class="o">=</span> <span class="n">proportionalControl</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pc</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This shows it in use.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">PV</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PV</span><span class="p">,</span> <span class="n">pc</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">PV</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 5.0
+1 2.5
+2 0.0
+3 -2.5
+4 -5.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can verify that these results satisfy the proportional control relationship.</p>
+<p><a id='section3'></a></p>
+</section>
+</section>
+<section id="example-application-modeling-gravity-drained-tanks-with-python-generators">
+<h2>Example Application: Modeling Gravity-Drained Tanks with Python Generators<a class="headerlink" href="#example-application-modeling-gravity-drained-tanks-with-python-generators" title="Link to this heading">#</a></h2>
+<p>The first step in using a Python generator for simulation is to write the generator. It will be used to create instances of the dynamical process being modeled by the generator. Parameters should include a sample time <code class="docutils literal notranslate"><span class="pre">dt</span></code> and any other model parameters you choose to specify a particular instance of the process. The yield statement should provide time plus any other relevant process data. The yield statement will produce new values of process inputs valid for the next time step.</p>
+<p><a id='section3-1'></a></p>
+<section id="generator-for-a-gravity-drained-tank">
+<h3>Generator for a Gravity-Drained Tank<a class="headerlink" href="#generator-for-a-gravity-drained-tank" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generator for a gravity-drained tank model</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">IC</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">qout</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="n">dh</span> <span class="o">=</span> <span class="p">(</span><span class="n">qin</span> <span class="o">-</span> <span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="n">A</span>
+        <span class="k">return</span> <span class="n">dh</span>
+    
+    <span class="n">h</span> <span class="o">=</span> <span class="n">IC</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">qin</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">t</span><span class="p">,</span><span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span><span class="n">h</span><span class="p">,[</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='section3-2'></a></p>
+</section>
+<section id="simulation-of-a-single-tank-with-constant-inflow">
+<h3>Simulation of a Single Tank with Constant Inflow<a class="headerlink" href="#simulation-of-a-single-tank-with-constant-inflow" title="Link to this heading">#</a></h3>
+<p>Next we show how to use the generator to create a simulation consisting of a single gravity drained tank with constant inflow.</p>
+<ol class="arabic simple">
+<li><p>Choose a sample time for the simulation.</p></li>
+<li><p>Create instances of the processes to be used in your simulation.</p></li>
+<li><p>The first call to an instance is f.send(None). This will return the initial condition.</p></li>
+<li><p>Subsequent calls to the instance should be f.send(u) where u is variable, tuple, or other data time being passed to the process. The return value will be a tuple contaning the next value of time plus other process data.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. select sample time</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="c1"># 2. create a process instance</span>
+<span class="n">tank</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+
+<span class="c1"># 3. get initial condition</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+
+<span class="c1"># 4. append subsequent states </span>
+<span class="n">y</span> <span class="o">+=</span> <span class="p">[</span><span class="n">tank</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">dt</span><span class="p">)]</span>
+
+<span class="c1"># 5. extract information into numpy arrays for plotting</span>
+<span class="n">t</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Outlet Flow&#39;</span><span class="p">,</span><span class="s1">&#39;Level&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3720a6463df369cb35b2c699dd91dc90ed0af4aeca21589065c70a0e1722295b.png" src="../_images/3720a6463df369cb35b2c699dd91dc90ed0af4aeca21589065c70a0e1722295b.png" />
+</div>
+</div>
+<p><a id='section3-3'></a></p>
+</section>
+<section id="simulation-of-two-tanks-in-series">
+<h3>Simulation of Two Tanks in Series<a class="headerlink" href="#simulation-of-two-tanks-in-series" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">tank1</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">tank2</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+    <span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+    
+    <span class="n">y1</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span><span class="p">])</span>
+    <span class="n">y2</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span><span class="p">])</span>
+    
+<span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">h1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">h2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x111f5a7f0&gt;,
+ &lt;matplotlib.lines.Line2D at 0x11213bf28&gt;]
+</pre></div>
+</div>
+<img alt="../_images/2700174b81f527cfefed76cd4b3267bd66acc27d82ec55ee85904b3ae735c5ae.png" src="../_images/2700174b81f527cfefed76cd4b3267bd66acc27d82ec55ee85904b3ae735c5ae.png" />
+</div>
+</div>
+<p><a id='section3-4'></a></p>
+</section>
+<section id="simulation-of-two-tanks-in-series-with-pi-level-control-on-the-second-tank">
+<h3>Simulation of Two Tanks in Series with PI Level Control on the Second Tank<a class="headerlink" href="#simulation-of-two-tanks-in-series-with-pi-level-control-on-the-second-tank" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">tank1</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">tank2</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">Kp</span> <span class="o">=</span> <span class="mf">.6</span>
+<span class="n">Ki</span> <span class="o">=</span> <span class="mf">.6</span>
+<span class="n">ecurr</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ulog</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+    <span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+    
+    <span class="n">eprev</span><span class="p">,</span><span class="n">ecurr</span> <span class="o">=</span> <span class="n">ecurr</span><span class="p">,</span><span class="n">r2</span><span class="o">-</span><span class="n">h2</span>
+    <span class="n">u</span> <span class="o">+=</span> <span class="n">Kp</span><span class="o">*</span><span class="p">(</span><span class="n">ecurr</span><span class="o">-</span><span class="n">eprev</span><span class="p">)</span> <span class="o">+</span> <span class="n">Ki</span><span class="o">*</span><span class="n">ecurr</span><span class="o">*</span><span class="n">dt</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+    
+    <span class="n">y1</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span><span class="p">])</span>
+    <span class="n">y2</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span><span class="p">])</span>
+    <span class="n">ulog</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    
+<span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">h1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">h2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">ulog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1123d0240&gt;]
+</pre></div>
+</div>
+<img alt="../_images/55ea92ddc1228a061ea8b3ff4ac6d25218cc5adef8b122eec4440c713b307afa.png" src="../_images/55ea92ddc1228a061ea8b3ff4ac6d25218cc5adef8b122eec4440c713b307afa.png" />
+</div>
+</div>
+<p><a id='section3-5'></a></p>
+</section>
+<section id="adding-a-pi-control-generator">
+<h3>Adding a PI Control Generator<a class="headerlink" href="#adding-a-pi-control-generator" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">):</span>
+
+    <span class="n">ecurr</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">eprev</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">MVmin</span>
+    
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">t</span><span class="p">,</span><span class="n">u</span>
+        <span class="n">eprev</span><span class="p">,</span><span class="n">ecurr</span> <span class="o">=</span> <span class="n">ecurr</span><span class="p">,</span><span class="n">r</span><span class="o">-</span><span class="n">y</span>
+        <span class="n">u</span> <span class="o">+=</span> <span class="n">Kp</span><span class="o">*</span><span class="p">(</span><span class="n">ecurr</span> <span class="o">-</span> <span class="n">eprev</span><span class="p">)</span> <span class="o">+</span> <span class="n">Ki</span><span class="o">*</span><span class="n">ecurr</span><span class="o">*</span><span class="n">dt</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">MVmin</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="n">MVmax</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">tank1</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">tank2</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">PI_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">Kp</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+<span class="n">ulog</span> <span class="o">=</span> <span class="p">[</span><span class="n">pi</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)[</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+    <span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+    <span class="n">t3</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">r2</span><span class="p">,</span><span class="n">h2</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+    
+    <span class="n">y1</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span><span class="p">])</span>
+    <span class="n">y2</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span><span class="p">])</span>
+    <span class="n">ulog</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    
+<span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">h1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">h2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">ulog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1124d7c50&gt;]
+</pre></div>
+</div>
+<img alt="../_images/55ea92ddc1228a061ea8b3ff4ac6d25218cc5adef8b122eec4440c713b307afa.png" src="../_images/55ea92ddc1228a061ea8b3ff4ac6d25218cc5adef8b122eec4440c713b307afa.png" />
+</div>
+</div>
+<p><a id='section3-6'></a></p>
+</section>
+<section id="implementing-cascade-control-for-two-tanks-in-series-with-unmeasured-disturbance">
+<h3>Implementing Cascade Control for Two Tanks in Series with Unmeasured Disturbance<a class="headerlink" href="#implementing-cascade-control-for-two-tanks-in-series-with-unmeasured-disturbance" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># disturbance function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># simulation</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">tank1</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">tank2</span> <span class="o">=</span> <span class="n">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+
+<span class="c1"># level control for tank 1.  </span>
+<span class="n">pi1</span> <span class="o">=</span> <span class="n">PI_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">Kp</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># cascade level control for tank 2. Manipulated variable is the setpoint to pi1</span>
+<span class="n">pi2</span> <span class="o">=</span> <span class="n">PI_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">Kp</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span>
+<span class="n">ulog</span> <span class="o">=</span> <span class="p">[</span><span class="n">pi1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">pi2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mf">1.3</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+    <span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">q1</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">t3</span><span class="p">,</span><span class="n">r1</span> <span class="o">=</span> <span class="n">pi2</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">r2</span><span class="p">,</span><span class="n">h2</span><span class="p">,</span><span class="n">r1</span><span class="p">))</span>
+    <span class="n">t4</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">pi1</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">r1</span><span class="p">,</span><span class="n">h1</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+    
+    <span class="n">y1</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span><span class="p">])</span>
+    <span class="n">y2</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span><span class="p">])</span>
+    <span class="n">ulog</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    
+<span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">q1</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">h1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">q2</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">h2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">ulog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1125c0710&gt;]
+</pre></div>
+</div>
+<img alt="../_images/9a3df983fd6539426ef6239e95e9ee68ee82f9f24123497ab0a56b106f405538.png" src="../_images/9a3df983fd6539426ef6239e95e9ee68ee82f9f24123497ab0a56b106f405538.png" />
+</div>
+</div>
+<p><a id='section4'></a></p>
+</section>
+</section>
+<section id="enhancing-modularity-with-class-definitions-for-process-units">
+<h2>Enhancing Modularity with Class Definitions for Process Units<a class="headerlink" href="#enhancing-modularity-with-class-definitions-for-process-units" title="Link to this heading">#</a></h2>
+<p>One of the key goals of a modular approach to simulation is to implement process specific behavior within the definitions of the process, and separate from the organization of information flow among units that takes place in the main simulation loop.</p>
+<p>Below we define two examples of class definitions demonstrating how this can be done. The class definitions add features for defining names and parameters for instances of each class, and functions to log and plot data gathered in the course of simulations.</p>
+<p><a id='section4-1'></a></p>
+<section id="gravity-drained-tank-class">
+<h3>Gravity-Drained Tank Class<a class="headerlink" href="#gravity-drained-tank-class" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">gravtank</span><span class="p">():</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Cv</span> <span class="o">=</span> <span class="n">Cv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qin</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">qout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="n">dh</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qin</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span>
+        <span class="k">return</span> <span class="n">dh</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t</span><span class="p">,</span><span class="n">qout</span><span class="p">,</span><span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">qout</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; qout&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; h&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">IC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">IC</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">qin</span> <span class="o">=</span> <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deriv</span><span class="p">,</span><span class="n">h</span><span class="p">,[</span><span class="n">t</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="n">dt</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)])</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='section4-2'></a></p>
+</section>
+<section id="pi-controller-class">
+<h3>PI Controller Class<a class="headerlink" href="#pi-controller-class" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PI</span><span class="p">():</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">Kp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Kp</span> <span class="o">=</span> <span class="n">Kp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ki</span> <span class="o">=</span> <span class="n">Ki</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MVmin</span> <span class="o">=</span> <span class="n">MVmin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MVmax</span> <span class="o">=</span> <span class="n">MVmax</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="p">[]</span>
+        
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; PV&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">(),</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; SP&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Process Variable and Setpoint&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; MV&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Manipulated Variable&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+    <span class="k">def</span><span class="w"> </span><span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+        <span class="n">ecurr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">eprev</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MVmin</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">u</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span><span class="p">])</span> 
+            <span class="n">eprev</span><span class="p">,</span><span class="n">ecurr</span> <span class="o">=</span> <span class="n">ecurr</span><span class="p">,</span><span class="n">r</span><span class="o">-</span><span class="n">y</span>
+            <span class="n">u</span> <span class="o">+=</span> <span class="n">Kp</span><span class="o">*</span><span class="p">(</span><span class="n">ecurr</span> <span class="o">-</span> <span class="n">eprev</span><span class="p">)</span> <span class="o">+</span> <span class="n">Ki</span><span class="o">*</span><span class="n">ecurr</span><span class="o">*</span><span class="n">dt</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MVmin</span><span class="p">,</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MVmax</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='section4-3'></a></p>
+</section>
+<section id="modular-simulation-of-cascade-control-for-two-tanks-in-series">
+<h3>Modular Simulation of Cascade Control for Two Tanks in Series<a class="headerlink" href="#modular-simulation-of-cascade-control-for-two-tanks-in-series" title="Link to this heading">#</a></h3>
+<p>The following simulation shows how to use the class definitions in a simulation.  Each process instance used in the simulation requires three actions:</p>
+<ol class="arabic simple">
+<li><p>Create an instance of the process. This is the step at which you can provide an instance name, parameters specific to the process and instance. Methods associated with the instance will be used to examine simulation logs and plot simulation results.</p></li>
+<li><p>Create a generator. A call to the generator function for each process instance creates an associated iterator. A sample time must be specified.</p></li>
+<li><p>An initial call to the iterator with an argument of <code class="docutils literal notranslate"><span class="pre">None</span></code> is needed to advance execution to the first <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># disturbance function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># sample time</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># create and initialize tank1</span>
+<span class="n">tank1_obj</span> <span class="o">=</span> <span class="n">gravtank</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Tank 1&#39;</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">tank1</span> <span class="o">=</span> <span class="n">tank1_obj</span><span class="o">.</span><span class="n">generator</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># create and initailize tank2</span>
+<span class="n">tank2_obj</span> <span class="o">=</span> <span class="n">gravtank</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Tank 2&#39;</span><span class="p">,</span><span class="n">A</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">tank2</span> <span class="o">=</span> <span class="n">tank2_obj</span><span class="o">.</span><span class="n">generator</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># level control for tank 1. </span>
+<span class="n">pi1_obj</span> <span class="o">=</span> <span class="n">PI</span><span class="p">(</span><span class="s1">&#39;Tank 1&#39;</span><span class="p">,</span><span class="n">Kp</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">pi1</span> <span class="o">=</span> <span class="n">pi1_obj</span><span class="o">.</span><span class="n">generator</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">pi1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># cascade level control for tank 2. Manipulated variable is the setpoint to for pi1</span>
+<span class="n">pi2_obj</span> <span class="o">=</span> <span class="n">PI</span><span class="p">(</span><span class="s1">&#39;Tank 2&#39;</span><span class="p">,</span><span class="n">Kp</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">pi2</span> <span class="o">=</span> <span class="n">pi2_obj</span><span class="o">.</span><span class="n">generator</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">pi2</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># initial signals</span>
+<span class="n">u</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+<span class="c1"># setpoint for tank 2 level</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="mf">1.3</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+    <span class="n">qout1</span><span class="p">,</span><span class="n">h1</span> <span class="o">=</span> <span class="n">tank1</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>
+    <span class="n">qout2</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">tank2</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">t</span><span class="p">,</span><span class="n">qout1</span> <span class="o">+</span> <span class="n">d</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">pi2</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">t</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">h2</span><span class="p">,</span><span class="n">r1</span><span class="p">))</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">pi1</span><span class="o">.</span><span class="n">send</span><span class="p">((</span><span class="n">t</span><span class="p">,</span><span class="n">r1</span><span class="p">,</span><span class="n">h1</span><span class="p">,</span><span class="n">u</span><span class="p">))</span>    
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">tank1_obj</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">tank2_obj</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">pi1_obj</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">pi2_obj</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7fb3eb0bb979e824adb87610d5192e98201d705af4af042ecf6aecfd803cf701.png" src="../_images/7fb3eb0bb979e824adb87610d5192e98201d705af4af042ecf6aecfd803cf701.png" />
+<img alt="../_images/a3a6424e2a6faf33c4f9e32660feee878fa4725f243948d136511ee26ca2ec8d.png" src="../_images/a3a6424e2a6faf33c4f9e32660feee878fa4725f243948d136511ee26ca2ec8d.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="A.10-Coding-Controllers-with-Python-Generators.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Coding Controllers with Python Generators</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="A.30-Animation-in-Jupyter-Notebooks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Animation in Jupyter Notebooks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-using-scipy-integrate-odeint">Simulation using scipy.integrate.odeint()</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-usage">Typical Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-wrong-with-that">What’s Wrong with That?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-generators">Python Generators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yield-statement">Yield Statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterators">Iterators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-way-communcation-with-generators-using-send">Two-way communcation with Generators using Send</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-application-modeling-gravity-drained-tanks-with-python-generators">Example Application: Modeling Gravity-Drained Tanks with Python Generators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generator-for-a-gravity-drained-tank">Generator for a Gravity-Drained Tank</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-a-single-tank-with-constant-inflow">Simulation of a Single Tank with Constant Inflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-two-tanks-in-series">Simulation of Two Tanks in Series</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-of-two-tanks-in-series-with-pi-level-control-on-the-second-tank">Simulation of Two Tanks in Series with PI Level Control on the Second Tank</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-pi-control-generator">Adding a PI Control Generator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-cascade-control-for-two-tanks-in-series-with-unmeasured-disturbance">Implementing Cascade Control for Two Tanks in Series with Unmeasured Disturbance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enhancing-modularity-with-class-definitions-for-process-units">Enhancing Modularity with Class Definitions for Process Units</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gravity-drained-tank-class">Gravity-Drained Tank Class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pi-controller-class">PI Controller Class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modular-simulation-of-cascade-control-for-two-tanks-in-series">Modular Simulation of Cascade Control for Two Tanks in Series</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jeffrey Kantor and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
