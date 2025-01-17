@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Lab 5: Open Loop Optimization &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -612,8 +607,8 @@
 <span class="c1"># This will prevent you from overwriting your data</span>
 <span class="n">run_tamb_tclab</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="k">if</span> <span class="n">run_tamb_tclab</span><span class="p">:</span>
 
@@ -681,30 +676,30 @@ C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">interpolate</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># ensure that IDAES is imported if there is an error calling Ipopt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">idaes</span>
+<span class="kn">import</span> <span class="nn">idaes</span>
 
 <span class="c1"># Protip: only import the functions you need for each library.</span>
 <span class="c1"># This tells other programs exactly where each function is defined.</span>
 <span class="c1"># Avoid using from pyomo.environ import * as this imports everything</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyomo.environ</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConcreteModel</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">Param</span><span class="p">,</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">TransformationFactory</span><span class="p">,</span> <span class="n">SolverFactory</span><span class="p">,</span> <span class="n">Objective</span><span class="p">,</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">Suffix</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyomo.dae</span><span class="w"> </span><span class="kn">import</span> <span class="n">DerivativeVar</span><span class="p">,</span> <span class="n">ContinuousSet</span><span class="p">,</span> <span class="n">Simulator</span>
+<span class="kn">from</span> <span class="nn">pyomo.environ</span> <span class="kn">import</span> <span class="n">ConcreteModel</span><span class="p">,</span> <span class="n">Var</span><span class="p">,</span> <span class="n">Param</span><span class="p">,</span> <span class="n">Constraint</span><span class="p">,</span> <span class="n">TransformationFactory</span><span class="p">,</span> <span class="n">SolverFactory</span><span class="p">,</span> <span class="n">Objective</span><span class="p">,</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">Suffix</span>
+<span class="kn">from</span> <span class="nn">pyomo.dae</span> <span class="kn">import</span> <span class="n">DerivativeVar</span><span class="p">,</span> <span class="n">ContinuousSet</span><span class="p">,</span> <span class="n">Simulator</span>
 
 <span class="c1">##### IMPORTANT #####</span>
 <span class="c1"># Update the default values for Ua, Ub, CpH, and CpS to match your previous labs</span>
 <span class="c1">#####################</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">TCLabPyomo</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">TCLabPyomo</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    This class contains the methods used for simulating the TCLab model, optimizing u(t) per a </span>
 <span class="sd">    given set point for T, observing a disturbance, and estimating model parameters in the TCLab.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">t_data</span><span class="p">,</span> <span class="n">u_data</span><span class="p">,</span> <span class="n">d_data</span><span class="p">,</span> <span class="n">Tset_data</span><span class="p">,</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">t_data</span><span class="p">,</span> <span class="n">u_data</span><span class="p">,</span> <span class="n">d_data</span><span class="p">,</span> <span class="n">Tset_data</span><span class="p">,</span> 
                  <span class="n">TS_data</span><span class="p">,</span> <span class="n">Tamb</span> <span class="o">=</span> <span class="n">Tamb</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.00016</span><span class="p">,</span> <span class="n">P1</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
                  <span class="n">Ua</span> <span class="o">=</span> <span class="mf">0.0261</span><span class="p">,</span> <span class="n">Ub</span> <span class="o">=</span> <span class="mf">0.0222</span><span class="p">,</span> <span class="n">CpH</span> <span class="o">=</span> <span class="mf">1.335</span><span class="p">,</span> <span class="n">CpS</span> <span class="o">=</span> <span class="mf">1.328</span><span class="p">,</span>
                  <span class="n">integrate_to_initialize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">obj_weight_observe</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
@@ -767,7 +762,7 @@ C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H)
         <span class="k">return</span> <span class="kc">None</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_create_pyomo_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_create_pyomo_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Method that creates and defines the pyomo model for each mode.</span>
 <span class="sd">        Arguments:</span>
@@ -785,7 +780,7 @@ C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H)
         <span class="n">m</span><span class="o">.</span><span class="n">Th</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">75</span><span class="p">],</span> <span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">Ts</span> <span class="o">=</span> <span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">75</span><span class="p">],</span> <span class="n">initialize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Tamb</span><span class="p">)</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">helper</span><span class="p">(</span><span class="n">my_array</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">helper</span><span class="p">(</span><span class="n">my_array</span><span class="p">):</span>
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Method that builds a dictionary to help initialization.</span>
 <span class="sd">            Arguments:</span>
@@ -927,7 +922,7 @@ C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H)
         <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
     
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Solves the pyomo model using ipopt.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -936,49 +931,49 @@ C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H)
         <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns time data from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_Th</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_Th</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns heater temperature data from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Th</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
     
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_Ts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_Ts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns sensor temperature data from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Ts</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
     
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_U</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_U</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns control decision data from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">U</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
     
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns disturbance data from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">D</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_data</span><span class="p">])</span>
     
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns model parameters from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Ua</span><span class="p">),</span> <span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">Ub</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">inv_CpH</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="n">value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">inv_CpS</span><span class="p">)</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">print_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">print_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Prints out the model parameters from solved pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -990,7 +985,7 @@ C_p^S \frac{dT_S}{dt} &amp; = - U_c (T_S - T_H)
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of CpS is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">CpS</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="s2">&quot;Joules/degC.&quot;</span><span class="p">)</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Method to plot the results from the pyomo model.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -1193,7 +1188,7 @@ T_S(t_0) &amp; = T_{amb}
 <span class="c1"># experimental parameters</span>
 <span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="c1"># To complete the experiment, change this to True</span>
 <span class="c1"># After completing the experiment, be sure to change it back to False</span>
@@ -1238,7 +1233,7 @@ T_S(t_0) &amp; = T_{amb}
     <span class="n">TH_solution</span><span class="p">,</span>   <span class="c1"># sensor temperature prediction</span>
     <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="k">if</span> <span class="n">run_exercise2_tclab</span><span class="p">:</span>
 
@@ -1263,9 +1258,9 @@ T_S(t_0) &amp; = T_{amb}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">save_tclab_data</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">overwrite_file</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">save_tclab_data</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">overwrite_file</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Save TCLab data to csv file</span>
 <span class="sd">    Arguments:</span>
@@ -1336,7 +1331,7 @@ T_S(t_0) &amp; = T_{amb}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="n">experiment_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">excercise2_tclab_data_file</span><span class="p">)</span>
 <span class="n">experiment_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -1392,8 +1387,8 @@ T_H(t_0) &amp; = T_{amb} \\
 T_S(t_0) &amp; = T_{amb}
 \end{align*}\]</div>
 <p>and assumption disturbance is zero</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2b15491b-82a9-4b30-8039-85dd5da6947a">
-<span class="eqno">(8)<a class="headerlink" href="#equation-2b15491b-82a9-4b30-8039-85dd5da6947a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3ba98a73-c6ed-47b2-94d3-22bca5f51219">
+<span class="eqno">(8)<a class="headerlink" href="#equation-3ba98a73-c6ed-47b2-94d3-22bca5f51219" title="Permalink to this equation">#</a></span>\[\begin{equation}
 d(t) = 0
 \end{equation}\]</div>
 </section>
@@ -1474,8 +1469,8 @@ d(t) = 0
 <span class="c1"># This will prevent you from overwriting your data</span>
 <span class="n">run_tamb2_tclab</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="k">if</span> <span class="n">run_tamb2_tclab</span><span class="p">:</span>
 
@@ -1538,7 +1533,7 @@ d(t) = 0
 <span class="c1"># This will prevent you from overwriting your data</span>
 <span class="n">run_exercise6_tclab</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="k">if</span> <span class="n">run_exercise6_tclab</span><span class="p">:</span>
 
@@ -1581,7 +1576,7 @@ d(t) = 0
     <span class="n">TH_solution</span><span class="p">,</span>   <span class="c1"># sensor temperature prediction</span>
     <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>   <span class="c1"># tolerates slight exptrapolation</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="k">if</span> <span class="n">run_exercise6_tclab</span><span class="p">:</span>
 
@@ -1840,8 +1835,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

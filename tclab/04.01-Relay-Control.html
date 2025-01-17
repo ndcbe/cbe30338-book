@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5.1. Relay Control &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -554,11 +549,12 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="relay-control">
 <h1><span class="section-number">5.1. </span>Relay Control<a class="headerlink" href="#relay-control" title="Link to this heading">#</a></h1>
+<p><strong>Warning:</strong> This is a legacy lab assignment. See <a class="reference internal" href="../assignments/assignments.html"><span class="std std-doc">Assignments</span></a> for a listing of the current assignments. Please use this legacy notebook as reference material.</p>
 <section id="simple-relay-control">
 <h2><span class="section-number">5.1.1. </span>Simple Relay Control<a class="headerlink" href="#simple-relay-control" title="Link to this heading">#</a></h2>
 <p>The following code implements relay control for temperature T1 on the Temperature Control Lab.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0feda783-9c6d-40e9-9404-b6ba51b3f259">
-<span class="eqno">(5.10)<a class="headerlink" href="#equation-0feda783-9c6d-40e9-9404-b6ba51b3f259" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-47386003-806d-44ca-9eba-94e53445ecd9">
+<span class="eqno">(5.10)<a class="headerlink" href="#equation-47386003-806d-44ca-9eba-94e53445ecd9" title="Permalink to this equation">#</a></span>\[\begin{align}
 Q(t) &amp; = \begin{cases} 
     Q^{max} &amp;\text{if $T \leq T_{setpoint}$}\\
     0       &amp; \text{if $T \geq T_{setpoint}$}
@@ -568,7 +564,7 @@ Q(t) &amp; = \begin{cases}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span>
 
 <span class="c1"># control parameters</span>
 <span class="n">Qmax</span> <span class="o">=</span> <span class="mi">100</span>
@@ -603,8 +599,8 @@ Q(t) &amp; = \begin{cases}
 <h2><span class="section-number">5.1.2. </span>Relay Control with Hysteresis<a class="headerlink" href="#relay-control-with-hysteresis" title="Link to this heading">#</a></h2>
 <p>One of the issues with simple relay control is the potential for ‘chattering’, which are situations where the manipulated variable (in this case heater power) rapid on-and-off switching. This can be caused by systems that are highly response to control inputs or where the sensor measurements carry significant noise.</p>
 <p>The typical home thermostat used for furnace control incorporates a simple but highly effective solution to the chattering period. The idea is to intentially overshoot the setpoint. Then, after the control switches state, there will be at least a short period of time where no further control action should be necessary. The control algorithm can be written</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c90d2911-66b8-48bb-9171-f33955eb2bca">
-<span class="eqno">(5.11)<a class="headerlink" href="#equation-c90d2911-66b8-48bb-9171-f33955eb2bca" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f258c5fd-047b-4a6b-b648-9d3c892a4c66">
+<span class="eqno">(5.11)<a class="headerlink" href="#equation-f258c5fd-047b-4a6b-b648-9d3c892a4c66" title="Permalink to this equation">#</a></span>\[\begin{align}
 Q(t) &amp; = \begin{cases} 
     0       &amp; \text{if $T \geq T_{Setpoint} - \frac{d}{2}$}\\
     Q^{max} &amp;\text{if $T \leq T_{Setpoint} + \frac{d}{2}$}\\
@@ -614,8 +610,8 @@ Q(t) &amp; = \begin{cases}
 <p>where <span class="math notranslate nohighlight">\(d\)</span> is the <em>tolerance</em> or <em>hysteresis</em>. For home heating systems a typical value is in the range of 0.5 to 1 degree F. This image shows how hystersis was adjusted on a typical home thermostat in common usage in the late 20th century.</p>
 <p><a title="By Vincent de Groot - http://www.videgro.net (Own work) [GFDL (http://www.gnu.org/copyleft/fdl.html), CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/) or CC BY 2.5 (http://creativecommons.org/licenses/by/2.5)], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3AHoneywell_thermostat_open.jpg"><img width="512" alt="Honeywell thermostat open" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Honeywell_thermostat_open.jpg/512px-Honeywell_thermostat_open.jpg"/></a></p>
 <p>The furnance is turned on for temperatures below the range</p>
-<div class="amsmath math notranslate nohighlight" id="equation-390cccda-4f8c-4626-952d-8bf78345edbc">
-<span class="eqno">(5.12)<a class="headerlink" href="#equation-390cccda-4f8c-4626-952d-8bf78345edbc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1e371131-3850-460d-a680-b84326deda4f">
+<span class="eqno">(5.12)<a class="headerlink" href="#equation-1e371131-3850-460d-a680-b84326deda4f" title="Permalink to this equation">#</a></span>\[\begin{align}
 T_{Setpoint} - \frac{d}{2} \leq T \leq T_{Setpoint} + \frac{d}{2}
 \end{align}\]</div>
 <p>and is turned for temperatures above the range. Within the range, however, the furnance may be on or off depending on what happened at the last decision point.</p>
@@ -623,7 +619,7 @@ T_{Setpoint} - \frac{d}{2} \leq T \leq T_{Setpoint} + \frac{d}{2}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span>
 
 <span class="c1"># control parameters</span>
 <span class="n">Qmax</span> <span class="o">=</span> <span class="mi">100</span>
@@ -664,7 +660,7 @@ T_{Setpoint} - \frac{d}{2} \leq T \leq T_{Setpoint} + \frac{d}{2}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span>
 
 <span class="n">Tsetpoint1</span> <span class="o">=</span> <span class="mi">45</span>
 <span class="n">Tsetpoint2</span> <span class="o">=</span> <span class="mi">35</span>
@@ -832,8 +828,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

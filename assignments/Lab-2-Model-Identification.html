@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Lab 2: Model Identification &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -539,16 +534,20 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-2025-todo-list">Spring 2025 TODO List</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-lab-exercise">Pre-lab Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-step-tests-and-data-collection">Exercise 1. Step Tests and Data Collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-0-fitting-a-first-order-linear-model">Exercise 0. Fitting a First-Order Linear Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-sine-test-and-data-collection">Exercise 1. Sine Test and Data Collection</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-verify-operation">Step 1. Verify operation.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-check-for-steady-state">Step 2.  Check for steady state</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-step-test">Step 3. Step Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-sine-test">Step 3. Sine Test</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-save-data-to-a-csv-file">Step 4. Save data to a .csv file</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-fitting-a-first-order-model">Exercise 2. Fitting a First-Order Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-fitting-a-second-order-model">Exercise 3. Fitting a Second-Order Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-fit-first-order-model-using-sine-test-data">Exercise 2. Fit First-Order Model using Sine Test Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-fitting-a-second-order-model-using-sine-test-data">Exercise 3. Fitting a Second-Order Model using Sine Test Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-fit-second-order-modeling-using-step-test-data">Exercise 4: Fit Second Order Modeling Using Step Test Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-fit-second-order-model-using-both-data-sets">Exercise 5: Fit Second Order Model Using Both Data Sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-analyze-uncertainty-estimates-for-second-order-models">Exercise 6: Analyze Uncertainty Estimates for Second-Order Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-estimate-heat-and-sesnor-time-constants">Exercise 7: Estimate Heat and Sesnor Time Constants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarations">Declarations</a></li>
 </ul>
             </nav>
@@ -590,114 +589,30 @@
 <li><p>Submit your completed lab notebook via Gradescope.</p></li>
 </ol>
 </section>
-<section id="pre-lab-exercise">
-<h2>Pre-lab Exercise<a class="headerlink" href="#pre-lab-exercise" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Read through the entirety of the assignment before coming to lab.</p></li>
-<li><p>Write pseudocode for estimating the model parameters <strong>with uncertainty</strong> in Exercise 3.</p></li>
-<li><p>Bring pseudocode to lab on a piece of paper or a tablet. The instructor and TAs will likely ask to see this as a starting point for debugging.</p></li>
-</ol>
-</section>
-<section id="exercise-1-step-tests-and-data-collection">
-<h2>Exercise 1. Step Tests and Data Collection<a class="headerlink" href="#exercise-1-step-tests-and-data-collection" title="Link to this heading">#</a></h2>
-<section id="step-1-verify-operation">
-<h3>Step 1. Verify operation.<a class="headerlink" href="#step-1-verify-operation" title="Link to this heading">#</a></h3>
-<p>Execute the following cell to verify that you have a working connection to the temperature control lab hardware. This will test for installation of <a class="reference external" href="http://TCLab.py">TCLab.py</a>, connection to the Arduino device, and working firmware within the Arduino.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
-
-
-<span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">lab</span> <span class="o">=</span> <span class="n">TCLab</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TCLab Temperatures:&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">)</span>
-<span class="n">lab</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-2-check-for-steady-state">
-<h3>Step 2.  Check for steady state<a class="headerlink" href="#step-2-check-for-steady-state" title="Link to this heading">#</a></h3>
-<p>As discussed in class, for step testing the device must be initially at steady state. Run the following code to verify the heaters are off and that the temperatures are at a steady ambient temperature.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># experimental parameters</span>
-<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
-
-<span class="c1"># perform experiment</span>
-<span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
-    <span class="n">lab</span><span class="o">.</span><span class="n">U1</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">lab</span><span class="o">.</span><span class="n">U2</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">tfinal</span><span class="p">):</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-3-step-test">
-<h3>Step 3. Step Test<a class="headerlink" href="#step-3-step-test" title="Link to this heading">#</a></h3>
-<p>The step test consists of turning one heater one at 50% power and recording temperature data for at least 900 seconds. Copy the code from Step 2 into the following cell. Then modify as needed to accomplish the step test with P1 at 200 and using 50% of maximum power.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="step-4-save-data-to-a-csv-file">
-<h3>Step 4. Save data to a .csv file<a class="headerlink" href="#step-4-save-data-to-a-csv-file" title="Link to this heading">#</a></h3>
-<p>Run the following cell to verify and save your data to a ‘.csv’ file. Be sure you can find and locate the data on your laptop before ending your session. You will need access to this data for subsequent exercises.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os.path</span>
-
-<span class="n">t</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">fields</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">Q2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;T1&#39;</span><span class="p">,</span><span class="s1">&#39;T2&#39;</span><span class="p">,</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span><span class="s1">&#39;Q2&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time / seconds&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
-<span class="c1"># Change the filename here</span>
-<span class="n">data_file</span> <span class="o">=</span> <span class="s1">&#39;tclab-model-id.csv&#39;</span>
-
-<span class="c1"># Set to True to overwrite the file. Default is False</span>
-<span class="c1"># to safeguard against accidentally rerunning this cell.</span>
-<span class="n">overwrite_file</span> <span class="o">=</span> <span class="kc">False</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">overwrite_file</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span><span class="n">data_file</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="n">data_file</span> <span class="o">+</span> <span class="s1">&#39; already exisits. Either choose a new filename or set overwrite_file = True.&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">h</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully saved data to &quot;</span><span class="o">+</span><span class="n">data_file</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="exercise-2-fitting-a-first-order-model">
-<h2>Exercise 2. Fitting a First-Order Model<a class="headerlink" href="#exercise-2-fitting-a-first-order-model" title="Link to this heading">#</a></h2>
+<section id="exercise-0-fitting-a-first-order-linear-model">
+<h2>Exercise 0. Fitting a First-Order Linear Model<a class="headerlink" href="#exercise-0-fitting-a-first-order-linear-model" title="Link to this heading">#</a></h2>
 <p>As discussed in class, a simple energy balance model for T1 is given by</p>
 <div class="math notranslate nohighlight">
 \[C_p \frac{dT_1}{dt} = U_a(T_{amb} - T_1) + \alpha P_1 U_1\]</div>
-<p>where the parameter <span class="math notranslate nohighlight">\(\alpha\)</span> has, through independent means, been determined as 0.00016 when U1 is given in percent of full power and power is measured in Watts. Following the notes from Section 2.4, use the results of this experiment to estimate values for <span class="math notranslate nohighlight">\(C_p\)</span> and <span class="math notranslate nohighlight">\(U_a\)</span>. Write your answers in the following cell.</p>
-<p>You may cut and paste code from Section 2.4 for this task. You will need to modify the code to read your data file. Be sure to report</p>
+<p>where the parameter <span class="math notranslate nohighlight">\(\alpha\)</span> has, through independent means, been determined as 0.00016 when U1 is given in percent of full power and power is measured in Watts.</p>
+<p>Do the following:</p>
 <ol class="arabic simple">
-<li><p>Final estimates for <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span></p></li>
-<li><p>An estimate of the time constant computed from <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span>.</p></li>
-<li><p>An estimate of the steady-state gain computed from <span class="math notranslate nohighlight">\(U_a\)</span>.</p></li>
+<li><p>Perform nonlinear regression to estimate <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span>. In Lab 1, we estimated <span class="math notranslate nohighlight">\(\tau\)</span> and <span class="math notranslate nohighlight">\(K\)</span> and then calculated <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span>. In this lab, you will instead directly regress <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span>.</p></li>
+<li><p>Quantify the uncertainty in the estimates <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span> by computing the Fisher information matrix, covariance matrix, and correlation matrix.</p></li>
+<li><p>Perform an eigendecomposition of the covariance matrix.</p></li>
 </ol>
+<p>This pre-lab exercise builds up the analysis workflow you will adapt for the rest of the lab.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load and plot data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Start by loading your data from the previous lab</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Next, quickly plot your data from the previous lab</span>
+
 <span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
@@ -705,7 +620,72 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement and test model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># Next complete the function below which simulates </span>
+<span class="c1"># the first order model for the temperature of the heater.</span>
+
+<span class="k">def</span> <span class="nf">tclab_model1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.00016</span><span class="p">,</span> <span class="n">P1</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; First order linear model for TCLab</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        data: pandas dataframe with columns &#39;Time&#39;, &#39;T1&#39;, &#39;Q1&#39;</span>
+<span class="sd">        param: list of parameters [Ua, CpH]</span>
+<span class="sd">        alpha: power conversion factor, default 0.00016 watts / (units P1 * percent U1)</span>
+<span class="sd">        P1: power setting for heater 1, default 200 (P1 units)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        T1: numpy array of model predictions for T1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># unpack the adjustable parameters</span>
+    <span class="n">Ua</span><span class="p">,</span> <span class="n">CpH</span> <span class="o">=</span> <span class="n">param</span>
+
+    <span class="c1"># extract ambient temperature</span>
+    <span class="n">T_amb</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;T1&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># extract experiment time</span>
+    <span class="n">t_expt</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span>
+
+    <span class="c1"># model solution</span>
+    <span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+        <span class="c1"># interpolate the heater input to nearest value is faster than linear</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span>
+
+        <span class="c1"># unpack the state</span>
+        <span class="n">T1</span> <span class="o">=</span> <span class="n">y</span>
+
+        <span class="c1"># Add your solution here</span>
+
+
+        <span class="k">return</span> <span class="n">dT1dt</span>
+    <span class="n">soln</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">deriv</span><span class="p">,</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">t_expt</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t_expt</span><span class="p">)],</span> <span class="p">[</span><span class="n">T_amb</span><span class="p">,</span> <span class="n">T_amb</span><span class="p">],</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_expt</span><span class="p">)</span>
+
+    <span class="n">T1</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="c1"># Plot the temperature data and heat power</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_expt</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;T1&#39;</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Measured&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_expt</span><span class="p">,</span> <span class="n">T1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (degC)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_expt</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Heater&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Heater (%)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (sec)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">T1</span>
+
+
+<span class="c1"># Test your function with the data and initial parameters</span>
+<span class="c1"># Use the initial parameters from Lab 1 for Ua and CpH</span>
 <span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
@@ -713,26 +693,81 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit model</span>
-<span class="c1"># Add your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">least_squares</span>
+
+<span class="c1"># Next, complete the function below to perform nonlinear regression</span>
+
+<span class="k">def</span> <span class="nf">tclab_estimation1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">param_guess</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Nonlinear regression for TCLab one-state model</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        data: pandas dataframe with columns &#39;Time&#39;, &#39;T1&#39;, &#39;Q1&#39;</span>
+<span class="sd">        param_guess: list of initial guess for parameters [Ua, CpH]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        results: scipy least_squares results object</span>
+<span class="sd">        residuals: numpy array of residuals</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">residual</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
+        <span class="c1"># Add your solution here</span>
+
+    <span class="c1"># Set bounds (non-negative)</span>
+    <span class="n">bnds</span> <span class="o">=</span> <span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">least_squares</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">param_guess</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;trf&#39;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bnds</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;arctan&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">tclab_model1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">tclab_model1</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;T1&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="c1"># Plot the residuals</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+
+        <span class="c1"># font size</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
+        
+        <span class="c1"># labels</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$T_1$ residuals [$^\circ</span><span class="si">{}</span><span class="s2">$C]&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+        <span class="c1"># define tick size</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># finish plot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals</span>
+
+<span class="c1"># Test your function with the data</span>
+<span class="n">step_test_results1</span><span class="p">,</span> <span class="n">step_test_residuals1</span> <span class="o">=</span> <span class="n">tclab_estimation1</span><span class="p">(</span><span class="n">data1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">print_results1</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ua = </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2"> W/degC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CpH = </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2"> J/degC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save the results for later</span>
+<span class="n">Ua_ex0</span> <span class="o">=</span> <span class="n">step_test_results1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Cp_ex0</span> <span class="o">=</span> <span class="n">step_test_results1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">print_results1</span><span class="p">(</span><span class="n">step_test_results1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>TODO: Add explanation here to review FIM, covariance, …</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histogram of residuals</span>
-<span class="c1"># Add your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform uncertainty quantification</span>
 
-<span class="c1"># Estimate covariance and correlation of fitted parameters</span>
-<span class="c1"># Add your solution here</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance of p = [Ua, Cp]&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cov_p</span><span class="p">)</span>
-
-<span class="c1"># Convert to correlation matrix</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">covariance_to_correlation</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">covariance_to_correlation</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Convert covariance matrix into correlation matrix</span>
 
 <span class="sd">    Argument:</span>
@@ -758,12 +793,354 @@
 
     <span class="k">return</span> <span class="n">cor</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation matrix&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">covariance_to_correlation</span><span class="p">(</span><span class="n">cov_p</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">uncertainty_quantification</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">residuals</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Uncertainty quantification for the estimated parameters</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        res: scipy least_squares results object</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        fim: Fisher Information Matrix</span>
+<span class="sd">        cov: covariance matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># compute standard deviation of the residuals</span>
+    <span class="n">sigma_residuals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">residuals</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">residuals</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard deviation of the residuals = &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">sigma_residuals</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot; deg C&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># compute Fisher Information Matrix</span>
+    <span class="c1"># Add your solution here</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fisher Information Matrix&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fim</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># compute the covariance matrix</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance Matrix&quot;</span><span class="p">)</span>
+    <span class="c1"># Add your solution here</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># eigendecomposition of the covariance matrix</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigendecomposition of the covariance matrix&quot;</span><span class="p">)</span>
+    <span class="c1"># Add your solution here</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lambda_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">v</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># compute the correlation matrix</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix&quot;</span><span class="p">)</span>
+    <span class="n">cor</span> <span class="o">=</span> <span class="n">covariance_to_correlation</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cor</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">fim</span>
+
+<span class="n">fim1</span> <span class="o">=</span> <span class="n">uncertainty_quantification</span><span class="p">(</span><span class="n">step_test_results1</span><span class="p">,</span> <span class="n">step_test_residuals1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>TODO: Add discussion question.</p>
+</section>
+<section id="exercise-1-sine-test-and-data-collection">
+<h2>Exercise 1. Sine Test and Data Collection<a class="headerlink" href="#exercise-1-sine-test-and-data-collection" title="Link to this heading">#</a></h2>
+<section id="step-1-verify-operation">
+<h3>Step 1. Verify operation.<a class="headerlink" href="#step-1-verify-operation" title="Link to this heading">#</a></h3>
+<p>Execute the following cell to verify that you have a working connection to the temperature control lab hardware. This will test for installation of <a class="reference external" href="http://TCLab.py">TCLab.py</a>, connection to the Arduino device, and working firmware within the Arduino.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="n">run_tclab</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In the labs, we will us &quot;run_tclab&quot; to control whether the TCLab is used.</span>
+<span class="sd">After you finish the lab experiment, set run_tclab = False.</span>
+<span class="sd">This way, you can run all the cells without losing your TCLab output.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">if</span> <span class="n">run_tclab</span><span class="p">:</span>
+
+    <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">lab</span> <span class="o">=</span> <span class="n">TCLab</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TCLab Temperatures:&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">T1</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">T2</span><span class="p">)</span>
+    <span class="n">lab</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-check-for-steady-state">
+<h3>Step 2.  Check for steady state<a class="headerlink" href="#step-2-check-for-steady-state" title="Link to this heading">#</a></h3>
+<p>As discussed in class, for step testing the device must be initially at steady state. Run the following code to verify the heaters are off and that the temperatures are at a steady ambient temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">run_tclab</span><span class="p">:</span>
+    <span class="c1"># experimental parameters</span>
+    <span class="n">tfinal</span> <span class="o">=</span> <span class="mi">30</span>
+
+    <span class="c1"># perform experiment</span>
+    <span class="k">with</span> <span class="n">TCLab</span><span class="p">()</span> <span class="k">as</span> <span class="n">lab</span><span class="p">:</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lab</span><span class="o">.</span><span class="n">U2</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Historian</span><span class="p">(</span><span class="n">lab</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">clock</span><span class="p">(</span><span class="n">tfinal</span><span class="p">):</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-sine-test">
+<h3>Step 3. Sine Test<a class="headerlink" href="#step-3-sine-test" title="Link to this heading">#</a></h3>
+<p>The step test consists of turning one heater one at 50% power and recording temperature data for at least 1200 seconds. Copy the code from Step 2 into the following cell. Then modify as needed to accomplish the step test with P1 at 200 and using 50% of maximum power.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="k">def</span> <span class="nf">sine_wave</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="mi">60</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generate a sine wave with the given parameters.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">    t:          time (seconds)</span>
+<span class="sd">    period:     period of the sine wave (seconds)</span>
+<span class="sd">    amplitude:  amplitude of the sine wave</span>
+<span class="sd">    offset:     offset of the sine wave</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">901</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">sine_wave</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time / seconds&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power / %&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">run_tclab</span><span class="p">:</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-save-data-to-a-csv-file">
+<h3>Step 4. Save data to a .csv file<a class="headerlink" href="#step-4-save-data-to-a-csv-file" title="Link to this heading">#</a></h3>
+<p>Run the following cell to verify and save your data to a ‘.csv’ file. Be sure you can find and locate the data on your laptop before ending your session. You will need access to this data for subsequent exercises.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="c1"># Change the filename here</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="s1">&#39;lab2-sine-test.csv&#39;</span>
+
+<span class="k">if</span> <span class="n">run_tclab</span><span class="p">:</span>
+
+    <span class="c1"># Set to True to overwrite the file. Default is False</span>
+    <span class="c1"># to safeguard against accidentally rerunning this cell.</span>
+    <span class="n">overwrite_file</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">overwrite_file</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;./&#39;</span><span class="o">+</span><span class="n">data_file</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="n">data_file</span> <span class="o">+</span> <span class="s1">&#39; already exisits. Either choose a new filename or set overwrite_file = True.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">run_tclab</span><span class="p">:</span>
+        <span class="n">h</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Successfully saved data to &quot;</span><span class="o">+</span><span class="n">data_file</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data was not saved because run_tclab = False&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-2-fit-first-order-model-using-sine-test-data">
+<h2>Exercise 2. Fit First-Order Model using Sine Test Data<a class="headerlink" href="#exercise-2-fit-first-order-model-using-sine-test-data" title="Link to this heading">#</a></h2>
+<p>You will now repeat the steps for Exercise 0 but using the sine test data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Load the data</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate the first order model for the sine wave test</span>
+<span class="c1"># using the values of Ua and Cp you identified in Exercise 0</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform nonlinear regression on the sine wave test data</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Save the results for later</span>
+<span class="n">Ua_ex1</span> <span class="o">=</span> <span class="n">sine_test_results1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Cp_ex1</span> <span class="o">=</span> <span class="n">sine_test_results1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">print_results1</span><span class="p">(</span><span class="n">sine_test_results1</span><span class="p">)</span>
+<span class="c1">### END SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform uncertainty quantification on the sine wave test data</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3-fitting-a-second-order-model-using-sine-test-data">
+<h2>Exercise 3. Fitting a Second-Order Model using Sine Test Data<a class="headerlink" href="#exercise-3-fitting-a-second-order-model-using-sine-test-data" title="Link to this heading">#</a></h2>
+<p>A second order model is for the heater/sensor combination is given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+C^H_p\frac{dT_{H,1}}{dt} &amp; = U_a(T_{amb} - T_{H,1}) + U_b(T_{S,1} - T_{H,1}) + P_1u_1\\
+C^S_p\frac{dT_{S,1}}{dt} &amp; = U_b(T_{H,1} - T_{S,1}) 
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(T_{H,1}\)</span> is the heater temperature, <span class="math notranslate nohighlight">\(T_{S,1}\)</span> is the sensor temperature, and <span class="math notranslate nohighlight">\(U_b\)</span> is the heat transfer coefficient between the heater and sensor.</p>
+<p>Modify the code you developed for Exercises 0 and 2 to fit this second order model.</p>
+<p>Do the following:</p>
+<ol class="arabic simple">
+<li><p>Report your best fit for <span class="math notranslate nohighlight">\(U_a\)</span>, <span class="math notranslate nohighlight">\(U_b\)</span>, <span class="math notranslate nohighlight">\(C^H_p\)</span>, and <span class="math notranslate nohighlight">\(C^S_p\)</span> with units and a reasonable number of significant digits.</p></li>
+<li><p>Characterize the uncertainty in these estimates.</p></li>
+<li><p>Visualize the quality of fit and the residuals.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tclab_model2</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.00016</span><span class="p">,</span> <span class="n">P1</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Second order linear model for TCLab</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        data: pandas dataframe with columns &#39;Time&#39;, &#39;T1&#39;, &#39;Q1&#39;</span>
+<span class="sd">        param: list of parameters [Ua, Ub, CpH, CpS]</span>
+<span class="sd">        alpha: power conversion factor, default 0.00016 watts / (units P1 * percent U1)</span>
+<span class="sd">        P1: power setting for heater 1, default 200 (P1 units)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        TS: numpy array of model predictions for TS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Add your solution here</span>
+
+    <span class="k">return</span> <span class="n">TS</span>
+
+<span class="n">TS</span> <span class="o">=</span> <span class="n">tclab_model2</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Next, complete the function below to perform nonlinear regression</span>
+
+<span class="k">def</span> <span class="nf">tclab_estimation2</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">param_guess</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Nonlinear regression for TCLab two-state model</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        data: pandas dataframe with columns &#39;Time&#39;, &#39;T1&#39;, &#39;Q1&#39;</span>
+<span class="sd">        param_guess: list of initial guess for parameters [Ua, Ub, CpH, CpS]</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        results: scipy least_squares results object</span>
+<span class="sd">        residuals: numpy array of residuals</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Add your solution here</span>
+
+    <span class="k">return</span> <span class="n">results</span><span class="p">,</span> <span class="n">residuals</span>
+
+<span class="c1"># Test your function with the data</span>
+<span class="n">sine_test_results2</span><span class="p">,</span> <span class="n">sine_test_residuals2</span> <span class="o">=</span> <span class="n">tclab_estimation2</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">print_results2</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ua = </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2"> W/degC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ub = </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2"> W/degC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CpH = </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2"> J/degC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CpS = </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2"> J/degC&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save the results for later</span>
+<span class="n">Ua_ex3</span><span class="p">,</span> <span class="n">Ub_ex3</span><span class="p">,</span> <span class="n">CpH_ex3</span><span class="p">,</span> <span class="n">CpS_ex3</span> <span class="o">=</span> <span class="n">sine_test_results2</span><span class="o">.</span><span class="n">x</span>
+
+<span class="n">print_results2</span><span class="p">(</span><span class="n">sine_test_results2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform uncertainty quantification</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4-fit-second-order-modeling-using-step-test-data">
+<h2>Exercise 4: Fit Second Order Modeling Using Step Test Data<a class="headerlink" href="#exercise-4-fit-second-order-modeling-using-step-test-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform regression</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform uncertainty quantification</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5-fit-second-order-model-using-both-data-sets">
+<h2>Exercise 5: Fit Second Order Model Using Both Data Sets<a class="headerlink" href="#exercise-5-fit-second-order-model-using-both-data-sets" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modify the tclab_estimation2 function to support multiple datasets</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-6-analyze-uncertainty-estimates-for-second-order-models">
+<h2>Exercise 6: Analyze Uncertainty Estimates for Second-Order Models<a class="headerlink" href="#exercise-6-analyze-uncertainty-estimates-for-second-order-models" title="Link to this heading">#</a></h2>
+</section>
+<section id="exercise-7-estimate-heat-and-sesnor-time-constants">
+<h2>Exercise 7: Estimate Heat and Sesnor Time Constants<a class="headerlink" href="#exercise-7-estimate-heat-and-sesnor-time-constants" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate and print model parameters with uncertainty</span>
@@ -774,74 +1151,6 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of Cp is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">Cp</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;+/-&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_p</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;Joules/degC.&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of the time constant (tau) is&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;+/-&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_tau</span><span class="p">),</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;seconds.&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of the steady state gain (K) is&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="s2">&quot;+/-&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_K</span><span class="p">),</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;Watts.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="exercise-3-fitting-a-second-order-model">
-<h2>Exercise 3. Fitting a Second-Order Model<a class="headerlink" href="#exercise-3-fitting-a-second-order-model" title="Link to this heading">#</a></h2>
-<p>A second order model is for the heater/sensor combination is given by</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align}
-C^H_p\frac{dT_{H,1}}{dt} &amp; = U_a(T_{amb} - T_{H,1}) + U_b(T_{S,1} - T_{H,1}) + P_1u_1\\
-C^S_p\frac{dT_{S,1}}{dt} &amp; = U_b(T_{H,1} - T_{S,1}) 
-\end{align}
-\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(T_{H,1}\)</span> is the heater temperature, <span class="math notranslate nohighlight">\(T_{S,1}\)</span> is the sensor temperature, and <span class="math notranslate nohighlight">\(U_b\)</span> is the heat transfer coefficient between the heater and sensor.</p>
-<p>Modify the code you developed for Exercise 2 to fit this second order model. The code shown in Section 2.5 of the notes may be helpful.</p>
-<p>Do the following:</p>
-<ol class="arabic simple">
-<li><p>Report your best fit for <span class="math notranslate nohighlight">\(U_a\)</span>, <span class="math notranslate nohighlight">\(U_b\)</span>, <span class="math notranslate nohighlight">\(C^H_p\)</span>, and <span class="math notranslate nohighlight">\(C^S_p\)</span> with uncertainty.</p></li>
-<li><p>Calculate the time constants for the heater and sensor and report with uncertainty.</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load and plot data</span>
-<span class="c1"># Add your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement and test model</span>
-
-<span class="c1"># Add your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regress model</span>
-
-<span class="c1"># Add your solution here</span>
-
-<span class="c1"># Plot fitted model</span>
-
-<span class="c1"># Add your solution here</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histogram of residuals</span>
-<span class="c1"># Add your solution here</span>
-
-<span class="c1"># Estimate covariance and correlation of fitted parameters</span>
-
-<span class="c1"># Estimate covariance and correlation of fitted parameters</span>
-<span class="c1"># Add your solution here</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of p = [Ua, Ub, CpH, CpS]&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cov_p</span><span class="p">)</span>
-
-<span class="c1"># Convert to correlation matrix</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Correlation matrix&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">covariance_to_correlation</span><span class="p">(</span><span class="n">cov_p</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -944,16 +1253,20 @@ C^S_p\frac{dT_{S,1}}{dt} &amp; = U_b(T_{H,1} - T_{S,1})
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spring-2025-todo-list">Spring 2025 TODO List</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-lab-exercise">Pre-lab Exercise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-step-tests-and-data-collection">Exercise 1. Step Tests and Data Collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-0-fitting-a-first-order-linear-model">Exercise 0. Fitting a First-Order Linear Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-sine-test-and-data-collection">Exercise 1. Sine Test and Data Collection</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-verify-operation">Step 1. Verify operation.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-check-for-steady-state">Step 2.  Check for steady state</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-step-test">Step 3. Step Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-sine-test">Step 3. Sine Test</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-save-data-to-a-csv-file">Step 4. Save data to a .csv file</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-fitting-a-first-order-model">Exercise 2. Fitting a First-Order Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-fitting-a-second-order-model">Exercise 3. Fitting a Second-Order Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-fit-first-order-model-using-sine-test-data">Exercise 2. Fit First-Order Model using Sine Test Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-fitting-a-second-order-model-using-sine-test-data">Exercise 3. Fitting a Second-Order Model using Sine Test Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-fit-second-order-modeling-using-step-test-data">Exercise 4: Fit Second Order Modeling Using Step Test Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-fit-second-order-model-using-both-data-sets">Exercise 5: Fit Second Order Model Using Both Data Sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-analyze-uncertainty-estimates-for-second-order-models">Exercise 6: Analyze Uncertainty Estimates for Second-Order Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-estimate-heat-and-sesnor-time-constants">Exercise 7: Estimate Heat and Sesnor Time Constants</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declarations">Declarations</a></li>
 </ul>
   </nav></div>
@@ -1003,8 +1316,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

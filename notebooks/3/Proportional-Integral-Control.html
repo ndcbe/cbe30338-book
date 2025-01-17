@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>3.6. Practical Proportional (P) and Proportional-Integral (PI) Control &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -706,7 +701,7 @@ MV_k &amp; = \bar{MV} + K_P e_k
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># proportional control</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">P</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">P</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Simulate a proportional controller.</span>
 <span class="sd">    </span>
 <span class="sd">    Arguments:</span>
@@ -755,15 +750,15 @@ MV_k &amp; = \bar{MV} + K_P e_k
 <p>Let’s see how proportional control works when applied to the Temperature Control Laboratory. For this simulation we set <span class="math notranslate nohighlight">\(\bar{MV} = 0\)</span> and <span class="math notranslate nohighlight">\(K_p = 3.0\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="c1"># create functions to simulate setpoints and disturbance variables</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">40</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="mi">25</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">200</span> <span class="k">else</span> <span class="mi">0</span>
 
 <span class="c1"># create a controller instance</span>
@@ -847,32 +842,32 @@ MV_k &amp; = \bar{MV} + K_P e_k
 <section id="position-form">
 <h3><span class="section-number">3.6.6.1. </span>Position form<a class="headerlink" href="#position-form" title="Link to this heading">#</a></h3>
 <p>Given a process variable <span class="math notranslate nohighlight">\(PV\)</span> and setpoint <span class="math notranslate nohighlight">\(SP\)</span>, proportional-integral control is defined by the relation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8caef080-e1f4-4f2d-bc2f-f983d9637c4d">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-8caef080-e1f4-4f2d-bc2f-f983d9637c4d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a7e985c5-e936-4ad2-abc0-1f33a98495dc">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-a7e985c5-e936-4ad2-abc0-1f33a98495dc" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV(t) &amp; = \bar{MV} - K_P\left(PV(t) - SP(t)\right) - K_I\int_{0}^t (PV(t') - SP(t'))\,dt' \\
 &amp; = \bar{MV} + K_P\left(SP(t) - PV(t)\right) + K_I\int_{0}^t (SP(t') - PV(t'))\,dt'
 \end{align}\]</div>
 <p>or</p>
-<div class="amsmath math notranslate nohighlight" id="equation-65731b8a-8608-49c8-942d-3d89e819d517">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-65731b8a-8608-49c8-942d-3d89e819d517" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-58dc97d6-5b91-4e77-b115-209020b2a95d">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-58dc97d6-5b91-4e77-b115-209020b2a95d" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV(t) &amp; = \bar{MV} + K_P e(t) + K_I\int_{0}^t e(t') \,dt'
 \end{align}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[e(t) = SP(t) - PV(t)\]</div>
 <p>where <strong><span class="math notranslate nohighlight">\(K_P\)</span> is the proportional gain</strong> and <strong><span class="math notranslate nohighlight">\(K_I\)</span> is the integral gain</strong>. When implemented in discrete time with time steps of length <span class="math notranslate nohighlight">\(h\)</span>, the basic rule for proportional-integral control becomes</p>
-<div class="amsmath math notranslate nohighlight" id="equation-239f2db8-e359-4e6c-b527-ca34441501ac">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-239f2db8-e359-4e6c-b527-ca34441501ac" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-34dd8459-4b6b-4ce7-a63d-1a74051786bc">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-34dd8459-4b6b-4ce7-a63d-1a74051786bc" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_k &amp; = \bar{MV} + K_P(SP_k - PV_k) + h K_I\sum_{j=0}^{j=k}(SP_j - PV_j)
 \end{align}\]</div>
 <p>or</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d634d2ba-3e3f-4f0a-9a4f-847784e6b435">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-d634d2ba-3e3f-4f0a-9a4f-847784e6b435" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a48474de-6e7c-4c49-aff1-2318acb1294f">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-a48474de-6e7c-4c49-aff1-2318acb1294f" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_k &amp; = \bar{MV} + K_P e_k + h K_I\sum_{j=0}^{j=k}e_j
 \end{align}\]</div>
 <p>where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e59fbedb-19de-4973-b1eb-f869898720b2">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-e59fbedb-19de-4973-b1eb-f869898720b2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d20165be-5fa8-4d6b-9ab8-ea9ed578cd6c">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-d20165be-5fa8-4d6b-9ab8-ea9ed578cd6c" title="Permalink to this equation">#</a></span>\[\begin{align}
 e_k &amp; = SP_k - PV_k
 \end{align}\]</div>
 <p>This is the so-called <strong>position form</strong> of PI control. The position form specifies the value (or “position”) of the manipulated variable stricly in terms of the current and past values of the <strong>error</strong> signal <span class="math notranslate nohighlight">\(e_k\)</span>. Note the sign convention: A positive error occurs when the process variable is greater than the setpoint. The position form of PI control is rarely used in practice.</p>
@@ -880,20 +875,20 @@ e_k &amp; = SP_k - PV_k
 <section id="velocity-form">
 <h3><span class="section-number">3.6.6.2. </span>Velocity form<a class="headerlink" href="#velocity-form" title="Link to this heading">#</a></h3>
 <p>A more common implementation of PI control is done by computing how much the manipulated variable changes at each time step, and incrementing the manipulated variable by that amount. Consecutive values of <span class="math notranslate nohighlight">\(MV\)</span> are given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4375d36c-d572-4dba-b663-d9913b558a54">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-4375d36c-d572-4dba-b663-d9913b558a54" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-191859fa-843f-4777-b13e-52dea21d08b2">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-191859fa-843f-4777-b13e-52dea21d08b2" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_{k-1} &amp; = \bar{MV} + K_p e_{k-1} + h K_i \sum_{j=0}^{k-1} e_{j} \\
 MV_{k} &amp; = \bar{MV} + K_p e_{k} + h K_i \sum_{j=0}^{k} e_{j}
 \end{align}\]</div>
 <p>Taking differences gives a formula for updating the value of <span class="math notranslate nohighlight">\(MV\)</span> in response to process measurements or changes in setpoint.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-74d85f8b-8cf1-45ae-8ffb-ba8d25d2d3a0">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-74d85f8b-8cf1-45ae-8ffb-ba8d25d2d3a0" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-96d199f4-15cc-4afc-97b9-0835be290d30">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-96d199f4-15cc-4afc-97b9-0835be290d30" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_{k} &amp; = MV_{k-1} + K_p(e_{k} - e_{k-1}) + h K_i e_{k}
 \end{align}\]</div>
 <p>with <span class="math notranslate nohighlight">\(MV_0 = \bar{MV}\)</span>. Let’s see how this works.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Simulate a simple discrete time proportional-integral controller.</span>
 <span class="sd">    </span>
 <span class="sd">    Arguments:</span>
@@ -938,15 +933,15 @@ MV_{k} &amp; = MV_{k-1} + K_p(e_{k} - e_{k-1}) + h K_i e_{k}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 
 <span class="c1"># Setpoint function for heater 1</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">40</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="mi">25</span>
 
 <span class="c1"># Disturance signal (heater 2)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">t</span><span class="o">&gt;=</span> <span class="mi">200</span> <span class="k">else</span> <span class="mi">0</span>
 
 <span class="c1"># Create a controller instance</span>
@@ -1004,13 +999,13 @@ MV_{k} &amp; = MV_{k-1} + K_p(e_{k} - e_{k-1}) + h K_i e_{k}
 </div>
 </div>
 <p>As we can see from this example, an important practical property of proportonal-integral control is <strong>steady-state tracking of the setpoint.</strong> In other words, for a steaady setpoint <span class="math notranslate nohighlight">\(\bar{SP}\)</span>, at steady-state</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a1d7cf3c-b865-4e79-8350-b7b2f7d10d73">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-a1d7cf3c-b865-4e79-8350-b7b2f7d10d73" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3f169aa7-2c2c-4085-b5cd-58b479658f76">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-3f169aa7-2c2c-4085-b5cd-58b479658f76" title="Permalink to this equation">#</a></span>\[\begin{align}
 \lim_{k \rightarrow \infty} PV_k = \bar{SP}
 \end{align}\]</div>
 <p>To see why this is true, start with the velocity form of the proportional-integral controller</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1ac84c2e-51d4-479b-bf19-26a52cb8d807">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-1ac84c2e-51d4-479b-bf19-26a52cb8d807" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-971ff2de-6b48-4a8d-aa9e-ca0d29542494">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-971ff2de-6b48-4a8d-aa9e-ca0d29542494" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_{k} &amp; = MV_{k-1} + K_p(e_{k} - e_{k-1}) + h K_i e_{k}
 \end{align}\]</div>
 <p>At steady-state <span class="math notranslate nohighlight">\(MV_{k} = MV_{k-1}\)</span> and <span class="math notranslate nohighlight">\(e_{k} = e_{k-1}\)</span> leaving</p>
@@ -1163,8 +1158,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

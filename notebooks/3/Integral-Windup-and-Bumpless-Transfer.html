@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>3.7. Integral Windup and Bumpless Transfer &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -677,20 +672,20 @@
 <section id="basic-pi-control">
 <h2><span class="section-number">3.7.4. </span>Basic PI Control<a class="headerlink" href="#basic-pi-control" title="Link to this heading">#</a></h2>
 <p>Proportional-Integral (PI) Control in velocity form is given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cae583ab-4276-41ae-bad0-effb139f8ab9">
-<span class="eqno">(3.10)<a class="headerlink" href="#equation-cae583ab-4276-41ae-bad0-effb139f8ab9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3213eb47-261e-45d3-ba8f-f669eb22fed8">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-3213eb47-261e-45d3-ba8f-f669eb22fed8" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_k &amp; = MV_{k-1} + K_P (e_{k} - e_{k-1}) + \delta t K_I e_k
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(MV_0= \bar{MV}\)</span> is the initial value, and the error <span class="math notranslate nohighlight">\(e_k\)</span> is the difference between the process variable and setpoint, and <span class="math notranslate nohighlight">\(\delta t\)</span> is the time step.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8710d55a-9f43-48b3-ba04-ce44e216d949">
-<span class="eqno">(3.11)<a class="headerlink" href="#equation-8710d55a-9f43-48b3-ba04-ce44e216d949" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0b0a6992-dc57-4362-b31d-0d9a449bb643">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-0b0a6992-dc57-4362-b31d-0d9a449bb643" title="Permalink to this equation">#</a></span>\[\begin{align}
 e_k &amp; = SP_k - PV_k \\
 \end{align}\]</div>
 <p>and <span class="math notranslate nohighlight">\(\delta t\)</span> is the time step.</p>
 <p>We encode the controller using the Python <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement. The implementation has added <code class="docutils literal notranslate"><span class="pre">t_step</span></code> to facilitate use of this code for situations where we may change the time step or have a variable time step.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Primative &quot;textbook&quot; PI controller in velocity form</span>
 
 <span class="sd">    This is NOT the final version of our PI controller.</span>
@@ -736,13 +731,13 @@ e_k &amp; = SP_k - PV_k \\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Step test setpoint profile &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="mi">40</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="mi">20</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Disturbance profile &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">420</span> <span class="k">else</span> <span class="mi">0</span>
 
@@ -856,8 +851,8 @@ e_k &amp; = SP_k - PV_k \\
 </div>
 <hr class="docutils" />
 <p><strong>Discussion Question:</strong> Examine the results of this experiment. The PI velocity algorithm is given by an equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96fd494e-3ccd-4bba-8cc3-0244eef5e4e1">
-<span class="eqno">(3.12)<a class="headerlink" href="#equation-96fd494e-3ccd-4bba-8cc3-0244eef5e4e1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-102830df-d540-463f-944a-4acd4d41c1ea">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-102830df-d540-463f-944a-4acd4d41c1ea" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_{k} &amp; = MV_{k-1} + K_p(e_{k} + e_{k-1}) + \delta t K_i e_{k}
 \end{align}\]</div>
 <p>Looking at the period from 0 to 100 seconds, is this equation describing what is actually happening? Is it possible for <span class="math notranslate nohighlight">\(MV\)</span> to be different from the actual input applied to the device?</p>
@@ -889,7 +884,7 @@ MV^{max} &amp; \text{if}  \hat{MV_k} \geq MV^{max}
 <p>Let’s see how this works when applied to a simulation of the temperature control lab.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_antiwindup_1</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI_antiwindup_1</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; PI controller with anti-windup</span>
 
 <span class="sd">    This is NOT our final version of the PI controller.</span>
@@ -1011,7 +1006,7 @@ TCLab Model disconnected successfully.
 <p>To accommodate feedback of the manipulated variable, we first need to modify the event loop to incorporate the measurement of the manipulated variable, then send that value to the controller.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_antiwindup_2</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI_antiwindup_2</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; PI controller with integral anti-windup  </span>
 
 <span class="sd">    This is NOT our final version of the PI controller.</span>
@@ -1058,7 +1053,7 @@ TCLab Model disconnected successfully.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">TCLab</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">speedup</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 
@@ -1118,7 +1113,7 @@ TCLab Model disconnected successfully.
 <p>With these considerations in place, the following cell presents a version of the PI control algorithm incorporating both range limits and direct feedback of the manipulated variables.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_antiwindup</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI_antiwindup</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; PI controller with integral anti-windup</span>
 
 <span class="sd">    This is our final version of the PI controller with integral anti-windup.</span>
@@ -1171,16 +1166,16 @@ TCLab Model disconnected successfully.
 <h3><span class="section-number">3.7.7.1. </span>Motivating Case Study<a class="headerlink" href="#motivating-case-study" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">TCLab</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span><span class="p">,</span> <span class="n">setup</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">MV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">MV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Manipulated variable profile </span>
 <span class="sd">        25% for t &lt;= 100 seconds</span>
 <span class="sd">        None (auto) for t &gt; 100 seconds</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="mi">25</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">100</span> <span class="k">else</span> <span class="kc">None</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">experiment_3</span><span class="p">(</span><span class="n">controller</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">experiment_3</span><span class="p">(</span><span class="n">controller</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Run experiment starting with manual control for 100 seconds</span>
 <span class="sd">        followed by automatic control</span>
 <span class="sd">    </span>
@@ -1260,18 +1255,18 @@ TCLab Model disconnected successfully.
 <li><p>Remove setpoint from proportional term</p></li>
 <li><p>Only the integral control term incorporates the setpoint.</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-b0dcf16e-877e-4035-8e2d-d36ed90302dd">
-<span class="eqno">(3.13)<a class="headerlink" href="#equation-b0dcf16e-877e-4035-8e2d-d36ed90302dd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-79d59186-7aa3-41c8-bbb3-98b715ef28c8">
+<span class="eqno">(3.13)<a class="headerlink" href="#equation-79d59186-7aa3-41c8-bbb3-98b715ef28c8" title="Permalink to this equation">#</a></span>\[\begin{align}
 e_k &amp; = SP_k - PV_k \\
 \hat{MV}_{k} &amp; = MV_{k-1} + K_p(-PV_{k} + PV_{k-1}) + \delta t K_i e_{k} 
 \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0941ffc9-177c-4e4e-b6cc-1746e72aa6e9">
-<span class="eqno">(3.14)<a class="headerlink" href="#equation-0941ffc9-177c-4e4e-b6cc-1746e72aa6e9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e4054557-cda6-4cb4-a9fb-c68aa0f32d05">
+<span class="eqno">(3.14)<a class="headerlink" href="#equation-e4054557-cda6-4cb4-a9fb-c68aa0f32d05" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_k &amp; = \max(MV^{min}, \min(MV^{max}, \hat{MV}_k)
 \end{align}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_bumpless</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI_bumpless</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; PI controller with bumpless transfer and integral anti-windup</span>
 
 <span class="sd">    This is our final version of the PI controller.</span>
@@ -1465,8 +1460,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Modular Simulation using Python Generators &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -637,9 +632,9 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Initialize graphics and import libraries</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 
 <span class="c1"># 2. Fix parameter values</span>
 <span class="n">A</span> <span class="o">=</span> <span class="mf">0.2</span>
@@ -647,7 +642,7 @@
 <span class="n">qin</span> <span class="o">=</span> <span class="mf">0.4</span>
 
 <span class="c1"># 3. Write a function to evaluate RHS of the differential equations</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">qin</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">qin</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="n">h1</span><span class="p">,</span><span class="n">h2</span> <span class="o">=</span> <span class="n">X</span>
     <span class="n">dh1</span> <span class="o">=</span> <span class="p">(</span><span class="n">qin</span> <span class="o">-</span> <span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span><span class="o">/</span><span class="n">A</span>
     <span class="n">dh2</span> <span class="o">=</span>  <span class="p">(</span><span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h2</span><span class="p">))</span><span class="o">/</span><span class="n">A</span> 
@@ -693,7 +688,7 @@
 <p>Let’s demonsrate this by writing a generator of Fibonacci numbers. This generator returns all Fibonacci numbers less or equal to a given number <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
@@ -777,7 +772,7 @@
 <p>Here’s the definition of a generator for negative feedback proportional control where the control gain <span class="math notranslate nohighlight">\(K_p\)</span> and setpoint <span class="math notranslate nohighlight">\(SP\)</span> are specified constants.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">proportionalControl</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">SP</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">proportionalControl</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">SP</span><span class="p">):</span>
     <span class="n">MV</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">PV</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">MV</span>
@@ -829,12 +824,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generator for a gravity-drained tank model</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">IC</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">gravtank_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">IC</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">qout</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">qout</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
         <span class="n">dh</span> <span class="o">=</span> <span class="p">(</span><span class="n">qin</span> <span class="o">-</span> <span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="n">A</span>
         <span class="k">return</span> <span class="n">dh</span>
     
@@ -976,7 +971,7 @@
 <h3>Adding a PI Control Generator<a class="headerlink" href="#adding-a-pi-control-generator" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI_generator</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">):</span>
 
     <span class="n">ecurr</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">eprev</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1039,7 +1034,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># disturbance function</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">0.1</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1103,29 +1098,29 @@
 <h3>Gravity-Drained Tank Class<a class="headerlink" href="#gravity-drained-tank-class" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">gravtank</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">gravtank</span><span class="p">():</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Cv</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Cv</span> <span class="o">=</span> <span class="n">Cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">qin</span> <span class="o">=</span> <span class="mi">0</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">qout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">qout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
         <span class="n">dh</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qin</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span>
         <span class="k">return</span> <span class="n">dh</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">t</span><span class="p">,</span><span class="n">qout</span><span class="p">,</span><span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">qout</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; qout&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; h&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">IC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">IC</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">IC</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">t</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">qin</span> <span class="o">=</span> <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">qout</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
@@ -1142,9 +1137,9 @@
 <h3>PI Controller Class<a class="headerlink" href="#pi-controller-class" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PI</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PI</span><span class="p">():</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">Kp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">Kp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ki</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MVmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Kp</span> <span class="o">=</span> <span class="n">Kp</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ki</span> <span class="o">=</span> <span class="n">Ki</span>
@@ -1152,7 +1147,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">MVmax</span> <span class="o">=</span> <span class="n">MVmax</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log</span> <span class="o">=</span> <span class="p">[]</span>
         
-    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; PV&#39;</span><span class="p">)</span>
@@ -1165,7 +1160,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         
-    <span class="k">def</span><span class="w"> </span><span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dt</span><span class="p">):</span>
         <span class="n">ecurr</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">eprev</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MVmin</span>
@@ -1193,7 +1188,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># disturbance function</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">d</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">0.1</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1394,8 +1389,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

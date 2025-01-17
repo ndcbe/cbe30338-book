@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Lab 4: PI Control &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -579,31 +574,31 @@
 <section id="implementation-of-a-simple-pi-controller">
 <h2>Implementation of a Simple PI Controller<a class="headerlink" href="#implementation-of-a-simple-pi-controller" title="Link to this heading">#</a></h2>
 <p>Given a process variable <span class="math notranslate nohighlight">\(PV\)</span> and setpoint <span class="math notranslate nohighlight">\(SP\)</span>, proportional-integral-derivative control determines the value of a manipulated variable MV by the equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b330352-6f4a-4000-ad0a-7fd56290d71d">
-<span class="eqno">(2)<a class="headerlink" href="#equation-8b330352-6f4a-4000-ad0a-7fd56290d71d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2484f541-8ada-433e-b0c3-ea76dbce7ac2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-2484f541-8ada-433e-b0c3-ea76dbce7ac2" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV(t) &amp; = \bar{MV} + K_P\left(SP(t) - PV(t)\right) + K_I \int_0^t \left(SP(t')-PV(t')\right)dt'
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(K_P\)</span> and <span class="math notranslate nohighlight">\(K_I\)</span> are the proportional and integral coefficients, respectively. The value <span class="math notranslate nohighlight">\(\bar{MV}\)</span> is a nominal or initial value of the manipulated variable.</p>
 <p>The actual implementation of PI control is normally done by computing how much the <span class="math notranslate nohighlight">\(MV\)</span> should change at each time step. Defining the error at time <span class="math notranslate nohighlight">\(k\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8f549051-f93d-44ec-9cfb-8970fcdb2011">
-<span class="eqno">(3)<a class="headerlink" href="#equation-8f549051-f93d-44ec-9cfb-8970fcdb2011" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-00821e8f-e484-4ad2-83cf-484e97f50885">
+<span class="eqno">(3)<a class="headerlink" href="#equation-00821e8f-e484-4ad2-83cf-484e97f50885" title="Permalink to this equation">#</a></span>\[\begin{align}
 e_k &amp; =  SP_k - PV_k
 \end{align}\]</div>
 <p>then consecutive values of <span class="math notranslate nohighlight">\(MV\)</span> are given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-271e0535-fa1e-4035-bbc2-5b88ee597f94">
-<span class="eqno">(4)<a class="headerlink" href="#equation-271e0535-fa1e-4035-bbc2-5b88ee597f94" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-497be75f-5b26-4dcd-bef7-ad256e01049d">
+<span class="eqno">(4)<a class="headerlink" href="#equation-497be75f-5b26-4dcd-bef7-ad256e01049d" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_{k-1} &amp; = \bar{MV} + K_P e_{k-1} + h K_I \sum_{j=0}^{k-1} e_{j} \\
 MV_{k} &amp; = \bar{MV} + K_P e_{k} + h K_I \sum_{j=0}^{k} e_{j}
 \end{align}\]</div>
 <p>Taking differences gives a practical formula (velocity form) for updating the value of <span class="math notranslate nohighlight">\(MV\)</span> in response to measurements</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d8f8437-87d7-495e-9dc2-50cf3d6693bd">
-<span class="eqno">(5)<a class="headerlink" href="#equation-9d8f8437-87d7-495e-9dc2-50cf3d6693bd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-17ed6953-0916-4d7a-ae21-a948f08233b6">
+<span class="eqno">(5)<a class="headerlink" href="#equation-17ed6953-0916-4d7a-ae21-a948f08233b6" title="Permalink to this equation">#</a></span>\[\begin{align}
 MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 \end{align}\]</div>
 <p>The following code defines a Python object that implements this algorithm.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI</span><span class="p">(</span><span class="n">Kp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ki</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI</span><span class="p">(</span><span class="n">Kp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ki</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Simple proportion-integral controller</span>
 
 <span class="sd">    Arguments:</span>
@@ -650,7 +645,7 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span><span class="w"> </span><span class="nn">tclab</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span>
+<span class="kn">from</span> <span class="nn">tclab</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">clock</span><span class="p">,</span> <span class="n">Historian</span><span class="p">,</span> <span class="n">Plotter</span>
 </pre></div>
 </div>
 </div>
@@ -781,7 +776,7 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PI_Bumpless</span><span class="p">(</span><span class="n">Kp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ki</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">PI_Bumpless</span><span class="p">(</span><span class="n">Kp</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ki</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">MV_bar</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Improved PI controller with:</span>
 <span class="sd">        - Two anti-integral windup protections</span>
 <span class="sd">        - Bumpless transition from manual to automatic control</span>
@@ -876,9 +871,9 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 <p>Repeat the stability analysis for the PI controller that was performed in the notes (<a class="reference external" href="https://ndcbe.github.io/controls/notebooks/03.09-PI-Controller-Analysis.html">https://ndcbe.github.io/controls/notebooks/03.09-PI-Controller-Analysis.html</a>). Identify values of Kp and Ki for (a) no oscillations and (b) with oscillations. Include a justification for these values in the Markdown cells. Make and reference plots in your justification.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">eig</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">eig</span>
 
 <span class="c1"># instructions:</span>
 <span class="c1"># 1. update the parameters to match your TCLab device</span>
@@ -898,7 +893,7 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 <span class="n">CpS</span> <span class="o">=</span> <span class="mf">1.328</span> <span class="c1"># joules/deg C</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">calc_eig</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">Ki</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">calc_eig</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">Ki</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Calculate the eigenvalues of the PI controller</span>
 
 <span class="sd">    Arguments:</span>
@@ -958,7 +953,7 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 <p>Using your both sets of controller gains from Exercise 5, simulate the system using a test case similar to class (<a class="reference external" href="https://ndcbe.github.io/controls/notebooks/03.06-Proportional-Integral-Control.html">https://ndcbe.github.io/controls/notebooks/03.06-Proportional-Integral-Control.html</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SP</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    This function defines the setpoint for T1 as: </span>
 <span class="sd">        SP is 25 degC for t &lt;= 20 seconds</span>
@@ -967,7 +962,7 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 
     <span class="c1"># Add your solution here</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">DV</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    This function uses heat 2 as a disurbance:</span>
 <span class="sd">        DV is 0% for t &lt;= 200 seconds</span>
@@ -980,7 +975,7 @@ MV_{k} &amp; = MV_{k-1} + K_P(e_{k} - e_{k-1}) + h K_I e_{k}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_system</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">Ki</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_system</span><span class="p">(</span><span class="n">Kp</span><span class="p">,</span><span class="n">Ki</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Define function to simulate Exercise 6</span>
 
 <span class="sd">    Arguments:</span>
@@ -1155,8 +1150,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

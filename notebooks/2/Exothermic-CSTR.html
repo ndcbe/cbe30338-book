@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>2.8. Exothermic Continuous Stirred Tank Reactor &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -579,9 +574,9 @@
 <p>We can see the strong temperature dependence by plotting <span class="math notranslate nohighlight">\(k(T)\)</span> versus temperature over typical operating conditions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1">#import seaborn as sns</span>
 
 <span class="c1"># Arrehnius parameters</span>
@@ -590,7 +585,7 @@
 <span class="n">k0</span> <span class="o">=</span> <span class="mf">7.2e10</span>    <span class="c1"># Arrhenius rate constant 1/min</span>
 
 <span class="c1"># Arrhenius rate expression</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">k</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">k</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">k0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">290</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -723,15 +718,15 @@ V\frac{dc_A}{dt} &amp; = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <p>This mathematical formulation is implemented as a function <code class="docutils literal notranslate"><span class="pre">simulate_cstr</span></code> that returns a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> DataFrame object. The inputs to the function is a grid of points in time for the which a solution is required, initial conditions, and values for selected operating parameters. The remaining parameters are fixed in the body of the function. With this design, all calculations within the function require no access to parameters or function defined outside of <code class="docutils literal notranslate"><span class="pre">simulate_cstr</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
 
 <span class="c1"># study parameters</span>
 <span class="n">Tc</span>  <span class="o">=</span> <span class="mf">300.0</span>     <span class="c1"># Coolant temperature [K]</span>
 <span class="n">cA0</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>      <span class="c1"># Initial concentration [mol/L]</span>
 <span class="n">T0</span>  <span class="o">=</span> <span class="mf">350.0</span><span class="p">;</span>    <span class="c1"># Initial temperature [K]</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">,</span> <span class="n">cA0</span><span class="o">=</span><span class="n">cA0</span><span class="p">,</span> <span class="n">T0</span><span class="o">=</span><span class="n">T0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">,</span> <span class="n">cA0</span><span class="o">=</span><span class="n">cA0</span><span class="p">,</span> <span class="n">T0</span><span class="o">=</span><span class="n">T0</span><span class="p">):</span>
     
     <span class="c1"># fixed model parameters</span>
     <span class="n">Ea</span>  <span class="o">=</span> <span class="mi">72750</span>     <span class="c1"># activation energy J/gmol</span>
@@ -747,11 +742,11 @@ V\frac{dc_A}{dt} &amp; = q(c_{A,f} - c_A) - Vk(T)c_A \\
     <span class="n">Tf</span>  <span class="o">=</span> <span class="mf">350.0</span>     <span class="c1"># Inlet feed temperature [K]</span>
     
     <span class="c1"># Arrhenius rate expression</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">k</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">k</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">k0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Ea</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
 
     <span class="c1"># function to evaluate differential equations</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="n">cA</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">y</span>
         <span class="n">dcAdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">cAf</span> <span class="o">-</span> <span class="n">cA</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">cA</span>
         <span class="n">dTdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Tf</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">dHr</span><span class="o">/</span><span class="n">rho</span><span class="o">/</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">cA</span> <span class="o">+</span> <span class="p">(</span><span class="n">UA</span><span class="o">/</span><span class="n">V</span><span class="o">/</span><span class="n">rho</span><span class="o">/</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">Tc</span><span class="o">-</span><span class="n">T</span><span class="p">)</span>
@@ -828,7 +823,7 @@ V\frac{dc_A}{dt} &amp; = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <p>Executing the following cell provides an interactive tool for exploring the relationship of cooling temperature with reactor behavior.  Use it to observe a thermal runaway, sustained osciallations, and low and high conversion steady states.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Install and uncomment these two packages to run the interactive widget</span>
 <span class="c1"># from ipywidgets import interact</span>
@@ -851,7 +846,7 @@ V\frac{dc_A}{dt} &amp; = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
 <span class="c1"># function to update and display the plot object</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">sim</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">sim</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;cA&quot;</span><span class="p">])</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span><span class="o">.</span><span class="n">get_texts</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;$T_c$ = &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; K&quot;</span><span class="p">)</span>
@@ -901,7 +896,7 @@ V\frac{dc_A}{dt} &amp; = 0 = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <span class="n">cAf</span> <span class="o">=</span> <span class="mf">1.0</span>       <span class="c1"># Inlet feed concentration [mol/L]</span>
 <span class="n">Tf</span>  <span class="o">=</span> <span class="mf">350.0</span>     <span class="c1"># Inlet feed temperature [K]</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_nullclines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_nullclines</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="n">Tc</span><span class="p">):</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>  
                        <span class="s2">&quot;dC/dt = 0&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="n">cAf</span><span class="o">/</span><span class="p">((</span><span class="n">q</span><span class="o">/</span><span class="n">V</span><span class="p">)</span> <span class="o">+</span> <span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span>
@@ -945,7 +940,7 @@ V\frac{dc_A}{dt} &amp; = 0 = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">460</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">plot_phase</span><span class="p">(</span><span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">simulate_cstr</span><span class="p">(</span><span class="n">t_eval</span><span class="p">,</span> <span class="n">T_cooling</span><span class="p">,</span> <span class="n">c_initial</span><span class="p">,</span> <span class="n">T_initial</span><span class="p">)</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">500.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xdata</span><span class="p">((</span><span class="n">rho</span><span class="o">*</span><span class="n">q</span><span class="o">*</span><span class="n">Cp</span><span class="o">*</span><span class="p">(</span><span class="n">Tf</span> <span class="o">-</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">UA</span><span class="o">*</span><span class="p">(</span><span class="n">T_cooling</span> <span class="o">-</span> <span class="n">T</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">V</span><span class="o">*</span><span class="n">dHr</span><span class="o">*</span><span class="n">k</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
@@ -1042,7 +1037,7 @@ V\frac{dc_A}{dt} &amp; = 0 = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># function to evaluate RHS of ODEs</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mf">310.</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mf">310.</span><span class="p">):</span>
     <span class="n">cA</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="n">y</span>
 
     <span class="c1"># Arrhenius rate expression</span>
@@ -1061,7 +1056,7 @@ V\frac{dc_A}{dt} &amp; = 0 = q(c_{A,f} - c_A) - Vk(T)c_A \\
 <p>Next, we will use Newton’s method, available in <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root</span></code>, to numerically compute values of <span class="math notranslate nohighlight">\(\bar{c}_A\)</span> and <span class="math notranslate nohighlight">\(\bar{T}\)</span> at one coolant temperature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">root</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root</span>
 <span class="c1"># Test calculation for steady-state at one coolant temperature</span>
 <span class="n">ode_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">y_</span> <span class="p">:</span> <span class="n">deriv</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mf">300.</span><span class="p">)</span>
 <span class="n">sln</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">ode_func</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">350.</span><span class="p">])</span>
@@ -1165,7 +1160,7 @@ T =  350.08 K
 <p>First, we will assemble a linear approximation to our ODE system using <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/Newton-Raphson-Methods-for-Systems-of-Equations.html?#finite-difference-to-approximate-the-jacobian-matrix">finite difference code from CBE 20258</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Approximate Jacobian using forward finite difference</span>
 
 <span class="sd">    Args:</span>
@@ -1418,8 +1413,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

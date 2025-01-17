@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4.1. Two-Input, Two-Output Model &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -559,14 +554,14 @@
 <section id="interacting-heaters">
 <h2><span class="section-number">4.1.1. </span>Interacting Heaters<a class="headerlink" href="#interacting-heaters" title="Link to this heading">#</a></h2>
 <p>Our next model considers the interaction between the two heaters. From the step response it is obvious that the heaters interact, and we need to understand how that affects the dynamic performance.  Will we see qualitative differences in the step response once we’ve included the second heater?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f2958be7-3d50-4835-b417-6fa4a4a2d979">
-<span class="eqno">(4.9)<a class="headerlink" href="#equation-f2958be7-3d50-4835-b417-6fa4a4a2d979" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-57244136-583d-4369-bf1b-b1b2866ec585">
+<span class="eqno">(4.9)<a class="headerlink" href="#equation-57244136-583d-4369-bf1b-b1b2866ec585" title="Permalink to this equation">#</a></span>\[\begin{align}
 C_p\frac{dT_1}{dt} &amp; = U_a(T_{amb} - T_1) + U_b(T_2 - T_1) + P_1u_1\\
 C_p\frac{dT_2}{dt} &amp; = U_a(T_{amb} - T_2) + U_b(T_1 - T_2) + P_2u_2
 \end{align}\]</div>
 <p>As a first step we isolate the bare derivatives on the left-hand side of the equations. This is good practice in situations where you expect to be doing numerical simulation.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8e18ca53-f4d0-4c80-8a7d-caf703347ee6">
-<span class="eqno">(4.10)<a class="headerlink" href="#equation-8e18ca53-f4d0-4c80-8a7d-caf703347ee6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7e56c372-845f-42a9-a086-c188eb3b7bd5">
+<span class="eqno">(4.10)<a class="headerlink" href="#equation-7e56c372-845f-42a9-a086-c188eb3b7bd5" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{dT_1}{dt} &amp; = \frac{U_a}{C_p}(T_{amb} - T_1) + \frac{U_b}{C_p}(T_2 - T_1) + \frac{P_1}{C_p}u_1\\
 \frac{dT_2}{dt} &amp; = \frac{U_a}{C_p}(T_{amb} - T_2) + \frac{U_b}{C_p}(T_1 - T_2) + \frac{P_2}{C_p}u_2
 \end{align}\]</div>
@@ -574,20 +569,20 @@ C_p\frac{dT_2}{dt} &amp; = U_a(T_{amb} - T_2) + U_b(T_1 - T_2) + P_2u_2
 <section id="deviation-variables">
 <h2><span class="section-number">4.1.2. </span>Deviation Variables<a class="headerlink" href="#deviation-variables" title="Link to this heading">#</a></h2>
 <p>As before, the equations appear somewhat simpler if we introduce deviation variables from a nominal state. In this case we’ll use the ambient temperature as the reference, so the deviation variable will express deviation from ambient.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b1d1fe3-0a90-4522-9f7f-6ddbfaa6e207">
-<span class="eqno">(4.11)<a class="headerlink" href="#equation-8b1d1fe3-0a90-4522-9f7f-6ddbfaa6e207" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8adea6c8-4bf4-4d42-b914-c9781fbb172f">
+<span class="eqno">(4.11)<a class="headerlink" href="#equation-8adea6c8-4bf4-4d42-b914-c9781fbb172f" title="Permalink to this equation">#</a></span>\[\begin{align}
 T_1' &amp; = T_1 - T_{amb} \\
 T_2' &amp; = T_2 - T_{amb}
 \end{align}\]</div>
 <p>Then gathering terms</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c2809378-70c3-4b1c-819f-6da6efd7b89d">
-<span class="eqno">(4.12)<a class="headerlink" href="#equation-c2809378-70c3-4b1c-819f-6da6efd7b89d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7fac97f8-a587-4fd9-ada4-e87f13fac69c">
+<span class="eqno">(4.12)<a class="headerlink" href="#equation-7fac97f8-a587-4fd9-ada4-e87f13fac69c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{dT_1'}{dt} &amp; = -\frac{U_a+U_b}{C_p}T_1' + \frac{U_b}{C_p}T_2' + \frac{P_1}{C_p}u_1\\
 \frac{dT_2'}{dt} &amp; = -\frac{U_a+U_b}{C_p}T_2' + \frac{U_b}{C_p}T_1' + \frac{P_2}{C_p}u_2
 \end{align}\]</div>
 <p>An alternative way to express these equations is in matrix/vector form.  We won’t use this today, but later will make extensive use of this ‘state-space’ model of a linear system.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49e9dbcd-8fc2-4c42-bf91-0de4a3e85131">
-<span class="eqno">(4.13)<a class="headerlink" href="#equation-49e9dbcd-8fc2-4c42-bf91-0de4a3e85131" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ae6203ab-645d-42d4-95cb-cb052250f39f">
+<span class="eqno">(4.13)<a class="headerlink" href="#equation-ae6203ab-645d-42d4-95cb-cb052250f39f" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{array}{c}\frac{dT_1'}{dt} \\ \frac{dT_2'}{dt}\end{array}\right] &amp; = 
 \left[\begin{array}{cc}-\frac{U_a+U_b}{C_p} &amp; \frac{U_b}{C_p} \\ \frac{U_b}{C_p} &amp; -\frac{U_a+U_b}{C_p} \end{array}\right]
 \left[\begin{array}{c}T_1' \\ T_2'\end{array}\right] +
@@ -598,21 +593,21 @@ T_2' &amp; = T_2 - T_{amb}
 <section id="steady-state">
 <h2><span class="section-number">4.1.3. </span>Steady State<a class="headerlink" href="#steady-state" title="Link to this heading">#</a></h2>
 <p>The steady state is found by setting the derivatives to zero. We’ll use a bar over the dependent variables to designate steady state values.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-93c60281-6450-416c-8bab-4998599dd420">
-<span class="eqno">(4.14)<a class="headerlink" href="#equation-93c60281-6450-416c-8bab-4998599dd420" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d65a4269-37bb-4fbf-8b36-8a8bab83ddd2">
+<span class="eqno">(4.14)<a class="headerlink" href="#equation-d65a4269-37bb-4fbf-8b36-8a8bab83ddd2" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 &amp; = -(U_a+U_b)\bar{T}_{1}' + U_b\bar{T}_{2}' + P_1\bar{u}_{1}\\
 0 &amp; = -(U_a+U_b)\bar{T}_{2}' + U_b\bar{T}_{1}' + P_2\bar{u}_{1}
 \end{align}\]</div>
 <p>Our challenge is to solve the following 2x2 system of linear equations for the steady state temperatures.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3fc6c69a-c850-4386-91ff-ebe56eb00fa0">
-<span class="eqno">(4.15)<a class="headerlink" href="#equation-3fc6c69a-c850-4386-91ff-ebe56eb00fa0" title="Permalink to this equation">#</a></span>\[\begin{align} 
+<div class="amsmath math notranslate nohighlight" id="equation-fa3d0772-9cf3-4f73-8b53-3d1e349333ca">
+<span class="eqno">(4.15)<a class="headerlink" href="#equation-fa3d0772-9cf3-4f73-8b53-3d1e349333ca" title="Permalink to this equation">#</a></span>\[\begin{align} 
 \left[\begin{array}{cc}(U_a+U_b) &amp; -U_b \\ -U_b &amp; (U_a+U_b) \end{array}\right]
 \left[\begin{array}{c}\bar{T}_1' \\ \bar{T}_2'\end{array}\right] &amp; = 
 \left[\begin{array}{c} P_1\bar{u}_1 \\ P_2\bar{u}_2\end{array}\right]
 \end{align}\]</div>
 <p>The solution to these equations is a bit of work, but you should be able to verify</p>
-<div class="amsmath math notranslate nohighlight" id="equation-264d04f3-3152-41be-ba1b-b39198d0b2a3">
-<span class="eqno">(4.16)<a class="headerlink" href="#equation-264d04f3-3152-41be-ba1b-b39198d0b2a3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a0d76c31-3076-4a34-bc7c-6342c2d198b2">
+<span class="eqno">(4.16)<a class="headerlink" href="#equation-a0d76c31-3076-4a34-bc7c-6342c2d198b2" title="Permalink to this equation">#</a></span>\[\begin{align}
 \bar{T}_1' &amp; = \frac{(U_a+U_b)}{U_a(U_a+2U_b)}P_1\bar{u}_1 + \frac{U_b}{U_a(U_a+2U_b)}P_2\bar{u}_2 \\
 \bar{T}_2' &amp; = \frac{U_b}{U_a(U_a+2U_b)}P_1\bar{u}_1 + \frac{(U_a+U_b)}{U_a(U_a+2U_b)}P_2\bar{u}_2
 \end{align}\]</div>
@@ -620,14 +615,14 @@ T_2' &amp; = T_2 - T_{amb}
 <section id="estimating-u-a-and-u-b">
 <h2><span class="section-number">4.1.4. </span>Estimating <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(U_b\)</span><a class="headerlink" href="#estimating-u-a-and-u-b" title="Link to this heading">#</a></h2>
 <p>Experimental step response data gives us the information needed to estimate parameters <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(U_b\)</span>. Rearranging the steady state equations, we find a pair of linear equations for <span class="math notranslate nohighlight">\(U_a\)</span> and <span class="math notranslate nohighlight">\(U_b\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8b179672-1ff8-4017-8f74-7b363f56cd88">
-<span class="eqno">(4.17)<a class="headerlink" href="#equation-8b179672-1ff8-4017-8f74-7b363f56cd88" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e3cf3f9d-5f8b-4230-b3f6-8ce9aaffedae">
+<span class="eqno">(4.17)<a class="headerlink" href="#equation-e3cf3f9d-5f8b-4230-b3f6-8ce9aaffedae" title="Permalink to this equation">#</a></span>\[\begin{align}
 \bar{T}_{1}'U_a  + (\bar{T}_{1}'-\bar{T}_{2}')U_b &amp; = P_1\bar{u}_{1}\\
 \bar{T}_{2}'U_a + (\bar{T}_{2}'-\bar{T}_{1}')U_b &amp; = P_2\bar{u}_{1}
 \end{align}\]</div>
 <p>There is an analytical solution to these equations</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fefeda7a-5dde-4bd3-bd7c-b139a6aea52d">
-<span class="eqno">(4.18)<a class="headerlink" href="#equation-fefeda7a-5dde-4bd3-bd7c-b139a6aea52d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5e90d62b-ec3f-4597-a203-c6d2f8d0b572">
+<span class="eqno">(4.18)<a class="headerlink" href="#equation-5e90d62b-ec3f-4597-a203-c6d2f8d0b572" title="Permalink to this equation">#</a></span>\[\begin{align}
 U_a &amp; = \frac{P_1\bar{u}_1 + P_2\bar{u}_2}{\bar{T}_1' + \bar{T}_2'}\\
 U_b &amp; = \frac{\bar{T}_2'P_1\bar{u}_1 - \bar{T}_1'P_2\bar{u}_2}{(\bar{T}_1' - \bar{T}_2')(\bar{T}_1' + \bar{T}_2')}
 \end{align}\]</div>
@@ -635,8 +630,8 @@ U_b &amp; = \frac{\bar{T}_2'P_1\bar{u}_1 - \bar{T}_1'P_2\bar{u}_2}{(\bar{T}_1' -
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Step_Test_Data.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span>
@@ -661,9 +656,9 @@ U_b &amp; = \frac{\bar{T}_2'P_1\bar{u}_1 - \bar{T}_1'P_2\bar{u}_2}{(\bar{T}_1' -
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>                  <span class="c1"># basic package for numerical calculations</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>     <span class="c1"># plotting package</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>                  <span class="c1"># basic package for numerical calculations</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>     <span class="c1"># plotting package</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
 
 <span class="c1"># parameter values and units</span>
 <span class="n">P1</span> <span class="o">=</span> <span class="mi">4</span>                 <span class="c1"># watts</span>
@@ -675,7 +670,7 @@ U_b &amp; = \frac{\bar{T}_2'P_1\bar{u}_1 - \bar{T}_1'P_2\bar{u}_2}{(\bar{T}_1' -
 <span class="n">u2</span> <span class="o">=</span> <span class="mf">0.0</span>               <span class="c1"># steady state value of u2 (fraction of total power)</span>
 <span class="n">T_ambient</span> <span class="o">=</span> <span class="mi">21</span>         <span class="c1"># ambient temperature of the surroundings</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
     <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="n">T</span>
     <span class="n">dT1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span><span class="p">)</span><span class="o">*</span><span class="n">T1</span><span class="o">/</span><span class="n">Cp</span> <span class="o">+</span> <span class="n">Ub</span><span class="o">*</span><span class="n">T2</span><span class="o">/</span><span class="n">Cp</span> <span class="o">+</span> <span class="n">P1</span><span class="o">*</span><span class="n">u1</span><span class="o">/</span><span class="n">Cp</span>
     <span class="n">dT2</span> <span class="o">=</span> <span class="n">Ub</span><span class="o">*</span><span class="n">T1</span><span class="o">/</span><span class="n">Cp</span> <span class="o">-</span> <span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span><span class="p">)</span><span class="o">*</span><span class="n">T2</span><span class="o">/</span><span class="n">Cp</span> <span class="o">+</span> <span class="n">P2</span><span class="o">*</span><span class="n">u2</span><span class="o">/</span><span class="n">Cp</span>
@@ -703,10 +698,10 @@ U_b &amp; = \frac{\bar{T}_2'P_1\bar{u}_1 - \bar{T}_1'P_2\bar{u}_2}{(\bar{T}_1' -
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">odeint</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Step_Test_Data.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span>
@@ -720,9 +715,9 @@ U_b &amp; = \frac{\bar{T}_2'P_1\bar{u}_1 - \bar{T}_1'P_2\bar{u}_2}{(\bar{T}_1' -
 <span class="n">u2</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="n">T_ambient</span> <span class="o">=</span> <span class="mi">21</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Ua</span><span class="p">,</span> <span class="n">Ub</span><span class="p">,</span> <span class="n">Cp</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">Ua</span><span class="p">,</span> <span class="n">Ub</span><span class="p">,</span> <span class="n">Cp</span><span class="p">):</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">deriv</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">deriv</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
         <span class="n">T1</span><span class="p">,</span> <span class="n">T2</span> <span class="o">=</span> <span class="n">T</span>
         <span class="n">dT1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span><span class="p">)</span><span class="o">*</span><span class="n">T1</span><span class="o">/</span><span class="n">Cp</span> <span class="o">+</span> <span class="n">Ub</span><span class="o">*</span><span class="n">T2</span><span class="o">/</span><span class="n">Cp</span> <span class="o">+</span> <span class="n">P1</span><span class="o">*</span><span class="n">u1</span><span class="o">/</span><span class="n">Cp</span>
         <span class="n">dT2</span> <span class="o">=</span> <span class="n">Ub</span><span class="o">*</span><span class="n">T1</span><span class="o">/</span><span class="n">Cp</span> <span class="o">-</span> <span class="p">(</span><span class="n">Ua</span> <span class="o">+</span> <span class="n">Ub</span><span class="p">)</span><span class="o">*</span><span class="n">T2</span><span class="o">/</span><span class="n">Cp</span> <span class="o">+</span> <span class="n">P2</span><span class="o">*</span><span class="n">u2</span><span class="o">/</span><span class="n">Cp</span>
@@ -878,8 +873,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

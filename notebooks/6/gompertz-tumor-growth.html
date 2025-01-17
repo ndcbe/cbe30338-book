@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>6.5. Gompertz Model &#8212; CBE 30338 Data Analytics, Optimization, and Control</title>
   
@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
   -->
   <noscript>
     <style>
@@ -27,22 +27,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -55,7 +55,7 @@
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -322,14 +322,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -571,13 +566,13 @@
 <p>The <a class="reference external" href="https://idaes-pse.readthedocs.io/en/latest/tutorials/getting_started/index.html">IDAES Project</a> maintains a version of Pyomo and associated solvers. The following cells will install Pyomo and selected solvers from the IDAES project.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="c1"># install pyomo and solvers for Google Colab</span>
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">idaes</span><span class="o">-</span><span class="n">pse</span> <span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="mi">2</span><span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span>
     <span class="err">!</span><span class="n">idaes</span> <span class="n">get</span><span class="o">-</span><span class="n">extensions</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">idaes</span>
+    <span class="kn">import</span> <span class="nn">idaes</span>
 </pre></div>
 </div>
 </div>
@@ -643,11 +638,11 @@ Library:  v3.2.0 20230203-1528 ubuntu2004-x86_64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyomo.environ</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyo</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyomo.dae</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dae</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyomo.environ</span> <span class="k">as</span> <span class="nn">pyo</span>
+<span class="kn">import</span> <span class="nn">pyomo.dae</span> <span class="k">as</span> <span class="nn">dae</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># transformer to convert DAEs to systems of nonlinear equations</span>
 <span class="n">transformer</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">TransformationFactory</span><span class="p">(</span><span class="s1">&#39;dae.finite_difference&#39;</span><span class="p">)</span>
@@ -723,7 +718,7 @@ N(0) &amp; = N_0 &amp; \text{initial condition} \\
 
 <span class="c1"># we need to use Pyomo&#39;s log function</span>
 <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> 
 
 <span class="c1"># initial condition</span>
@@ -787,7 +782,7 @@ N(0) &amp; = N_0 &amp;&amp; \text{initial condition} \\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
 
     <span class="c1"># build model</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
@@ -801,7 +796,7 @@ N(0) &amp; = N_0 &amp;&amp; \text{initial condition} \\
 
     <span class="c1"># we need to use Pyomo&#39;s log function</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span>
 
     <span class="c1"># initial condition</span>
@@ -855,7 +850,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 <p>and <span class="math notranslate nohighlight">\(\bar{u}\)</span> is a unknown constant, and therefore a decision variable for the solver.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
 
     <span class="c1"># build model</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
@@ -872,7 +867,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># we need to use Pyomo&#39;s log function</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span>
 
     <span class="c1"># initial condition</span>
@@ -922,7 +917,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 <p>This is underdetermined. As long as the initial and final conditions are satisfied, any <span class="math notranslate nohighlight">\(u(t)\)</span> will do. Don’t be surprised if the solver reports a something crazy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
 
     <span class="c1"># build model</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
@@ -937,7 +932,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># we need to use Pyomo&#39;s log function</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
 
     <span class="c1"># initial condition</span>
@@ -978,7 +973,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 \[u_{total} = \int_0^{t_f} u(t)\ dt\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
 
     <span class="c1"># build model</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
@@ -993,12 +988,12 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># measuring total amount</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Integral</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">u_total</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">u_total</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
 
     <span class="c1"># we need to use Pyomo&#39;s log function</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
 
     <span class="c1"># initial condition</span>
@@ -1058,7 +1053,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bN_ub</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">u_ub</span> <span class="o">=</span> <span class="mi">5</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
 
     <span class="c1"># build model</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
@@ -1073,12 +1068,12 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># measuring total amount</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Integral</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">u_total</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">u_total</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
 
     <span class="c1"># we need to use Pyomo&#39;s log function</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
 
     <span class="c1"># initial condition</span>
@@ -1087,7 +1082,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># objective</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">sense</span><span class="o">=</span><span class="n">pyo</span><span class="o">.</span><span class="n">minimize</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">minimize_u_total</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">minimize_u_total</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">u_total</span>
 
     <span class="c1"># transform and solve</span>
@@ -1144,7 +1139,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
 <span class="n">gamma</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">gompertz</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
 
     <span class="c1"># build model</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
@@ -1159,12 +1154,12 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># measuring total amount</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Integral</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">u_total</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">u_total</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
 
     <span class="c1"># we need to use Pyomo&#39;s log function</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dN</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span> <span class="n">r</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">pyo</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># initial condition</span>
@@ -1173,7 +1168,7 @@ N(t_f) &amp; = N_f &amp;&amp; \text{final condition} \\
 
     <span class="c1"># objective</span>
     <span class="nd">@m</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">sense</span><span class="o">=</span><span class="n">pyo</span><span class="o">.</span><span class="n">minimize</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">minimize_u_total</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">minimize_u_total</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">u_total</span>
 
     <span class="c1"># transform and solve</span>
@@ -1344,8 +1339,8 @@ By Jeffrey Kantor and Alexander Dowling
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
